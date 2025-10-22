@@ -15,7 +15,6 @@ public class A10_Rectangulo {
         A10_Rectangulo rectangulo = new A10_Rectangulo(esquinaSupIzq, esquinaInfDer);
         rectangulo.mostrarRectangulo();
         rectangulo.calcularPerimetro();
-        rectangulo.rotar90Izquierda();
     }
 
     A5_Punto calcularEsquinasSuperiorDerecha() {
@@ -42,23 +41,5 @@ public class A10_Rectangulo {
         double perimetro = 2 * (largo + alto);
         System.out.println("Perimetro del rectangulo: " + perimetro);
         return perimetro;
-    }
-
-    A10_Rectangulo rotar90Izquierda() {
-        int x1 = esquinaSuperiorIzquierda.getX(); // cojo las cordenadas actuales y las guardo en variables
-        int y1 = esquinaSuperiorIzquierda.getY();
-        int x2 = esquinaInferiorDerecha.getX();
-        int y2 = esquinaInferiorDerecha.getY();
-
-        int ancho = x2 - x1; //calculo el ancho y alto del rectangulo
-        int alto = y1 - y2;
-
-        A5_Punto nuevaEsquinaSuperiorIzquierda = new A5_Punto(x1, y1 + ancho); //calculo las nuevas cordenadas despues de rotar 90 grados a la izquierda
-        A5_Punto nuevaEsqsuinaInferiorDerecha = new A5_Punto(x1 + alto, y1);
-
-        A10_Rectangulo rectanguloRotado = new A10_Rectangulo(nuevaEsquinaSuperiorIzquierda, nuevaEsqsuinaInferiorDerecha);
-        System.out.println("Rectangulo rotado 90 grados a la izquierda:");
-        rectanguloRotado.mostrarRectangulo();
-        return rectanguloRotado;
     }
 }
