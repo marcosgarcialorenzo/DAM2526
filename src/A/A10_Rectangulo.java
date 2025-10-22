@@ -15,6 +15,7 @@ public class A10_Rectangulo {
         A10_Rectangulo rectangulo = new A10_Rectangulo(esquinaSupIzq, esquinaInfDer);
         rectangulo.mostrarRectangulo();
         rectangulo.calcularPerimetro();
+        rectangulo.rotar90Izquierda();
     }
 
     A5_Punto calcularEsquinasSuperiorDerecha() {
@@ -41,5 +42,22 @@ public class A10_Rectangulo {
         double perimetro = 2 * (largo + alto);
         System.out.println("Perimetro del rectangulo: " + perimetro);
         return perimetro;
+    }
+
+    A10_Rectangulo rotar90Izquierda() {
+        int x1 = esquinaSuperiorIzquierda.getX();
+        int y1 = esquinaSuperiorIzquierda.getY();
+        int x2 = esquinaInferiorDerecha.getX();
+        int y2 = esquinaInferiorDerecha.getY();
+
+        int ancho = x2 - x1;   // ancho original
+        int alto  = y1 - y2;   // alto original
+
+        A5_Punto nuevaEsquinaSuperiorIzquierda = new A5_Punto(x1, y1 + ancho);
+        A5_Punto nuevaEsquinaInferirorDerecha = new A5_Punto(x1 + alto, y1);
+
+        A10_Rectangulo nuevoRectangulo = new A10_Rectangulo(nuevaEsquinaSuperiorIzquierda, nuevaEsquinaInferirorDerecha);
+        nuevoRectangulo.mostrarRectangulo();
+        return nuevoRectangulo;
     }
 }
