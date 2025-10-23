@@ -1,0 +1,6 @@
+Soldado: CodSolado(PK), Nombre, Apellido, Graduacion, CodCuartel(FK), CodCuerpo(FK), NumCompania(FK), CodServicio(FK)
+Cuarteles: CodCuartel(PK), Ubicacion, Nombre
+Cuerpos: CodCuerpo(PK), Denominacion
+Compañias: NumComapania(PK), Actividad, CodCuartel(FK)
+Servicios: CodServicio(PK), Descripcion
+Soldado_Servicio: CodSolado(FK), CodServicio(FK)
