@@ -14,10 +14,10 @@ Este repositorio contiene:
 
 El repositorio está organizado de la siguiente manera:
 
-DAM2526/
-src/ # Código fuente de los ejercicios y proyectos
-.gitignore # Archivos y carpetas ignorados por Git
-README.md # Este archivo
+- `DAM2526/` — carpeta raíz del repositorio
+- `src/` — código fuente de los ejercicios y proyectos
+- `.gitignore` — archivos y carpetas ignorados por Git
+- `README.md` — este archivo
 
 ## Requisitos
 
