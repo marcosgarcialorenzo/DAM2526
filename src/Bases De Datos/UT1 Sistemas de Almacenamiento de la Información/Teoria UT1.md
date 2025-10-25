@@ -33,3 +33,15 @@ Un **sistema de información** es un conjunto de elementos que almacena y gestio
 Esta arquitectura consigue la independencia de datos, es decir, los cambios en un nivel no afectan a los otros niveles. Hay dos tipos:
 * **Independencia lógica**: Cambios en el nivel conceptual no afectan al nivel externo.
 * **Independencia fisica**: Cambios en el nivel interno no afectan al nivel conceptual.
+
+### Modelos de datos:
+**Modelo de datos**: colección de herramientas conceptuales para describir los datos, las relaciones que existen entre ellos y sus restricciones, hay tres tipos:
+1. Conceptuales:
+   * **Conceptual**: Describe los datos a nivel global, el más parecido al mundo real.
+2. Logicos tradicionales:
+   * **Jerarquico**: Almacena la información en nodos padres e hijos, donde un hijo solo puede tener un padre. Los que nos tienen hijos son hojas.
+   * **Red**: Parecido al jerarquico, pero permite que un mismo nodo tenga distintos padres.
+   * **Relacional**: Representa los datos y las relaciones entre ellos a través de una colección de tablas donde cada fila es un registro (tuplas) y las columnas son atributos
+3. Logicos Avanzados:
+    * **Orientado a objetos**.
+    * **Datos declarativos**.
