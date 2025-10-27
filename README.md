@@ -15,7 +15,7 @@ Este repositorio contiene:
 El repositorio está organizado de la siguiente manera:
 
 - `DAM2526/` — carpeta raíz del repositorio
-- `src/` — código fuente de los ejercicios y proyectos
+  - `src/` — código fuente de los ejercicios y proyectos
 - `.gitignore` — archivos y carpetas ignorados por Git
 - `README.md` — este archivo
 
@@ -38,7 +38,7 @@ Las contribuciones son bienvenidas. Si deseas colaborar, por favor sigue estos p
 
 ## Licencia
 
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](https://opensource.org/license/MIT) para más detalles.
 
 ## Contacto
 
