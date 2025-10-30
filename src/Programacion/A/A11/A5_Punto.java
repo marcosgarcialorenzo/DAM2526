@@ -1,6 +1,5 @@
 package Programacion.A.A11;
 
-
 public class A5_Punto {
     int x;
     int y;
@@ -23,9 +22,13 @@ public class A5_Punto {
         System.out.println("Distancia al 0,0 del punto mas cercano: " + p1.distanciaAl0(p1, p2));
     }
 
-    @Override
+    /*@Override
     public String toString() { //Return a string representation of the AccessibilityListenerList. para que no me mustre el hash code , y en su lugar me muestre las cordenadas del punto
         return "(" + x + ", " + y + ")";
+    }*/
+
+    void mostrarPunto() {
+        System.out.println("(x "+ ", " + y + ")");
     }
 
     void moverX(int incrementoX) {

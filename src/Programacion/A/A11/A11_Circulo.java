@@ -29,22 +29,23 @@ public class A11_Circulo {
         A5_Punto centro1 = new A5_Punto(x1, y1);
         A11_Circulo circulo1 = new A11_Circulo(centro1, radio1);
         A11_Circulo circulo2 = new A11_Circulo(radio2);
-
+        // Mostrar información y realizar operaciones
         circulo1.mostrarCirculo();
         circulo2.mostrarCirculo();
-        circulo1.calcularPerimetro();
+        System.out.println("Perimetro del circulo: " + circulo1.calcularPerimetro());
         circulo1.seTocan(circulo2);
         circulo1.moverCirculo(3);
         circulo1.mostrarCirculo();
     }
 
     void mostrarCirculo() {
-        System.out.println("Centro: " + centro + ", Radio: " + radio);
+        System.out.print("Centro: ");
+        centro.mostrarPunto();
+        System.out.println("Radio: " + radio);
     }
 
     double calcularPerimetro() {
         double perimetro = 2 * Math.PI * radio;
-        System.out.println("Perímetro: " + perimetro);
         return perimetro;
     }
 
@@ -52,19 +53,13 @@ public class A11_Circulo {
         boolean seTocan = false;
         double distanciaCentros = centro.distanciaEntre2Puntos(otroCirculo.centro);
         double sumaRadios = this.radio + otroCirculo.radio;
-        if (distanciaCentros > sumaRadios) {
-            System.out.println("¿Se tocan los círculos? " + seTocan);
-            return seTocan; // No se tocan
-        } else {
-            seTocan = true;
-            System.out.println("¿Se tocan los círculos? " + seTocan);
+        if (distanciaCentros <= sumaRadios) {
             return seTocan; // Se tocan
         }
+        return seTocan;
     }
 
-    A11_Circulo moverCirculo(int incrementoX) { //, int incrementoY
+    void moverCirculo(int incrementoX) {
         centro.moverX(incrementoX);
-//        centro.moverY(incrementoY);
-        return this;
     }
 }
