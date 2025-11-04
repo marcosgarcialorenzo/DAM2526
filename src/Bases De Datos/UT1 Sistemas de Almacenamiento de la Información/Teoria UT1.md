@@ -14,7 +14,7 @@ empresa, y se compone de:
 * **Recursos humanos**: Personal que maneja la información.
 * **Reglas**: Normas que debe cumplir la información para que sea manejada.
 
-## Jerarquia de 3 niveles:
+## Tipos de almacenamiento:
 
 * **Primario**: Memoria más rapida y a la cual la CPU puede acceder directamente (RAM, Cache).
 * **Secundaria**: Dispositivos más lentos pero de mayor capacidad (Discos duros, SSD).
@@ -38,9 +38,9 @@ satisfacer los requerimientos de información
 * **Nivel externo**: Vista del usuario, cada usuario tiene su propia vista de la base de datos
 * **Nivel conceptual**: Vista de la comunidad de usuarios, oculta los detalles fisicos y se centra en entidades,
   atributos y relaciones.
-* **Nivel interno:** Vista fisica, describe cómo se almacenan realmente los datos y sus metodos de acceso.
+* **Nivel interno:** Vista fisica, describe cómo se almacenan los datos y sus metodos de acceso.
 
-Esta arquitectura consigue la independencia de datos, es decir, los cambios en un nivel no afectan a los otros niveles.
+Esta arquitectura consigue la independencia de datos, es decir, los cambios en un nivel no afectan a los niveles superiores.
 Hay dos tipos:
 
 * **Independencia lógica**: Cambios en el nivel conceptual no afectan al nivel externo.
@@ -48,7 +48,7 @@ Hay dos tipos:
 
 ## Modelos de datos:
 
-**Modelo de datos**: colección de herramientas conceptuales para describir los datos, las relaciones que existen entre
+**Modelo de datos**: colección de herramientas para describir los datos, las relaciones que existen entre
 ellos y sus restricciones, hay tres tipos (ver _UT1 Modelos de datos.png_):
 
 1. Conceptuales:
