@@ -10,6 +10,7 @@ public class C3_Juego {
         boolean fin = false;
         int contador = 0;
         while (!fin) {
+            System.out.println("Tiempo restante: " + (tiempoFin - System.currentTimeMillis()) / 1000 + " segundos");
             if (System.currentTimeMillis() >= tiempoFin) {
                 System.out.println("Se ha acabado el tiempo. Fin del juego.");
                 System.out.println("Has conseguido " + contador + " aciertos.");
@@ -28,6 +29,7 @@ public class C3_Juego {
                     int resultadoSuma = numero1 + numero2;
                     if (juego.pedirResultado() == resultadoSuma) {
                         System.out.println("Correcto");
+                        System.out.println();
                         contador++;
                     } else {
                         System.out.println("Incorrecto, el resultado correcto es: " + resultadoSuma);
@@ -41,6 +43,7 @@ public class C3_Juego {
                     int resultadoResta = numero1 - numero2;
                     if (juego.pedirResultado() == resultadoResta) {
                         System.out.println("Correcto");
+                        System.out.println();
                         contador++;
                     } else {
                         System.out.println("Incorrecto, el resultado correcto es: " + resultadoResta);
@@ -54,6 +57,7 @@ public class C3_Juego {
                     int resultadoMultiplicacion = numero1 * numero2;
                     if (juego.pedirResultado() == resultadoMultiplicacion) {
                         System.out.println("Correcto");
+                        System.out.println();
                         contador++;
                     } else {
                         System.out.println("Incorrecto, el resultado correcto es: " + resultadoMultiplicacion);
@@ -67,6 +71,7 @@ public class C3_Juego {
                     double resultadoDivision = (double) numero1 / numero2;
                     if (juego.pedirResultado() == Math.round(resultadoDivision)) {
                         System.out.println("Correcto");
+                        System.out.println();
                         contador++;
                     } else {
                         System.out.println("Incorrecto, el resultado correcto es: " + resultadoDivision);
