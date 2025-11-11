@@ -64,23 +64,22 @@ public class C4_Fecha {
     void escribirCalendarioMes(int primerDiaSemana) {
         if (primerDiaSemana < 1 || primerDiaSemana > 7) {
             System.out.println("ERROR:      Primer día de la semana inválido (usar 1=lunes ... 7=domingo).");
-            return;
-        }
+        } else {
+            int dias = diasEnMes();
+            System.out.println("Lu Ma Mi Ju Vi Sa Do");
 
-        int dias = diasEnMes();
-        System.out.println("Lu Ma Mi Ju Vi Sa Do");
-
-        for (int i = 1; i < primerDiaSemana; i++) {
-            System.out.print("   ");
-        }
-
-        for (int d = 1; d <= dias; d++) {
-            System.out.printf("%2d ", d);
-            int posicion = (primerDiaSemana - 1 + d) % 7;
-            if (posicion == 0) {
-                System.out.println();
+            for (int i = 1; i < primerDiaSemana; i++) {
+                System.out.print("   ");
             }
+
+            for (int d = 1; d <= dias; d++) {
+                System.out.printf("%2d ", d);
+                int posicion = (primerDiaSemana - 1 + d) % 7; // salto de línea cada 7 días
+                if (posicion == 0) {
+                    System.out.println();
+                }
+            }
+            System.out.println();
         }
-        System.out.println();
     }
 }
