@@ -70,7 +70,6 @@ public class C4_Fecha {
         int dias = diasEnMes();
         System.out.println("Lu Ma Mi Ju Vi Sa Do");
 
-        // Espacios iniciales: primerDiaSemana=1 -> 0 espacios antes del 1
         for (int i = 1; i < primerDiaSemana; i++) {
             System.out.print("   ");
         }
@@ -78,7 +77,7 @@ public class C4_Fecha {
         for (int d = 1; d <= dias; d++) {
             System.out.printf("%2d ", d);
             int posicion = (primerDiaSemana - 1 + d) % 7;
-            if (posicion == 0) { // domingo completó la semana
+            if (posicion == 0) {
                 System.out.println();
             }
         }
