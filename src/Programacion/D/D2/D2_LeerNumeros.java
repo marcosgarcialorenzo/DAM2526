@@ -19,7 +19,7 @@ public class D2_LeerNumeros {
         boolean fin = false;
 
         while (!fin) {
-            System.out.print("\nNúmero a buscar (0 para salir): ");
+            System.out.println("Número a buscar (0 para salir): ");
             int buscado = teclado.leerInt();
             if (buscado == 0) {
                 System.out.println("Saliendo...");
