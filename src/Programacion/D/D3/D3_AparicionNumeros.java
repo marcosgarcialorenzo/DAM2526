@@ -6,13 +6,17 @@ public class D3_AparicionNumeros {
     public static void main(String[] args) throws IOException {
         Teclado teclado = new Teclado();
         int[] numeros = new int[20];
+
         System.out.println("Introduce 20 números enteros:");
+
         for (int i = 0; i < numeros.length; i++) {
             System.out.print("Número " + (i + 1) + ": ");
             numeros[i] = teclado.leerInt();
         }
+
         int mejorIndice = 0;
         int mejorCuenta = 0;
+
         for (int i = 0; i < numeros.length; i++) {
             int cuenta = 0;
             for (int j = 0; j < numeros.length; j++) {
