@@ -5,7 +5,7 @@ public class Poligono {
     int[] arrayPuntos;
 
     public Poligono(int numVertices) {
-        int[] arrayPuntos = new int[numVertices * 2];
+        int[] arrayPuntos = new int[numVertices * 2]; // this.arrayPuntos = new int[numVertices * 2];
         for (int i = 0; i < arrayPuntos.length; i++) {
             arrayPuntos[i] = (int) (Math.random() * 100);
         }
@@ -79,14 +79,14 @@ public class Poligono {
 
     int[] puntosComunes(Poligono p) {
         int dos = 2;
-        int [] resultado = new int[10];
+        int[] resultado = new int[10];
         for (int i = 0; i < arrayPuntos.length; i += dos) {
             Punto poligonoPunto1 = new Punto(arrayPuntos[i], arrayPuntos[i + 1]);
             for (int j = 0; j < arrayPuntos.length; i += dos) {
                 Punto poligonoPunto2 = new Punto(arrayPuntos[i], arrayPuntos[i + 1]);
                 if (poligonoPunto1.x == poligonoPunto2.x && poligonoPunto1.y == poligonoPunto2.y) {
                     resultado[j] = (int) poligonoPunto1.x;
-                    resultado[j +1] = (int) poligonoPunto1.y;
+                    resultado[j + 1] = (int) poligonoPunto1.y;
                 }
             }
         }
