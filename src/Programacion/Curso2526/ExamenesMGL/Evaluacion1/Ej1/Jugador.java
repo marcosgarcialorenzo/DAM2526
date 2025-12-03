@@ -64,7 +64,7 @@ public class Jugador {
         Jugador jugador1 = new Jugador("Juan", 0);
         Jugador jugador2 = new Jugador("Ana", 0);
 
-        while (jugador1.puntuacion < 10 && jugador2.puntuacion < 10) {
+        while (jugador1.puntuacion < 10 && jugador2.puntuacion < 10) { // aqui si un jugador gana no deberia hacer la segunda tirada
             jugador1.tirada(jugador2);
             jugador2.tirada(jugador1);
         }
