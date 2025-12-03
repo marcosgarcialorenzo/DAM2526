@@ -12,10 +12,9 @@ public class Jugador {
     }
 
     boolean hayBarcos() {
-        boolean finJuego = false;
         if (this.barcos <= 0) {
-            finJuego = true;
+            return true;
         }
-        return finJuego;
+        return false;
     }
 }
