@@ -21,22 +21,23 @@ public class Tablero {
 
     void mostrarTableroOculto(Jugador j) {
         int jugador = j.id;
-        System.out.println("Tablero del jugador " + (jugador + 1) + ":");
+        System.out.println("Tablero de " + j.nombre );
         for (int fila = 0; fila < tablero[jugador].length; fila++) {
             for (int columna = 0; columna < tablero[jugador][fila].length; columna++) {
                 int valor = tablero[jugador][fila][columna];
                 if (valor == -1) {
-                    System.out.print("X "); // tocado
+                    System.out.print("🔴 " ); // tocado
                 } else if (valor == -2) {
-                    System.out.print("0 "); // agua disparada
+                    System.out.print("🔵 "); // agua disparada
                 } else {
-                    System.out.print("O "); // oculto
+                    System.out.print("⬜ "); // oculto
                 }
             }
             System.out.println();
         }
         System.out.println();
     }
+
 
     void rellenar(int jugador) throws IOException {
         Teclado teclado = new Teclado();
@@ -58,16 +59,17 @@ public class Tablero {
         }
     }
 
-    void disparar(Jugador j) throws IOException {
-        int jugador = j.id;
+    void disparar(Jugador j, Jugador j2) throws IOException {
+        int jugadorAtaque = j.id;
+        int jugadorDefensa = j2.id;
         Teclado teclado = new Teclado();
         System.out.print("Introduce la fila para disparar (1-10): ");
         int fila = teclado.leerInt() - 1; // ajustar índice para estar entre 0 y 9
         System.out.print("Introduce la columna para disparar (1-10): ");
         int columna = teclado.leerInt() - 1;
-        if (tablero[jugador][fila][columna] == 1) {
+        if (tablero[jugadorAtaque][fila][columna] == 1) {
             System.out.println("¡Tocado!");
-            tablero[jugador][fila][columna] = -1; // marcar como tocado
+            tablero[jugadorAtaque][fila][columna] = -1; // marcar como tocado
             System.out.println("Jugador rival ¿se ha hundido un barco? (No = 0 / Si = 1): ");
             int respuesta = teclado.leerInt();
             if (respuesta == 1) {
@@ -76,18 +78,18 @@ public class Tablero {
             } else {
                 System.out.println("Sigue intentando.");
             }
-        } else if (tablero[jugador][fila][columna] == 0) {
+        } else if (tablero[jugadorAtaque][fila][columna] == 0) {
             System.out.println("Agua.");
-            tablero[jugador][fila][columna] = -2; // marcar como agua disparada
+            tablero[jugadorAtaque][fila][columna] = -2; // marcar como agua disparada
         } else {
             System.out.println("Ya has disparado aquí.");
         }
     }
-    boolean hayBarcos(Jugador j) {
+    /*boolean hayBarcos(Jugador j) {
         boolean finJuego = false;
-        if (j.barcos == 0) {
+        if (j.barcos <= 0) {
             finJuego = true;
         }
         return finJuego;
-    }
+    }*/
 }
