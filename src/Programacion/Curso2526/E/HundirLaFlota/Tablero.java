@@ -1,4 +1,4 @@
-package Programacion.Curso2526.HundirLaFlota;
+package Programacion.Curso2526.E.HundirLaFlota;
 
 import Programacion.Curso2526.A.A11.Teclado;
 import java.io.IOException;
@@ -59,16 +59,15 @@ public class Tablero {
     }
 
     void disparar(Jugador j, Jugador j2) throws IOException {
-        int jugadorAtaque = j.id;
-        int jugadorDefensa = j2.id;
+        int jugador = j.id;
         Teclado teclado = new Teclado();
         System.out.print("Introduce la fila para disparar (1-10): ");
         int fila = teclado.leerInt() - 1; // ajustar índice para estar entre 0 y 9
         System.out.print("Introduce la columna para disparar (1-10): ");
         int columna = teclado.leerInt() - 1;
-        if (tablero[jugadorAtaque][fila][columna] == 1) {
+        if (tablero[jugador][fila][columna] == 1) {
             System.out.println("¡Tocado!");
-            tablero[jugadorAtaque][fila][columna] = -1; // marcar como tocado
+            tablero[jugador][fila][columna] = -1; // marcar como tocado
             System.out.println("Jugador rival ¿se ha hundido un barco? (No = 0 / Si = 1): ");
             int respuesta = teclado.leerInt();
             if (respuesta == 1) {
@@ -77,9 +76,9 @@ public class Tablero {
             } else {
                 System.out.println("Sigue intentando.");
             }
-        } else if (tablero[jugadorAtaque][fila][columna] == 0) {
+        } else if (tablero[jugador][fila][columna] == 0) {
             System.out.println("Agua.");
-            tablero[jugadorAtaque][fila][columna] = -2; // marcar como agua disparada
+            tablero[jugador][fila][columna] = -2; // marcar como agua disparada
         } else {
             System.out.println("Ya has disparado aquí.");
         }

@@ -1,4 +1,4 @@
-package Programacion.Curso2526.HundirLaFlota;
+package Programacion.Curso2526.E.HundirLaFlota;
 
 public class Jugador {
     String nombre;
