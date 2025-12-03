@@ -3,7 +3,6 @@ package Programacion.Curso2526.HundirLaFlota;
 import Programacion.Curso2526.A.A11.Teclado;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 
 public class Tablero {
     int[][][] tablero = new int[2][10][10]; // jugador, fila, columna
@@ -13,6 +12,24 @@ public class Tablero {
         for (int fila = 0; fila < tablero[jugador].length; fila++) {
             for (int columna = 0; columna < tablero[jugador][fila].length; columna++) {
                 System.out.print(tablero[jugador][fila][columna] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    void mostrarTableroOculto(int jugador) {
+        System.out.println("Tablero del jugador " + (jugador + 1) + ":");
+        for (int fila = 0; fila < tablero[jugador].length; fila++) {
+            for (int columna = 0; columna < tablero[jugador][fila].length; columna++) {
+                int valor = tablero[jugador][fila][columna];
+                if (valor == -1) {
+                    System.out.print("X "); // tocado
+                } else if (valor == -2) {
+                    System.out.print("0 "); // agua disparada
+                } else {
+                    System.out.print("O "); // oculto
+                }
             }
             System.out.println();
         }
@@ -36,6 +53,23 @@ public class Tablero {
                     tablero[jugador][fila][columna] = (int) (Math.random() * 2); // 0 o 1
                 }
             }
+        }
+    }
+
+    void disparar(int jugador) throws IOException {
+        Teclado teclado = new Teclado();
+        System.out.print("Introduce la fila para disparar (1-10): ");
+        int fila = teclado.leerInt() - 1; // ajustar índice para estar entre 0 y 9
+        System.out.print("Introduce la columna para disparar (1-10): ");
+        int columna = teclado.leerInt() - 1;
+        if (tablero[jugador][fila][columna] == 1) {
+            System.out.println("¡Tocado!");
+            tablero[jugador][fila][columna] = -1; // marcar como tocado
+        } else if (tablero[jugador][fila][columna] == 0) {
+            System.out.println("Agua.");
+            tablero[jugador][fila][columna] = -2; // marcar como agua disparada
+        } else {
+            System.out.println("Ya has disparado aquí.");
         }
     }
 
