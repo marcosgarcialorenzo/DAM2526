@@ -1,7 +1,6 @@
 package Programacion.Curso2526.HundirLaFlota;
 
 import Programacion.Curso2526.A.A11.Teclado;
-
 import java.io.IOException;
 
 public class Tablero {
@@ -85,11 +84,4 @@ public class Tablero {
             System.out.println("Ya has disparado aquí.");
         }
     }
-    /*boolean hayBarcos(Jugador j) {
-        boolean finJuego = false;
-        if (j.barcos <= 0) {
-            finJuego = true;
-        }
-        return finJuego;
-    }*/
 }
