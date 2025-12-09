@@ -16,7 +16,7 @@ public class E2_Empresa {
         double mediaSueldosMujeres = mediaSueldoMujeres(empleados);
         int contadorHombres = 0;
         for (int i = 0; i < empleados.length; i++) {
-            if (!empleados[i].mujer && empleados[i].sueldo > mediaSueldosMujeres) {
+            if (! empleados[i].mujer && empleados[i].sueldo > mediaSueldosMujeres) {
                 contadorHombres++;
             }
         }
@@ -27,7 +27,7 @@ public class E2_Empresa {
         double sumaSueldosHombres = 0;
         int contadorHombres = 0;
         for (int i = 0; i < empleados.length; i++) {
-            if (!empleados[i].mujer && empleados[i].getAntiguedad() > 1) {
+            if (! empleados[i].mujer && empleados[i].getAntiguedad() > 1) {
                 sumaSueldosHombres += empleados[i].sueldo;
                 contadorHombres++;
             }
@@ -40,7 +40,7 @@ public class E2_Empresa {
         double sumaSueldosHombres = 0;
         int contadorHombres = 0;
         for (int i = 0; i < empleados.length; i++) {
-            if (!empleados[i].mujer && empleados[i].getAntiguedad() < 1) {
+            if (! empleados[i].mujer && empleados[i].getAntiguedad() < 1) {
                 sumaSueldosHombres += empleados[i].sueldo;
                 contadorHombres++;
             }

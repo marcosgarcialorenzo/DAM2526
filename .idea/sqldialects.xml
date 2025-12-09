@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/Bases De Datos/UT4 El lenguaje SQL Lenguaje de Definición de Datos Restricciones/Ejercicio 1 Alumnos/Ejercicio 1 Alumnos Solucion.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/Bases De Datos/UT4 El lenguaje SQL Lenguaje de Definición de Datos Restricciones/Ejercicio 3 Universidad/Ejercico 3 Universidad Solucion.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/Bases De Datos/UT4 El lenguaje SQL Lenguaje de Definición de Datos Restricciones/Ejercicio 4 Ventas/TablaVentas.sql" dialect="GenericSQL" />
-    <file url="PROJECT" dialect="GenericSQL" />
-  </component>
   <component name="SqlResolveMappings">
     <file url="PROJECT" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;@negative&quot;:&quot;1&quot;   }  } }}" />
   </component>
