@@ -1,6 +1,6 @@
 package Programacion.Curso2526.E.E3;
 
-public class E2_Empresa {
+public class E3_Empresa {
 
     int mujeresSolterasConAntiguedadMayor1(Persona[] empleados) {
         int contador = 0;
@@ -71,7 +71,7 @@ public class E2_Empresa {
     public static void main(String[] args) {
         Persona[] empleados = new Persona[100];
         char[] estados = {'s', 'c', 'v'};
-        for (int i = 0; i < empleados.length; i++) { // relleno todo el array porque si no da error, y no puedo usar ni continue ni for each para saltarme posiciones
+        for (int i = 0; i < empleados.length; i++) {
             char estado = estados[i % estados.length];
             double min = 15000, max = 35000;
             double sueldo = min + Math.random() * (max - min);
@@ -79,7 +79,7 @@ public class E2_Empresa {
             int antiguedad = i % 11;
             empleados[i] = new Persona(estado, sueldo, mujer, antiguedad);
         }
-        E2_Empresa empresa = new E2_Empresa();
+        E3_Empresa empresa = new E3_Empresa();
         int resultado = empresa.mujeresSolterasConAntiguedadMayor1(empleados);
         System.out.println("Número de mujeres solteras con antigüedad mayor a 1: " + resultado);
         int resultado2 = empresa.hombresConMayorMediaSueldoMujeres(empleados);
