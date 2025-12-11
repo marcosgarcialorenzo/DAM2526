@@ -230,6 +230,26 @@ public class E4_Biblioteca {
         }
     }
 
+    void consultaUsuariosOrdenadosPorNombre() throws IOException {
+        //crear un array del mismo tamaño que el número de usuarios no null
+        int contador = 0;
+        for (int i = 0; i < usuarios.length; i++) {
+            if (usuarios[i] != null) {
+                contador++;
+            }
+        }
+        int indice = 0;
+        Usuario[] lista = new Usuario[contador];
+        for (int i = 0; i < lista.length; i++) {
+            if (usuarios[i] != null) {
+                lista[i] = usuarios[indice];
+                indice++;
+            }
+        }
+        //ordenar los usuarios por nombre
+        lista.
+    }
+
     public void menu() throws IOException {
         Teclado t = new Teclado();
         int opcion;
