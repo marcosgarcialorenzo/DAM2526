@@ -247,7 +247,7 @@ public class E4_Biblioteca {
             }
         }
         //ordenar los usuarios por nombre
-        lista.sort
+        Arrays
     }
 
     public void menu() throws IOException {
