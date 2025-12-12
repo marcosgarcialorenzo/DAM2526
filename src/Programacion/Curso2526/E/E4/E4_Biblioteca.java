@@ -164,7 +164,7 @@ public class E4_Biblioteca {
                             for (int k = 0; k < usuarios[j].getLibrosPrestados(); k++) {
                                 if (usuarios[j].getCodigosLibrosPrestados()[k] == codigo) {
                                     System.out.print("El libro con identificador " + codigo + " y titulo " + libros[i].getTitulo() + " esta ");
-                                    System.out.println("siendo prestado al usuario con identificador: " + usuarios[j].getIdentificador() + " y con nommbre: " + usuarios[j].nombre);
+                                    System.out.println("siendo prestado al usuario con identificador: " + usuarios[j].getIdentificador() + " y con nombre: " + usuarios[j].nombre);
                                 }
                             }
                         }
@@ -175,15 +175,21 @@ public class E4_Biblioteca {
     }
 
     void consultaUsuarios() throws IOException {
+        System.out.println("Usuarios registrados:");
         for (int i = 0; i < usuarios.length; i++) {
             if (usuarios[i] != null) {
-                System.out.println("El usuario con identificador " + i + " y nombre " + usuarios[i].nombre + " tiene " + usuarios[i].getLibrosPrestados() + " libros prestados.");
+                System.out.println();
+                System.out.println("Usuario: " + usuarios[i].nombre);
+                System.out.println("Identificador: " + usuarios[i].getIdentificador());
+                System.out.print("Cantidad de libros prestados: " + usuarios[i].getLibrosPrestados());
                 if (usuarios[i].getLibrosPrestados() > 0) {
-                    System.out.print("Codigos de los libros prestados a " + usuarios[i].nombre + ": ");
+                    System.out.print(" [");
                     for (int j = 0; j < usuarios[i].getLibrosPrestados(); j++) {
-                        System.out.print(usuarios[i].getCodigosLibrosPrestados()[j] + " ");
+                        System.out.print("(" + usuarios[i].getCodigosLibrosPrestados()[j] + ")");
                     }
+                    System.out.println("]");
                 }
+                System.out.println();
             }
         }
         System.out.println();
@@ -209,13 +215,13 @@ public class E4_Biblioteca {
         }
         int indice = 0;
         Usuario[] lista = new Usuario[contador];
-        for (int i = 0; i < lista.length; i++) {
+        for (int i = 0; i < usuarios.length; i++) {
             if (usuarios[i] != null) {
-                lista[i] = usuarios[indice];
+                lista[indice] = usuarios[i];
                 indice++;
             }
         }
-        // ordenar los usuarios
+        // ordenar los usuarios usando el método de la burbuja
         for (int i = 0; i < lista.length; i++) {
             for (int j = i + 1; j < lista.length; j++) {
                 if (lista[i].getLibrosPrestados() < lista[j].getLibrosPrestados()) {
@@ -232,6 +238,7 @@ public class E4_Biblioteca {
     }
 
     void consultaUsuariosOrdenadosPorNombre() throws IOException {
+        System.out.println();
         //crear un array del mismo tamaño que el número de usuarios no null
         int contador = 0;
         for (int i = 0; i < usuarios.length; i++) {
@@ -252,12 +259,23 @@ public class E4_Biblioteca {
         //mostrar los usuarios
         System.out.println("Usuarios ordenados por nombre:");
         for (int i = 0; i < lista.length; i++) {
-            System.out.println("Usuario: " + lista[i].nombre + ", identificador: " + lista[i].getIdentificador() + ", libros prestados: " + lista[i].getLibrosPrestados());
+            System.out.println();
+            System.out.println("Usuario: " + lista[i].nombre);
+            System.out.println("Identificador: " + lista[i].getIdentificador());
+            System.out.print("Cantidad de libros prestados: " + lista[i].getLibrosPrestados());
+            if (lista[i].getLibrosPrestados() > 0) {
+                System.out.print(" [");
+                for (int j = 0; j < lista[i].getLibrosPrestados(); j++) {
+                    System.out.print("(" + lista[i].getCodigosLibrosPrestados()[j] + ")");
+                }
+                System.out.println("]");
+            }
+            System.out.println();
         }
         System.out.println();
     }
 
-    public void menu() throws IOException {
+    void menu() throws IOException {
         Teclado t = new Teclado();
         int opcion;
         do {
