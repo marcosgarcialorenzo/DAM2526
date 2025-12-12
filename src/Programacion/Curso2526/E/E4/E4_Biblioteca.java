@@ -241,18 +241,20 @@ public class E4_Biblioteca {
         }
         int indice = 0;
         Usuario[] lista = new Usuario[contador];
-        for (int i = 0; i < lista.length; i++) {
+        for (int i = 0; i < usuarios.length; i++) {
             if (usuarios[i] != null) {
-                lista[i] = usuarios[indice];
+                lista[indice] = usuarios[i];
                 indice++;
             }
         }
         //ordenar los usuarios por nombre
         Arrays.sort(lista, (u1, u2) -> u1.nombre.compareTo(u2.nombre));
         //mostrar los usuarios
+        System.out.println("Usuarios ordenados por nombre:");
         for (int i = 0; i < lista.length; i++) {
-            System.out.println("El usuario con identificador " + lista[i].getIdentificador() + " y nombre " + lista[i].nombre + " tiene " + lista[i].getLibrosPrestados() + " libros prestados.");
+            System.out.println("Usuario: " + lista[i].nombre + ", identificador: " + lista[i].getIdentificador() + ", libros prestados: " + lista[i].getLibrosPrestados());
         }
+        System.out.println();
     }
 
     public void menu() throws IOException {
