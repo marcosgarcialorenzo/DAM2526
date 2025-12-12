@@ -3,12 +3,12 @@ package Programacion.Curso2526.E.E4;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class E4_Biblioteca {
+public class Biblioteca {
     String nombre;
     Usuario[] usuarios = new Usuario[100];
     Libros[] libros = new Libros[2000];
 
-    public E4_Biblioteca(String nombre) {
+    public Biblioteca(String nombre) {
         this.nombre = nombre;
         this.usuarios = new Usuario[100];
         this.libros = new Libros[2000];
@@ -307,10 +307,5 @@ public class E4_Biblioteca {
                 default -> System.out.println("Opción no válida.");
             }
         } while (opcion != 0);
-    }
-
-    public static void main(String[] args) throws IOException {
-        E4_Biblioteca biblioteca = new E4_Biblioteca("Biblioteca Central");
-        biblioteca.menu();
     }
 }
