@@ -1,6 +1,7 @@
 package Programacion.Curso2526.E.E4;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class E4_Biblioteca {
     String nombre;
@@ -247,7 +248,11 @@ public class E4_Biblioteca {
             }
         }
         //ordenar los usuarios por nombre
-        Arrays
+        Arrays.sort(lista, (u1, u2) -> u1.nombre.compareTo(u2.nombre));
+        //mostrar los usuarios
+        for (int i = 0; i < lista.length; i++) {
+            System.out.println("El usuario con identificador " + lista[i].getIdentificador() + " y nombre " + lista[i].nombre + " tiene " + lista[i].getLibrosPrestados() + " libros prestados.");
+        }
     }
 
     public void menu() throws IOException {
@@ -263,6 +268,7 @@ public class E4_Biblioteca {
             System.out.println("7. Consulta de usuarios");
             System.out.println("8. Consulta de libros no prestados");
             System.out.println("9. Consulta de usuarios ordenador por cantidad de libros");
+            System.out.println("10. Consulta de usuarios ordenador por nombre");
             System.out.println("0. Salir");
             System.out.println("Elige una opción:");
             opcion = t.leerInt();
@@ -276,6 +282,7 @@ public class E4_Biblioteca {
                 case 7 -> consultaUsuarios();
                 case 8 -> consultaLibrosNoPrestados();
                 case 9 -> consultaUsuariosOrdenadosPorLibros();
+                case 10 -> consultaUsuariosOrdenadosPorNombre();
                 case 0 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción no válida.");
             }
