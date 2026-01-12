@@ -1,10 +1,10 @@
 package Programacion.Curso2526.E.E7;
 
 public class Vehiculo {
-    static String matricula;
+    String matricula;
     long tiempoDePaso; // en segundos desde 1970
 
-    public static String getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
@@ -18,5 +18,9 @@ public class Vehiculo {
 
     public void setTiempoDePaso(long tiempoDePaso) {
         this.tiempoDePaso = tiempoDePaso;
+    }
+
+    public Vehiculo(String matricula) {
+        this.matricula = matricula;
     }
 }
