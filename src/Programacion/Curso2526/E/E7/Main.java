@@ -16,7 +16,7 @@ public class Main {
 
         Vehiculo[] radar1 = new Vehiculo[100];
         Vehiculo[] radar2 = new Vehiculo[100];
-        Denuncias[] multados = new Denuncias[100];
+        Denuncias[] multasFinal = new Denuncias[100];
         E7_Radares radar = new E7_Radares();
 
         radar.obtenerRadar1(v1, radar1);
@@ -37,10 +37,10 @@ public class Main {
         radar.obtenerRadar1(v6, radar1);
         radar.obtenerRadar2(v6, radar2);
 
-        multados = radar.multar(radar1, radar2);
-        for (int i = 0; i < multados.length; i++) {
-            if (multados[i] != null) {
-                multados[i].mostrarDenuncia();
+        multasFinal = radar.multar(radar1, radar2);
+        for (int i = 0; i < multasFinal.length; i++) {
+            if (multasFinal[i] != null) {
+                multasFinal[i].mostrarDenuncia();
             }
         }
     }

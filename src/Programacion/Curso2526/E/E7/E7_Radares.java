@@ -4,7 +4,7 @@ public class E7_Radares {
     Vehiculo[] radar1;
     Vehiculo[] radar2;
     Denuncias[] multas;
-//esto no funciona siempre da error de null pointer exception
+    //esto no funciona siempre da error de null pointer exception
     Denuncias[] multar(Vehiculo[] radar1, Vehiculo[] radar2) {
         Denuncias[] multados = new Denuncias[100];
         for (int i = 0; i < radar1.length; i++) {
@@ -17,39 +17,37 @@ public class E7_Radares {
                             tiempoDePaso = tiempoDePaso / 1000; // convertir a segundos
                             tiempoDePaso = tiempoDePaso / 3600; // convertir a horas
                             double velocidad = 1 / tiempoDePaso; // distancia entre radares es de 10 km en el enunciado para probarlo lo he bajado a 1 km
-                            if (velocidad > 121 && velocidad < 150) {
+                            if (velocidad >= 121 && velocidad < 151) {
                                 for (int k = 0; k < multados.length; k++) {
                                     if (multados[k] != null) {
                                         Denuncias nueva = new Denuncias(matricula, (int) velocidad, 0, 100);
                                         multados[k] = nueva;
-                                        return multados;
                                     }
                                 }
                             }
-                            if (velocidad >= 151 && velocidad < 170) {
+                            if (velocidad >= 151 && velocidad < 171) {
                                 for (int k = 0; k < multados.length; k++) {
                                     if (multados[k] != null) {
                                         Denuncias nueva = new Denuncias(matricula, (int) velocidad, 2, 300);
                                         multados[k] = nueva;
-                                        return multados;
                                     }
                                 }
                             }
-                            if (velocidad >= 171 && velocidad < 180) {
+                            if (velocidad >= 171 && velocidad < 181) {
                                 for (int k = 0; k < multados.length; k++) {
                                     if (multados[k] != null) {
                                         Denuncias nueva = new Denuncias(matricula, (int) velocidad, 4, 400);
                                         multados[k] = nueva;
-                                        return multados;
+
                                     }
                                 }
                             }
-                            if (velocidad >= 181 && velocidad < 190) {
+                            if (velocidad >= 181 && velocidad < 191) {
                                 for (int k = 0; k < multados.length; k++) {
                                     if (multados[k] != null) {
                                         Denuncias nueva = new Denuncias(matricula, (int) velocidad, 6, 500);
                                         multados[k] = nueva;
-                                        return multados;
+
                                     }
                                 }
                             }
@@ -58,7 +56,6 @@ public class E7_Radares {
                                     if (multados[k] != null) {
                                         Denuncias nueva = new Denuncias(matricula, (int) velocidad, 6, 600);
                                         multados[k] = nueva;
-                                        return multados;
                                     }
                                 }
                             }
@@ -67,7 +64,7 @@ public class E7_Radares {
                 }
             }
         }
-        return null;
+        return multados;
     }
 
     Vehiculo[] obtenerRadar1(Vehiculo v, Vehiculo[] radar1) {
