@@ -20,7 +20,8 @@ public class Vehiculo {
         this.tiempoDePaso = tiempoDePaso;
     }
 
-    public Vehiculo(String matricula) {
+    public Vehiculo(String matricula, long tiempoDePaso) {
         this.matricula = matricula;
+        this.tiempoDePaso = tiempoDePaso;
     }
 }
