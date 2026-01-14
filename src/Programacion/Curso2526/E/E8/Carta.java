@@ -18,8 +18,7 @@ public class Carta {
         return numero + " de " + palo;
     }
     public double valorCarta(Carta carta) {
-        int numero = carta.numero;
-        return switch (numero) {
+        return switch (this.numero) {
             case 10, 11, 12 -> 0.5;
             case 1 -> 1.0;
             case 2 -> 2.0;
