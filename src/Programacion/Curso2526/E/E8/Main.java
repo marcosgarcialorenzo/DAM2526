@@ -1,7 +1,7 @@
 package Programacion.Curso2526.E.E8;
 
 import java.io.IOException;
-//revisar sumaJ2 al principio de la ronda  y almacenar las rondas ganadas de cada jugador
+
 public class Main {
     public static void main(String[] args) throws IOException {
         Teclado teclado = new Teclado();
@@ -10,7 +10,8 @@ public class Main {
 
         boolean finJuego = false;
         int numeroRondas = 1;
-
+        int rondasGanadasJ1 = 0;
+        int rondasGanadasJ2 = 0;
 
         do {
             boolean finRonda = false;
@@ -39,13 +40,30 @@ public class Main {
             System.out.println();
             System.out.println("Carta del jugador 2: ");
             manoJ2[indiceManoJ2] = baraja.repartirCarta();
-            if (manoJ2[indiceManoJ2] == null) { finJuego = true; break; }
+            if (manoJ2[indiceManoJ2] == null) {
+                finJuego = true;
+            }
             manoJ2[indiceManoJ2].mostrarCarta();
             indiceManoJ2++;
 
             System.out.println();
 
             do { // turno del jugador 1
+                //comprobar J2
+                sumaJ2 = 0;
+                for (int i = 0; i < manoJ2.length; i++) {
+                    if (manoJ2[i] != null) {
+                        sumaJ2 += manoJ2[i].valorCarta(manoJ2[i]);
+                    }
+                }
+
+                if (sumaJ2 > 7.6) {
+                    System.out.println("Jugador 2 se ha pasado");
+                    finRonda = true;
+                    J2PlantadoForzado = true;
+                    rondasGanadasJ1++;
+                }
+
                 sumaJ1 = 0;
                 for (int i = 0; i < manoJ1.length; i++) {
                     if (manoJ1[i] != null) {
@@ -57,12 +75,12 @@ public class Main {
                     System.out.println("Jugador 1 se ha pasado");
                     finRonda = true;
                     J1PlantadoForzado = true;
-                    J2PlantadoForzado = true;
+                    rondasGanadasJ2++;
                 }
 
                 if (J1PlantadoForzado) {
                     J1Plantado = true;
-                } else if (!J1Plantado) {
+                } else if (! J1Plantado) {
                     System.out.println("¿Jugador 1 se planta?: (s/n)");
                     String respuestaJ1 = teclado.leerString();
                     if (respuestaJ1.equals("s")) {
@@ -77,7 +95,7 @@ public class Main {
                         indiceManoJ1++;
                     }
                 }
-            } while (!J1Plantado && !finJuego);
+            } while (! J1Plantado && ! finJuego);
 
             System.out.println("Suma final del jugador 1: " + sumaJ1);
 
@@ -101,7 +119,7 @@ public class Main {
 
                     if (J2PlantadoForzado) {
                         J2Plantado = true;
-                    } else if (!J2Plantado) {
+                    } else if (! J2Plantado) {
                         System.out.println("¿Jugador 2 se planta?: (s/n)");
                         String respuestaJ2 = teclado.leerString();
                         if (respuestaJ2.equals("s")) {
@@ -116,7 +134,7 @@ public class Main {
                             indiceManoJ2++;
                         }
                     }
-                } while (!J2Plantado && !finJuego);
+                } while (! J2Plantado && ! finJuego);
             }
 
             System.out.println("Suma final del jugador 2: " + sumaJ2);
@@ -129,8 +147,24 @@ public class Main {
             if (numeroRondas > 5) {
                 finJuego = true;
             }
+            if (sumaJ1 > 7.6) {
+                System.out.println("Jugador 2 gana la ronda.");
+            } else if (sumaJ2 > 7.6) {
+                System.out.println("Jugador 1 gana la ronda.");
+            } else if (sumaJ1 > sumaJ2) {
+                System.out.println("Jugador 1 gana la ronda.");
+                rondasGanadasJ1++;
+            } else if (sumaJ2 >= sumaJ1) { // en caso de empate gana el jugador 2
+                System.out.println("Jugador 2 gana la ronda.");
+                rondasGanadasJ2++;
+            }
         } while (! finJuego);
 
+        if (rondasGanadasJ1 > rondasGanadasJ2) {
+            System.out.println("Jugador 1 gana el juego con " + rondasGanadasJ1 + " rondas ganadas.");
+        } else if (rondasGanadasJ2 > rondasGanadasJ1) {
+            System.out.println("Jugador 2 gana el juego con " + rondasGanadasJ2 + " rondas ganadas.");
+        }
         System.out.println("Fin del juego.");
     }
 }
