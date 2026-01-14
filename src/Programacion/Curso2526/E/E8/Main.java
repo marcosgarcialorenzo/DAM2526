@@ -1,7 +1,7 @@
 package Programacion.Curso2526.E.E8;
 
 import java.io.IOException;
-
+//revisar sumaJ2 al principio de la ronda  y almacenar las rondas ganadas de cada jugador
 public class Main {
     public static void main(String[] args) throws IOException {
         Teclado teclado = new Teclado();
