@@ -1,4 +1,4 @@
-package Programacion.Curso2526.E.HundirLaFlota; /**
+package Programacion.Curso2526.HundirLaFlota; /**
 *   @author Jose Manuel Perez Lobato
 *   @version 1.0
 */

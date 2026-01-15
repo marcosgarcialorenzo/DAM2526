@@ -1,6 +1,5 @@
 package Programacion.Curso2526.E.E5;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Cliente {

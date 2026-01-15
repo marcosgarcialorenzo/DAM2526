@@ -1,4 +1,4 @@
-package Programacion.Curso2526.E.HundirLaFlota;
+package Programacion.Curso2526.HundirLaFlota;
 
 import java.io.IOException;
 
