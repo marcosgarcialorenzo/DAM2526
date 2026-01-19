@@ -1,7 +1,6 @@
 package Programacion.Curso2526.E.E6;
 
 import Programacion.Curso2526.E.E4.Teclado;
-
 import java.io.IOException;
 
 public class E6_Autobus {
