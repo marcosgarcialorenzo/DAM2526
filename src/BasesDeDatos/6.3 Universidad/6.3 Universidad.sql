@@ -56,3 +56,22 @@ WHERE NUMMATRICULADOS >= 200 AND NUMMATRICULADOS <= 350;
 SELECT *
 FROM CARRERAS
 WHERE NOMCARRERA != 'INFORMATICA';
+
+10) Sacar el numero total de matriculados y la media de esos matriculados en todas las
+carreras.
+
+SELECT SUM(NUMMATRICULADOS) AS "Total matriculados", AVG(NUMMATRICULADOS) AS "Media matriculados"
+FROM CARRERAS;
+
+11) Sacar el número de caracteres que tienen todas las carreras. Usar la función
+LENGTH.
+
+SELECT NOMCARRERA, LENGTH(NOMCARRERA) AS "Numero de caracteres"
+FROM CARRERAS;
+
+12) Sacar el nombre y apellidos que tienen todas los alumnos en un solo campo
+concatenándolos y de modo que queden separados por un espacio en blanco. Usar
+los operadores de concatenación || del siguiente modo: (nombre || ' ' || apellidos)
+
+SELECT DNI, (NOMBRE || ' ' || APELLIDOS) AS "Datos personales"
+FROM ALUMNOS;
