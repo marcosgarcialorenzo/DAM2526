@@ -9,9 +9,15 @@ WHERE PROFESOR = 'BARNES' AND SEMESTRE = 'PRIMAVERA';
 asignaturas que dio el profesor BARNES en OTOÑO o el profesor
 MARTIN en OTOÑO.
 
+SELECT NOMASIG, HORASCREDITO
+FROM ASIGNATURAS
+WHERE PROFESOR = 'BARNES' AND SEMESTRE = 'OTOÑO' 
+OR PROFESOR = 'MARTIN' AND SEMESTRE = 'OTOÑO'
 
 3) Sacar todas las categorías distintas.
 
+SELECT DISTINCT CATEGORIA
+FROM PROFESORES;
 
 4) Sacar todos los profesores junto con sus asignaturas.
 
