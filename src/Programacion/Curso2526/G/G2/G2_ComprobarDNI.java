@@ -37,22 +37,22 @@ public class G2_ComprobarDNI {
             verificarDNI(dni);
             System.out.println("DNI correcto");
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }try {
             verificarDNI(dni1);
             System.out.println("DNI correcto");
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }try {
             verificarDNI(dni2);
             System.out.println("DNI correcto");
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }try {
             verificarDNI(dni3);
             System.out.println("DNI correcto");
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }

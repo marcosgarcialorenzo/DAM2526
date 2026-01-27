@@ -11,9 +11,9 @@ public class G1_LeerNumero {
                 String texto = t.leerString(); // asi para que pueda leer todo y lo convierta a entero
                 return Integer.parseInt(texto);
             } catch (NumberFormatException numeroNoValido) {
-                System.out.println("Debe dar un número entero válido.");
+                System.err.println("Debe dar un número entero válido.");
             } catch (IOException errorTeclado) {
-                System.out.println("Error de entrada/salida");
+                System.err.println("Error de entrada/salida");
             }
         }
     }
