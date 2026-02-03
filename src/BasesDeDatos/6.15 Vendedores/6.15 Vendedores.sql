@@ -19,3 +19,11 @@ cuyo oficio sea ‘Dir Ventas’.
 select v.nombre, v.num_ofi, o.ciudad, v.oficio
 from oficinas o, vendedores v
 where v.oficio = 'Dir Ventas' and v.num_ofi = o.num_ofi;
+
+4) Mostrar un listado del número de pedido, importe y descripción del producto
+ordenado por número de pedido. Son 30 filas.
+
+select p.num_ped, p.importe, pr.descripcion
+from pedidos p, productos pr
+where p.id_prod = pr.id_prod
+order by p.num_ped;
