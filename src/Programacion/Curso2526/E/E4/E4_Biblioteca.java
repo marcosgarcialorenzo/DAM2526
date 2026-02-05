@@ -3,12 +3,12 @@ package Programacion.Curso2526.E.E4;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class Biblioteca {
+public class E4_Biblioteca {
     String nombre;
     Usuario[] usuarios = new Usuario[100];
     Libros[] libros = new Libros[2000];
 
-    public Biblioteca(String nombre) {
+    public E4_Biblioteca(String nombre) {
         this.nombre = nombre;
         this.usuarios = new Usuario[100];
         this.libros = new Libros[2000];

@@ -5,7 +5,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Programa de gesti��n de biblioteca");
-        Biblioteca biblioteca = new Biblioteca("Mi Biblioteca");
+        E4_Biblioteca biblioteca = new E4_Biblioteca("Mi Biblioteca");
         biblioteca.menu();
     }
 }
