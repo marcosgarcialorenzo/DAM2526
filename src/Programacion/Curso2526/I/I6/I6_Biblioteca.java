@@ -50,7 +50,7 @@ public class I6_Biblioteca {
                 boolean prestado = Boolean.parseBoolean(partes[2]);
                 libros[codigo] = new Libros(titulo, codigo, prestado);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
