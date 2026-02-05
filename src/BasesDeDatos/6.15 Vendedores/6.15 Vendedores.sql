@@ -51,84 +51,84 @@ group by num_ofi;
 8) Mostrar el nombre y cuota de los vendedores que tengan más cuota que la media
 de las cuotas y clasificado en orden ascendente de cuotas.
 
-SELECT NOMBRE, CUOTA
-FROM VENDEDORES
-WHERE CUOTA > (SELECT AVG(CUOTA) FROM VENDEDORES)
-ORDER BY CUOTA ASC;
+select nombre, cuota
+from vendedores
+where cuota > (select avg(cuota) from vendedores)
+order by cuota asc;
 
 9) Mostrar todas las empresas atendidas por Jesús Serrano
 
-SELECT c.EMPRESA
-FROM CLIENTES c, VENDEDORES v
-WHERE c.NUM_EMP = v.NUM_EMP
-  AND v.NOMBRE = 'Jesus Serrano';
+select c.empresa
+from clientes c, vendedores v
+where c.num_emp = v.num_emp
+  and v.nombre = 'Jesus Serrano';
 
 10) Mostrar los nombres de los empleados que no trabajen en oficinas dirigidas por
 Carlos Ruiz
 
-SELECT NOMBRE
-FROM VENDEDORES
-WHERE NUM_OFI NOT IN (SELECT NUM_OFI 
-                      FROM OFICINAS 
-                      WHERE NUM_DIR = 108);
+select nombre
+from vendedores
+where num_ofi not in (select num_ofi 
+                      from oficinas 
+                      where num_dir = 108);
 
 11) Mostrar el número de cliente, la cantidad y el importe de los pedidos que hay
 sobre el producto ‘Tirador’
 
-SELECT p.NUM_CLI, p.CANTI, p.IMPORTE
-FROM PEDIDOS p, PRODUCTOS pr
-WHERE p.ID_FAB = pr.ID_FAB 
-  AND p.ID_PROD = pr.ID_PROD
-  AND pr.DESCRIPCION = 'Tirador';
+select p.num_cli, p.canti, p.importe
+from pedidos p, productos pr 
+where p.id_fab = pr.id_fab 
+  and p.id_prod = pr.id_prod
+  and pr.descripcion = 'Tirador';
 
 12) Sacar el nombre, ventas y numero de oficina de los vendedores cuyas ventas sean
 mayores que la media de ventas de su oficina
 
-SELECT NOMBRE, VENTAS, NUM_OFI
-FROM VENDEDORES v1
-WHERE VENTAS > (SELECT AVG(VENTAS) 
-                FROM VENDEDORES v2 
-                WHERE v2.NUM_OFI = v1.NUM_OFI);
+select nombre, ventas, num_ofi
+from vendedores v1
+where ventas > (select avg(ventas) 
+                from vendedores v2 
+                where v2.num_ofi = v1.num_ofi);
 
 13) Mostrar las oficinas que superan el promedio de ventas de la región ‘Este’.
 
-SELECT *
-FROM OFICINAS
-WHERE VENTAS > (SELECT AVG(VENTAS) 
-                FROM OFICINAS 
-                WHERE REGION = 'Este');
+select *
+from oficinas
+where ventas > (select avg(ventas) 
+                from oficinas 
+                where region = 'Este');
 
 14) Mostrar aquellos vendedores que han realizado ventas mayores al límite de
 crédito de sus clientes
 
-SELECT DISTINCT v.NOMBRE
-FROM VENDEDORES v, CLIENTES c, PEDIDOS p
-WHERE v.NUM_EMP = p.NUM_EMP
-  AND c.NUM_CLI = p.NUM_CLI
-  AND p.IMPORTE > c.LIMITE_CREDITO;
+select distinct v.nombre
+from vendedores v, clientes c, pedidos p
+where v.num_emp = p.num_emp
+  and c.num_cli = p.num_cli
+  and p.importe > c.limite_credito;
 
 15) Mostrar aquellos productos cuyo precio es superior al promedio de los productos
 de su fabricante
 
-SELECT DESCRIPCION, PRECIO, ID_FAB
-FROM PRODUCTOS p1
-WHERE PRECIO > (SELECT AVG(PRECIO) 
-                FROM PRODUCTOS p2 
-                WHERE p2.ID_FAB = p1.ID_FAB);
+select descripcion, precio, id_fab
+from productos p1
+where precio > (select avg(precio) 
+                from productos p2 
+                where p2.id_fab = p1.id_fab);
 
 16) Mostrar aquellos vendedores que han vendido productos con un precio superior
 al promedio de precio por oficina
 
-SELECT DISTINCT v.num_emp ,v.NOMBRE
-FROM VENDEDORES v, PEDIDOS p, PRODUCTOS pr
-WHERE v.NUM_EMP = p.NUM_EMP
-  AND p.ID_FAB = pr.ID_FAB
-  AND p.ID_PROD = pr.ID_PROD
-  AND pr.PRECIO > (
-      SELECT AVG(pr2.PRECIO)
-      FROM PRODUCTOS pr2, PEDIDOS p2, VENDEDORES v2
-      WHERE p2.ID_FAB = pr2.ID_FAB 
-        AND p2.ID_PROD = pr2.ID_PROD
-        AND p2.NUM_EMP = v2.NUM_EMP
-        AND v2.NUM_OFI = v.NUM_OFI
+select distinct v.num_emp ,v.nombre
+from vendedores v, pedidos p, productos pr
+where v.num_emp = p.num_emp
+  and p.id_fab = pr.id_fab
+  and p.id_prod = pr.id_prod
+  and pr.precio > (
+      select avg(pr2.precio)
+      from productos pr2, pedidos p2, vendedores v2
+      where p2.id_fab = pr2.id_fab 
+        and p2.id_prod = pr2.id_prod
+        and p2.num_emp = v2.num_emp
+        and v2.num_ofi = v.num_ofi
   );
