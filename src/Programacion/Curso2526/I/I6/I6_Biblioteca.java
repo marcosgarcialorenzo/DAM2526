@@ -1,7 +1,6 @@
 package Programacion.Curso2526.I.I6;
 
 import java.io.*;
-import java.io.IOException;
 import java.util.Arrays;
 
 public class I6_Biblioteca {
@@ -39,21 +38,6 @@ public class I6_Biblioteca {
         this.libros = libros;
     }
 
-    void cargarLibros() {
-        String ruta = "src/Programacion/Curso2526/I/I6/Libros.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] partes = linea.split(";");
-                String titulo = partes[0];
-                int codigo = Integer.parseInt(partes[1]);
-                boolean prestado = Boolean.parseBoolean(partes[2]);
-                libros[codigo] = new Libros(titulo, codigo, prestado);
-            }
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
 
     void altaUsuario() throws IOException {
         Teclado t = new Teclado();
@@ -255,7 +239,7 @@ public class I6_Biblioteca {
                 indice++;
             }
         }
-        //ordenar los usuarios por nombre
+        //ordenar los usuarios por nombre usando el método sort de la clase Arrays y un comparador lambda
         Arrays.sort(lista, (u1, u2) -> u1.nombre.compareTo(u2.nombre));
         //mostrar los usuarios
         System.out.println("Usuarios ordenados por nombre:");
@@ -274,6 +258,22 @@ public class I6_Biblioteca {
             System.out.println();
         }
         System.out.println();
+    }
+
+    void cargarLibros() {
+        String ruta = "src/Programacion/Curso2526/I/I6/Libros.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                String titulo = partes[0];
+                int codigo = Integer.parseInt(partes[1]);
+                boolean prestado = Boolean.parseBoolean(partes[2]);
+                libros[codigo] = new Libros(titulo, codigo, prestado);
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 
     void guardarLibros() {
