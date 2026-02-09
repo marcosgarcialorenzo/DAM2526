@@ -50,7 +50,7 @@ public class I6_Biblioteca {
             }
         }
         usuarios[posicionLibre] = new Usuario(posicionLibre, nombre); //empieza a rellenar el array desde el final
-        System.out.println("Usuario añadido con exito.");
+        System.out.println("Usuario añadido con éxito.");
         System.out.println("Identificador del usuario: " + posicionLibre);
         System.out.println();
     }
@@ -64,7 +64,7 @@ public class I6_Biblioteca {
                 if (usuarios[i].getLibrosPrestados() > 0) {
                     System.out.println("El usuario tiene libros prestados. No se puede eliminar.");
                 } else {
-                    System.out.println("Usuario con nombre " + usuarios[i].nombre + " y identificador " + usuarios[i].getIdentificador() + " eliminado con exito.");
+                    System.out.println("Usuario con nombre " + usuarios[i].nombre + " y identificador " + usuarios[i].getIdentificador() + " eliminado con éxito.");
                     usuarios[i] = null;
                     System.out.println();
                 }
@@ -76,7 +76,7 @@ public class I6_Biblioteca {
         Teclado t = new Teclado();
         System.out.println("Introduce el identificador del usuario:");
         int id = t.leerInt();
-        System.out.println("Introduce el codigo del libro a prestar:");
+        System.out.println("Introduce el código del libro a prestar:");
         int codigo = t.leerInt();
         for (int i = 0; i < libros.length; i++) {
             if (libros[i] != null && libros[i].getCodigo() == codigo) {
@@ -89,10 +89,10 @@ public class I6_Biblioteca {
                                 libros[i].setPrestado(true);
                                 usuarios[j].getCodigosLibrosPrestados()[usuarios[j].getLibrosPrestados()] = codigo;
                                 usuarios[j].setLibrosPrestados(usuarios[j].getLibrosPrestados() + 1);
-                                System.out.println("Libro prestado con exito.");
+                                System.out.println("Libro prestado con éxito.");
                                 System.out.println();
                             } else {
-                                System.out.println("El usuario ya tiene el maximo de libros prestados.");
+                                System.out.println("El usuario ya tiene el máximo de libros prestados.");
                                 System.out.println();
                             }
                         }
@@ -106,7 +106,7 @@ public class I6_Biblioteca {
         Teclado t = new Teclado();
         System.out.println("Introduce el identificador del usuario:");
         int id = t.leerInt();
-        System.out.println("Introduce el codigo del libro a devolver:");
+        System.out.println("Introduce el código del libro a devolver:");
         int codigo = t.leerInt();
         for (int i = 0; i < libros.length; i++) {
             if (libros[i] != null && libros[i].getCodigo() == codigo) {
@@ -122,7 +122,7 @@ public class I6_Biblioteca {
                                 usuarios[j].getCodigosLibrosPrestados()[usuarios[j].getLibrosPrestados() - 1] = 0;
                                 usuarios[j].setLibrosPrestados(usuarios[j].getLibrosPrestados() - 1);
                                 libros[i].setPrestado(false);
-                                System.out.println("Libro devuelto con exito.");
+                                System.out.println("Libro devuelto con éxito.");
                                 System.out.println();
                             }
                         }
@@ -138,7 +138,7 @@ public class I6_Biblioteca {
 
     void consultaLibros() throws IOException {
         Teclado t = new Teclado();
-        System.out.println("Introduce el codigo del libro a consultar:");
+        System.out.println("Introduce el código del libro a consultar:");
         int codigo = t.leerInt();
         for (int i = 0; i < libros.length; i++) {
             if (libros[i] != null && libros[i].getCodigo() == codigo) {
@@ -184,7 +184,7 @@ public class I6_Biblioteca {
         System.out.println("Libros no prestados:");
         for (int i = 0; i < libros.length; i++) {
             if (libros[i] != null && ! libros[i].isPrestado()) {
-                System.out.println("Codigo: " + libros[i].getCodigo() + ", Titulo: " + libros[i].getTitulo());
+                System.out.println("Código: " + libros[i].getCodigo() + ", Titulo: " + libros[i].getTitulo());
             }
         }
         System.out.println();
