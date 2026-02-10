@@ -1,8 +1,6 @@
 package Programacion.Curso2526.ExamenesMGL.Evaluacion2.Simulacro.Ej2;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 
 public class Ej2 {
     public static void main(String[] args) {
@@ -74,6 +72,121 @@ public class Ej2 {
             }
         } catch (IOException e) {
             System.out.println("Error al acceder al archivo: " + e.getMessage());
+        }
+    }
+
+    void mostrarEstadisticasPorDueño(File fichero, String dniBuscado) {
+        int contadorLocales = 0;
+        double superficieTotal = 0;
+        boolean dueñoEncontrado = false;
+
+        // Usamos RandomAccessFile para lectura (modo "r")
+        try (RandomAccessFile raf = new RandomAccessFile(fichero, "r")) {
+            String linea;
+
+            while ((linea = raf.readLine()) != null) {
+                // Formato: id#superficie@horarioAmpliado@DNIDueño
+                // 1. Separamos el ID del resto por el '#'
+                String[] partesPrincipal = linea.split("#");
+
+                // 2. Separamos los datos restantes por el '@'
+                // partesDatos[0] = superficie, [1] = horario, [2] = DNIDueño
+                String[] partesDatos = partesPrincipal[1].split("@");
+
+                String dniActual = partesDatos[2].trim();
+
+                if (dniActual.equalsIgnoreCase(dniBuscado.trim())) {
+                    contadorLocales++;
+                    superficieTotal += Double.parseDouble(partesDatos[0]);
+                    dueñoEncontrado = true;
+                }
+            }
+
+            if (dueñoEncontrado) {
+                System.out.println("--- Resultados para el DNI: " + dniBuscado + " ---");
+                System.out.println("Número total de locales: " + contadorLocales);
+                System.out.printf("Superficie acumulada total: %.2f m²\n", superficieTotal);
+            } else {
+                System.out.println("No se encontraron locales asociados al DNI: " + dniBuscado);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error al leer el fichero: " + e.getMessage());
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error en el formato de los datos del archivo.");
+        }
+    }
+
+    public void calcularCuota() {
+        Teclado t = new Teclado();
+        System.out.print("Introduce la cantidad total de gastos del centro comercial: ");
+        double gastosTotales = 0;
+        try {
+            gastosTotales = t.leerDouble();
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+
+        File ficheroDat = new File("locales.dat");
+
+        // Variables para la primera pasada
+        double superficieTotalTotal = 0;
+        int contadorHorarioAmpliado = 0;
+
+        // Usamos RandomAccessFile para leer y FileWriter para crear el nuevo fichero de texto
+        try (RandomAccessFile raf = new RandomAccessFile(ficheroDat, "r");
+             PrintWriter escritor = new PrintWriter(new FileWriter("repartoGastos.txt"))) {
+
+            // --- PRIMERA PASADA: Calcular acumulados ---
+            String linea;
+            while ((linea = raf.readLine()) != null) {
+                // Estructura: id#superficie@horarioAmpliado@DNIDueño
+                String[] partes = linea.split("#");
+                String[] datos = partes[1].split("@");
+
+                double superficie = Double.parseDouble(datos[0]);
+                boolean tieneHorario = Boolean.parseBoolean(datos[1]);
+
+                superficieTotalTotal += superficie;
+                if (tieneHorario) {
+                    contadorHorarioAmpliado++;
+                }
+            }
+
+            // Cálculos de cuotas base
+            double parteSuperficie = gastosTotales * 0.90;
+            double parteHorario = gastosTotales * 0.10;
+
+            double euroPorM2 = (superficieTotalTotal > 0) ? (parteSuperficie / superficieTotalTotal) : 0;
+            double cuotaFijaHorario = (contadorHorarioAmpliado > 0) ? (parteHorario / contadorHorarioAmpliado) : 0;
+
+            // --- SEGUNDA PASADA: Calcular cuota individual y escribir en fichero ---
+            raf.seek(0); // Volvemos al inicio del fichero .dat
+
+            while ((linea = raf.readLine()) != null) {
+                String[] partes = linea.split("#");
+                int id = Integer.parseInt(partes[0]);
+                String[] datos = partes[1].split("@");
+
+                double superficie = Double.parseDouble(datos[0]);
+                boolean tieneHorario = Boolean.parseBoolean(datos[1]);
+
+                // Cálculo final para este local
+                double cuotaLocal = (superficie * euroPorM2);
+                if (tieneHorario) {
+                    cuotaLocal += cuotaFijaHorario;
+                }
+
+                // Escritura en el fichero de texto repartoGastos.txt con el formato id@cuota
+                escritor.println(id + "@" + cuotaLocal);
+            }
+
+            System.out.println("Fichero 'repartoGastos.txt' generado correctamente.");
+
+        } catch (IOException e) {
+            System.out.println("Error al procesar los ficheros: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error inesperado: " + e.getMessage());
         }
     }
 }
