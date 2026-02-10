@@ -13,7 +13,6 @@ public class Ej1 {
             int numeroLinea = 0;
             boolean errorA = false;
             boolean errorB = false;
-
             while ((linea = br.readLine()) != null) {
                 numeroLinea++;
                 String[] partes = linea.split(";");
