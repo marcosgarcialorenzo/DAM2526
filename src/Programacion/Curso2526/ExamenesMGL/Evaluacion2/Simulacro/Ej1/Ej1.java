@@ -6,15 +6,16 @@ import java.io.FileReader;
 public class Ej1 {
     public static void main(String[] args) {
         int contador = 0;
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\marco\\IdeaProjects\\DAM2526\\src\\Programacion\\Curso2526\\ExamenesMGL\\Evaluacion2\\Simulacro\\productos.txt"))) { // para saber cuantas lineas tiene el .txt
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\marco\\IdeaProjects\\DAM2526\\src\\Programacion\\Curso2526\\ExamenesMGL\\Evaluacion2\\Simulacro\\Ej1\\productos.txt"))) { // para saber cuantas lineas tiene el .txt
             while (reader.readLine() != null) {
                 contador++;
             }
         } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
         Productos[] productos = new Productos[contador];
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\marco\\IdeaProjects\\DAM2526\\src\\Programacion\\Curso2526\\ExamenesMGL\\Evaluacion2\\Simulacro\\productos.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\marco\\IdeaProjects\\DAM2526\\src\\Programacion\\Curso2526\\ExamenesMGL\\Evaluacion2\\Simulacro\\Ej1\\productos.txt"))) {
             String linea;
             int contadorProductos = 0;
             int numeroLinea = 1;
@@ -69,6 +70,7 @@ public class Ej1 {
                 numeroLinea++;
             }
         } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
     }
