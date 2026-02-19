@@ -29,7 +29,7 @@ public class Empresa {
             System.out.println();
             existe = true;
         }
-        if (!existe) { // si es false
+        if (! existe) { // si es false
             empleados.add(p);
             System.out.println();
             System.out.println("Empleado añadido");
