@@ -1,0 +1,8 @@
+<tipo>(<alcance>): <descripción corta>
+
+# --- Guía de Estilo ---
+# feat: Nueva funcionalidad
+# fix: Corrección de error
+# docs: Documentación
+# style: Formato (espacios, puntos y coma...)
+# refactor: Mejora de código sin cambiar lógica
