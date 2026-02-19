@@ -1,4 +1,4 @@
-package Programacion.Curso2526.K.K1; /**
+package Programacion.Curso2526.K.K0; /**
  * @author Jose Manuel Perez Lobato
  * @version 1.0
  */
