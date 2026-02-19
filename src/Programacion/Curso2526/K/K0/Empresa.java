@@ -7,10 +7,10 @@ public class Empresa {
     Vector<Persona> empleados;
 
     Empresa() {
-        empleados = new Vector<Persona>(30);
+        empleados = new Vector<>(30);
     }
 
-    public static void main(String[] args) throws IOException {
+    static void main() throws IOException {
         Empresa e = new Empresa();
         e.menu();
     }
@@ -125,7 +125,7 @@ public class Empresa {
 
     void menu() throws IOException {
         Teclado t = new Teclado();
-        int opc = 0;
+        int opc;
         System.out.println("1-Añadir empleado");
         System.out.println("2-Eliminar empleado");
         System.out.println("3-Modificar edad");
