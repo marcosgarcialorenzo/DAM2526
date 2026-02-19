@@ -50,18 +50,18 @@ DAM2526/
 
 ### 💻 Programación (Java)
 
-| Carpeta | Descripción |
-|---------|-------------|
-| **A** | Clases fundamentales: `Fraccion`, `Punto`, `Triangulo`, `Rectangulo`, `Seguro` |
-| **B** | Métodos y estructuras de control: fracciones, fechas, sumas, contadores |
-| **C** | Validaciones y mejoras de clases anteriores |
-| **D** | Manejo de arrays y números |
-| **E** | Proyectos completos: Radares, Baraja Española, Máquina Expendedora, Hundir la Flota |
-| **F** | Procesamiento de Strings: búsqueda, medias, DNI, formateo |
-| **G** | Entrada/Salida con teclado gráfico |
-| **H** | Recursividad: Serie de Fibonacci |
-| **I** | Manejo de ficheros y directorios |
-| **K** | Colecciones: Vector, gestión de empresas y empleados |
+| Carpeta | Descripción                  |
+|---------|------------------------------|
+| **A** | Ejercios basicos             |
+| **B** | Estructura de control 1      |
+| **C** | Estructura de control 2      |
+| **D** | Arrays                       |
+| **E** | Matrices y objetos de arrays |
+| **F** | Strings                      |
+| **G** | Excepiones                   |
+| **H** | Recursividad                 |
+| **I** | Ficheros                     |
+| **K** | Colecciones                  |
 
 
 ## 🛠️ Tecnologías Utilizadas
