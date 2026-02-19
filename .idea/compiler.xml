@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EjemBDv250331a" />
+        <module name="DAM2526" />
       </profile>
     </annotationProcessing>
   </component>

@@ -2,6 +2,7 @@ package Programacion.Curso2526.K.K0;
 
 import java.io.IOException;
 import java.util.Vector;
+import Lombok.Data;
 
 public class Empresa {
     Vector<Persona> empleados;
