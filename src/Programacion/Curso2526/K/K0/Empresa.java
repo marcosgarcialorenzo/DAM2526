@@ -115,6 +115,14 @@ public class Empresa {
         }
     }
 
+    void listarEmpleadosPorNombre() {
+        System.out.println("Listado de empleados:");
+        empleados.sort((p1, p2) -> p1.nombre.compareTo(p2.nombre)); //expresión lambda (parámetros) → {cuerpo}
+        for (Persona persona : empleados) {
+            System.out.println(persona);
+        }
+    }
+
     void menu() throws IOException {
         Teclado t = new Teclado();
         int opc = 0;
@@ -124,6 +132,8 @@ public class Empresa {
         System.out.println("4-Modificar Nombre");
         System.out.println("5-Listar empleados");
         System.out.println("6-listar ordenado por edad");
+        System.out.println("7-listar ordenado por nombre");
+        System.out.println("0-Salir");
         do {
             System.out.print("Dar opción: ");
             opc = t.leerInt();
@@ -134,6 +144,7 @@ public class Empresa {
                 case 4 -> modificarNombre();
                 case 5 -> listarEmpleados();
                 case 6 -> listarEmpleadosPorEdad();
+                case 7 -> listarEmpleadosPorNombre();
             }
         } while (opc != 0);
     }
