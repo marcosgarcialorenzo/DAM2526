@@ -2,16 +2,11 @@ package Programacion.Curso2526.K.K0;
 
 import java.io.IOException;
 import java.util.Vector;
-import Lombok.Data;
 
 public class Empresa {
-    Vector<Persona> empleados;
+    Vector<Persona> empleados = new Vector<>(30);//creo e inicializo el vector de empleados con capacidad para 30 empleados
 
-    Empresa() {
-        empleados = new Vector<>(30);
-    }
-
-    static void main() throws IOException {
+    public static void main(String[] args) throws IOException {
         Empresa e = new Empresa();
         e.menu();
     }

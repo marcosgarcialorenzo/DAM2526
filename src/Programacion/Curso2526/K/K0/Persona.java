@@ -1,32 +1,16 @@
 package Programacion.Curso2526.K.K0;
 
-import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data //getters, setters, equals, hashCode y toString
+@AllArgsConstructor //constructor con todos los argumentos en orden de aparición
 public class Persona {
-    int edad;
     String nombre;
-
-    Persona(String nombre, int edad) {
-        this.nombre = nombre;
-        this.edad = edad;
-    }
+    int edad;
 
     @Override
     public String toString() {
         return nombre + ", " + edad;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || this.getClass() != o.getClass()) {
-            return false;
-        }
-        Persona persona = (Persona) o;
-        return this.nombre.equals(persona.nombre);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(nombre);
     }
 }
