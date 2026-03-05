@@ -23,4 +23,9 @@ public class ProductoOfertaCaducable extends Producto {
         System.out.println("Fecha caducidad: " + fechaCaducidad);
         System.out.println();
     }
+
+    @Override
+    boolean estaPorCaducar() {
+        return fechaCaducidad.isBefore(LocalDateTime.now().plusDays(7));
+    }
 }

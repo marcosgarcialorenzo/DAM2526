@@ -1,7 +1,6 @@
 package Programacion.Curso2526.J.J0;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Vector;
 
@@ -64,24 +63,15 @@ public class Supermercado {
     }
 
     void listarProductos() {
-            for (Producto producto : productos) {
-                producto.mostrar();
-            }
+        for (Producto producto : productos) {
+            producto.mostrar();
+        }
     }
 
     void listarProductosAPuntoDeCaducar() {
         for (Producto producto : productos) {
-            if (producto.caducable && producto.fechaCaducidad.isBefore(LocalDate.now().plusDays(7))) {
-                System.out.println("Nombre: " + producto.nombre);
-                if (producto.precioOferta < producto.precio) {
-                    System.out.println("Precio en oferta: " + producto.precioOferta);
-                    System.out.println("Fin de la oferta: " + producto.finOferta);
-                } else {
-                    System.out.println("Precio: " + producto.precio);
-                }
-                System.out.println("Cantidad: " + producto.cantidad);
-                System.out.println("Fecha de caducidad: " + producto.fechaCaducidad);
-                System.out.println();
+            if (producto.estaPorCaducar()) {
+                producto.mostrar();
             }
         }
     }

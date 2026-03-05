@@ -1,6 +1,6 @@
 package Programacion.Curso2526.J.J0;
 
-import javax.sound.midi.SoundbankResource;
+import java.time.LocalDateTime;
 
 public class Producto {
     String nombre;
@@ -18,5 +18,9 @@ public class Producto {
         System.out.println("Precio: " + precio + "€");
         System.out.println("Cantidad: " + cantidad);
         System.out.println();
+    }
+
+    boolean estaPorCaducar() {
+        return false;
     }
 }
