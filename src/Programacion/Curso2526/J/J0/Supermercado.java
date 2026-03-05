@@ -24,31 +24,35 @@ public class Supermercado {
 
     void añadirProducto() throws IOException {
         Teclado t = new Teclado();
+        String nombre, oferta, caducable;
+        double precio, precioOferta = 0;
+        LocalDateTime fechaCaducidad, fechaFinOferta;
         System.out.println("Introduce el nombre del producto:");
-        String nombre = t.leerString();
+        nombre = t.leerString();
         System.out.println("¿El producto tiene oferta? (s/n)");
-        String oferta = t.leerString();
+        oferta = t.leerString();
         if (oferta.equalsIgnoreCase("s")) {
             System.out.println("Introduce el precio de la oferta:");
-            double precioOferta = t.leerDouble();
+            precioOferta = t.leerDouble();
             System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
             String fechaFinOfertaStr = t.leerString();
-            LocalDateTime fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
-        }
-        else {
+            fechaCaducidad = LocalDateTime.parse(fechaFinOfertaStr);
+        } else {
             System.out.println("Introduce el precio del producto:");
-            double precio = t.leerDouble();
+            precio = t.leerDouble();
         }
         System.out.println("Introduce la cantidad del producto:");
         int cantidad = t.leerInt();
         System.out.println("¿El producto es caducable? (s/n)");
-        String caducable = t.leerString();
+        caducable = t.leerString();
         if (caducable.equalsIgnoreCase("s")) {
             System.out.println("Introduce la fecha de caducidad (YYYY-MM-DD):");
             String fechaCaducidadStr = t.leerString();
-            LocalDate fechaCaducidad = LocalDate.parse(fechaCaducidadStr);
+            fechaCaducidad = LocalDate.parse(fechaCaducidadStr);
         }
-
+        if (oferta.equalsIgnoreCase("s") && caducable.equalsIgnoreCase("s")) {
+            productos.add(new Producto(nombre, precioOferta, cantidad, finOferta, fechaCaducidad));
+        }
     }
 
     void listarProductos() {
