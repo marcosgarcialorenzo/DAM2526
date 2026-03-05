@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class Supermercado {
     String nombre;
-    Vector<Usuario> clientes;
+    Vector<Cliente> clientes;
     Vector<Producto> productos;
 
     public Supermercado(String nombre) {
@@ -17,7 +17,7 @@ public class Supermercado {
 
     public static void main(String[] args) throws IOException {
         Supermercado supermercado = new Supermercado("Supermercado XYZ");
-        Usuario admin = new ClienteNormal("admin", "admin123");
+        Cliente admin = new Cliente("admin", "admin123");
         supermercado.clientes.add(admin);
         supermercado.menu();
     }
@@ -90,24 +90,53 @@ public class Supermercado {
         System.out.println("Introduce el nombre del producto que quieres poner en oferta:");
         String nombre = t.leerString();
         for (Producto producto : productos) {
-            if (producto.enOferta()) {
-                System.out.println("El producto ya está en oferta.");
-                return;
-            } else {
-                if (producto.caducable()) { // ProductoCaducable o ProductoOfertaCaducable
-                    System.out.println("Introduce el precio de la oferta:");
-                    double precioOferta = t.leerDouble();
-                    System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
-                    String fechaFinOfertaStr = t.leerString();
-                    LocalDateTime fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
-                    productos.set(productos.indexOf(producto), new ProductoOfertaCaducable(producto.nombre, precioOferta, producto.cantidad, fechaFinOferta, ((ProductoCaducable) producto).fechaCaducidad));
-                } else { // Producto a ProductoOferta
-                    System.out.println("Introduce el precio de la oferta:");
-                    double precioOferta = t.leerDouble();
-                    System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
-                    String fechaFinOfertaStr = t.leerString();
-                    LocalDateTime fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
-                    productos.set(productos.indexOf(producto), new ProductoOferta(producto.nombre, precioOferta, producto.cantidad, fechaFinOferta));
+            if (producto.nombre.equals(nombre)) {
+                if (producto.enOferta()) {
+                    System.out.println("El producto ya está en oferta.");
+                    return;
+                } else {
+                    if (producto.caducable()) { // ProductoCaducable o ProductoOfertaCaducable
+                        System.out.println("Introduce el precio de la oferta:");
+                        double precioOferta = t.leerDouble();
+                        System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
+                        String fechaFinOfertaStr = t.leerString();
+                        LocalDateTime fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
+                        productos.set(productos.indexOf(producto), new ProductoOfertaCaducable(producto.nombre, precioOferta, producto.cantidad, fechaFinOferta, ((ProductoCaducable) producto).fechaCaducidad));
+                    } else { // Producto a ProductoOferta
+                        System.out.println("Introduce el precio de la oferta:");
+                        double precioOferta = t.leerDouble();
+                        System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
+                        String fechaFinOfertaStr = t.leerString();
+                        LocalDateTime fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
+                        productos.set(productos.indexOf(producto), new ProductoOferta(producto.nombre, precioOferta, producto.cantidad, fechaFinOferta));
+                    }
+                }
+            }
+        }
+    }
+
+    void anadirProductoAlCarrito(Cliente cliente) throws IOException {
+        Teclado t = new Teclado();
+        System.out.println("Introduce el nombre del producto que quieres añadir al carrito:");
+        String nombre = t.leerString();
+        for (Producto producto : productos) {
+            if (producto.nombre.equals(nombre)) {
+                System.out.println("Introduce la cantidad que quieres añadir al carrito:");
+                int cantidad = t.leerInt();
+                if (cantidad > producto.cantidad) {
+                    System.out.println("No hay suficiente stock.");
+                } else {
+                    if (producto.caducable() && producto.enOferta()) {
+                        cliente.carrito.add(new ProductoOfertaCaducable(producto.nombre, producto.precio, cantidad, ((ProductoOferta) producto).fechaFinOferta, ((ProductoCaducable) producto).fechaCaducidad));
+                    }
+                    if (producto.caducable() && ! producto.enOferta()) {
+                        cliente.carrito.add(new ProductoCaducable(producto.nombre, producto.precio, cantidad, ((ProductoCaducable) producto).fechaCaducidad));
+                    }
+                    if (! producto.caducable() && producto.enOferta()) {
+                        cliente.carrito.add(new ProductoOferta(producto.nombre, producto.precio, cantidad, ((ProductoOferta) producto).fechaFinOferta));
+                    } else {
+                        cliente.carrito.add(new Producto(producto.nombre, producto.precio, cantidad));
+                    }
                 }
             }
         }
@@ -118,16 +147,21 @@ public class Supermercado {
         int opcion;
         boolean admin = false;
         boolean encontrado = false;
+        Cliente cliente = null;
         System.out.println("Introduce un nombre de usuario:");
         String nombre = t.leerString();
         System.out.println("Introduce una contraseña:");
         String contrasena = t.leerString();
-        for (Usuario user : clientes) {
-            if (user.nombre.equals(nombre) && user.contrasena.equals(contrasena)) {
-                if (user.nombre.equals("admin") && user.contrasena.equals("admin123")) {
-                    admin = true;
-                }
+        for (Cliente user : clientes) {
+            if (user.nombre.equals("admin") && user.contrasena.equals("admin123")) {
+                admin = true;
+            } else if (user.nombre.equals(nombre) && user.contrasena.equals(contrasena)) {
                 encontrado = true;
+                if (user.esClientePreferente()) {
+                    cliente = new ClientePreferente(user.nombre, contrasena);
+                } else {
+                    cliente = new Cliente(user.nombre, contrasena);
+                }
             }
         }
         if (admin) { //si es admin
@@ -150,8 +184,7 @@ public class Supermercado {
                     default -> System.out.println("Opción no válida.");
                 }
             } while (opcion != 0);
-        }
-        if (encontrado) { //si es user normal
+        } else if ((encontrado)) { //si es user normal y no es admin
             do {
                 System.out.println("1. Añadir producto al carrito");
                 System.out.println("2. Listar productos en el carrito");
@@ -162,7 +195,7 @@ public class Supermercado {
                 System.out.println("Elige una opción:");
                 opcion = t.leerInt();
                 switch (opcion) {
-                    case 1 -> System.out.println("Funcionalidad no implementada.");
+                    case 1 -> anadirProductoAlCarrito(cliente);
                     case 2 -> System.out.println("Funcionalidad no implementada.");
                     case 3 -> System.out.println("Funcionalidad no implementada.");
                     case 4 -> System.out.println("Funcionalidad no implementada.");

@@ -2,7 +2,7 @@ package Programacion.Curso2526.J.J0;
 
 import java.util.Vector;
 
-public class ClientePreferente extends Usuario {
+public class ClientePreferente extends Cliente {
     Vector<Integer> descuentos;
     Vector<Producto> compras;
     Vector<Producto> carrito;
@@ -12,5 +12,10 @@ public class ClientePreferente extends Usuario {
         this.compras = new Vector<>(5, 5);
         this.carrito = new Vector<>(5, 5);
         this.descuentos = new Vector<>(5, 5);
+    }
+
+    @Override
+    boolean esClientePreferente (){
+        return true;
     }
 }
