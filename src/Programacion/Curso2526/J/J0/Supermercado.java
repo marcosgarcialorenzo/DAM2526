@@ -92,10 +92,10 @@ public class Supermercado {
         System.out.println("Introduce un nombre de usuario:");
         String nombre = t.leerString();
         System.out.println("Introduce una contraseña:");
-        String contraseña = t.leerString();
-        for (ClienteNormal cliente : clientes) {
-            if (cliente.nombre.equals(nombre) && cliente.contraseña.equals(contraseña)) {
-                if (cliente.nombre.equals("admin") && cliente.contraseña.equals("admin123")) {
+        String contrasena = t.leerString();
+        for (Usuario user : clientes) {
+            if (user.nombre.equals(nombre) && user.contrasena.equals(contrasena)) {
+                if (user.nombre.equals("admin") && user.contrasena.equals("admin123")) {
                     admin = true;
                 }
                 encontrado = true;
