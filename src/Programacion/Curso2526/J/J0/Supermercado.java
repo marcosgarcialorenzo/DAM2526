@@ -60,6 +60,23 @@ public class Supermercado {
         }
     }
 
+    void listarProductosAPuntoDeCaducar() throws IOException {
+        for (Productos producto : productos) {
+            if (producto.caducable && producto.fechaCaducidad.isBefore(LocalDate.now().plusDays(7)))  {
+                System.out.println("Nombre: " + producto.nombre);
+                if (producto.precioOferta < producto.precio) {
+                    System.out.println("Precio en oferta: " + producto.precioOferta);
+                    System.out.println("Fin de la oferta: " + producto.finOferta);
+                } else {
+                    System.out.println("Precio: " + producto.precio);
+                }
+                System.out.println("Cantidad: " + producto.cantidad);
+                System.out.println("Fecha de caducidad: " + producto.fechaCaducidad);
+                System.out.println();
+            }
+        }
+    }
+
     void menu() throws IOException {
         Teclado t = new Teclado();
         int opcion;
@@ -90,6 +107,7 @@ public class Supermercado {
                 switch (opcion) {
                     case 1 -> añadirProducto();
                     case 2 -> listarProductos();
+                    case 3 -> listarProductosAPuntoDeCaducar();
                     case 0 -> System.out.println("Saliendo...");
                     default -> System.out.println("Opción no válida.");
                 }
