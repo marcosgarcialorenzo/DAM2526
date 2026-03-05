@@ -43,7 +43,7 @@ public class Supermercado {
         }
     }
 
-    void listarProductos() throws IOException {
+    void listarProductos() {
         for (Productos producto : productos) {
             System.out.println("Nombre: " + producto.nombre);
             if (producto.precioOferta < producto.precio) {
@@ -60,7 +60,7 @@ public class Supermercado {
         }
     }
 
-    void listarProductosAPuntoDeCaducar() throws IOException {
+    void listarProductosAPuntoDeCaducar() {
         for (Productos producto : productos) {
             if (producto.caducable && producto.fechaCaducidad.isBefore(LocalDate.now().plusDays(7))) {
                 System.out.println("Nombre: " + producto.nombre);
@@ -77,7 +77,7 @@ public class Supermercado {
         }
     }
 
-    void listarProductosConMenosDe5EnStock() throws IOException {
+    void listarProductosConMenosDe5EnStock() {
         for (Productos producto : productos) {
             if (producto.cantidad < 5) {
                 System.out.println("Nombre: " + producto.nombre);
