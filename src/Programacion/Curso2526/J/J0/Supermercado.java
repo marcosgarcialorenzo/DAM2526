@@ -7,7 +7,7 @@ import java.util.Vector;
 public class Supermercado {
     String nombre;
     Vector<ClienteNormal> clientes;
-    Vector<Productos> productos;
+    Vector<Producto> productos;
 
     public Supermercado(String nombre) {
         this.nombre = nombre;
@@ -35,16 +35,16 @@ public class Supermercado {
             System.out.println("Introduce la fecha de caducidad del producto (YYYY-MM-DD):");
             String fechaCaducidadStr = t.leerString();
             LocalDate fechaCaducidad = LocalDate.parse(fechaCaducidadStr);
-            Productos producto = new Productos(nombre, precio, precio, null, cantidad, true, fechaCaducidad);
+            Producto producto = new Producto(nombre, precio, precio, null, cantidad, true, fechaCaducidad);
             productos.add(producto);
         } else {
-            Productos producto = new Productos(nombre, precio, precio, null, cantidad, false, null);
+            Producto producto = new Producto(nombre, precio, precio, null, cantidad, false, null);
             productos.add(producto);
         }
     }
 
     void listarProductos() {
-        for (Productos producto : productos) {
+        for (Producto producto : productos) {
             System.out.println("Nombre: " + producto.nombre);
             if (producto.precioOferta < producto.precio) {
                 System.out.println("Precio en oferta: " + producto.precioOferta);
@@ -61,7 +61,7 @@ public class Supermercado {
     }
 
     void listarProductosAPuntoDeCaducar() {
-        for (Productos producto : productos) {
+        for (Producto producto : productos) {
             if (producto.caducable && producto.fechaCaducidad.isBefore(LocalDate.now().plusDays(7))) {
                 System.out.println("Nombre: " + producto.nombre);
                 if (producto.precioOferta < producto.precio) {
@@ -78,7 +78,7 @@ public class Supermercado {
     }
 
     void listarProductosConMenosDe5EnStock() {
-        for (Productos producto : productos) {
+        for (Producto producto : productos) {
             if (producto.cantidad < 5) {
                 System.out.println("Nombre: " + producto.nombre);
                 if (producto.precioOferta < producto.precio) {
