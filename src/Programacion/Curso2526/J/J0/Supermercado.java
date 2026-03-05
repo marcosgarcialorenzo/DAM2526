@@ -36,7 +36,7 @@ public class Supermercado {
             precioOferta = t.leerDouble();
             System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
             String fechaFinOfertaStr = t.leerString();
-            fechaCaducidad = LocalDateTime.parse(fechaFinOfertaStr);
+            fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
         } else {
             System.out.println("Introduce el precio del producto:");
             precio = t.leerDouble();
