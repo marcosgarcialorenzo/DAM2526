@@ -2,12 +2,13 @@ package Programacion.Curso2526.J.J0;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Vector;
 
 public class Supermercado {
     String nombre;
     Vector<ClienteNormal> clientes;
-    Vector<Productos> productos;
+    Vector<Producto> productos;
 
     public Supermercado(String nombre) {
         this.nombre = nombre;
@@ -25,26 +26,33 @@ public class Supermercado {
         Teclado t = new Teclado();
         System.out.println("Introduce el nombre del producto:");
         String nombre = t.leerString();
-        System.out.println("Introduce el precio del producto:");
-        double precio = t.leerDouble();// el precio normal y el de oferta son iguales al añadir el producto
+        System.out.println("¿El producto tiene oferta? (s/n)");
+        String oferta = t.leerString();
+        if (oferta.equalsIgnoreCase("s")) {
+            System.out.println("Introduce el precio de la oferta:");
+            double precioOferta = t.leerDouble();
+            System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
+            String fechaFinOfertaStr = t.leerString();
+            LocalDateTime fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
+        }
+        else {
+            System.out.println("Introduce el precio del producto:");
+            double precio = t.leerDouble();
+        }
         System.out.println("Introduce la cantidad del producto:");
         int cantidad = t.leerInt();
-        System.out.println("¿Es un producto caducable? (s/n)");
-        boolean caducable = t.leerString().equalsIgnoreCase("s");
-        if (caducable) {
-            System.out.println("Introduce la fecha de caducidad del producto (YYYY-MM-DD):");
+        System.out.println("¿El producto es caducable? (s/n)");
+        String caducable = t.leerString();
+        if (caducable.equalsIgnoreCase("s")) {
+            System.out.println("Introduce la fecha de caducidad (YYYY-MM-DD):");
             String fechaCaducidadStr = t.leerString();
             LocalDate fechaCaducidad = LocalDate.parse(fechaCaducidadStr);
-            Productos producto = new Productos(nombre, precio, precio, null, cantidad, true, fechaCaducidad);
-            productos.add(producto);
-        } else {
-            Productos producto = new Productos(nombre, precio, precio, null, cantidad, false, null);
-            productos.add(producto);
         }
+
     }
 
     void listarProductos() {
-        for (Productos producto : productos) {
+        for (Producto producto : productos) {
             System.out.println("Nombre: " + producto.nombre);
             if (producto.precioOferta < producto.precio) {
                 System.out.println("Precio en oferta: " + producto.precioOferta);
@@ -61,7 +69,7 @@ public class Supermercado {
     }
 
     void listarProductosAPuntoDeCaducar() {
-        for (Productos producto : productos) {
+        for (Producto producto : productos) {
             if (producto.caducable && producto.fechaCaducidad.isBefore(LocalDate.now().plusDays(7))) {
                 System.out.println("Nombre: " + producto.nombre);
                 if (producto.precioOferta < producto.precio) {
@@ -78,7 +86,7 @@ public class Supermercado {
     }
 
     void listarProductosConMenosDe5EnStock() {
-        for (Productos producto : productos) {
+        for (Producto producto : productos) {
             if (producto.cantidad < 5) {
                 System.out.println("Nombre: " + producto.nombre);
                 if (producto.precioOferta < producto.precio) {

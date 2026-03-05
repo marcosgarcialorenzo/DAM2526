@@ -4,8 +4,8 @@ import java.util.Vector;
 
 public class ClientePreferente extends Usuario {
     Vector<Integer> descuentos;
-    Vector<Productos> compras;
-    Vector<Productos> carrito;
+    Vector<Producto> compras;
+    Vector<Producto> carrito;
 
     public ClientePreferente(String nombre, String contrasena) {
         super(nombre, contrasena);
