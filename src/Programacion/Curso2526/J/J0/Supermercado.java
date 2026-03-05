@@ -1,8 +1,7 @@
 package Programacion.Curso2526.J.J0;
 
-import Programacion.Curso2526.E.E4.Teclado;
-
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Vector;
 
 public class Supermercado {
@@ -20,6 +19,28 @@ public class Supermercado {
         Supermercado supermercado = new Supermercado("Supermercado XYZ");
         Clientes admin = new Clientes("admin", "admin123", false);
         supermercado.menu();
+    }
+
+    void añadirProducto() throws IOException {
+        Teclado t = new Teclado();
+        System.out.println("Introduce el nombre del producto:");
+        String nombre = t.leerString();
+        System.out.println("Introduce el precio del producto:");
+        double precio = t.leerDouble();// el precio normal y el de oferta son iguales al añadir el producto
+        System.out.println("Introduce la cantidad del producto:");
+        int cantidad = t.leerInt();
+        System.out.println("¿Es un producto caducable? (s/n)");
+        boolean caducable = t.leerString().equalsIgnoreCase("s");
+        if (caducable) {
+            System.out.println("Introduce la fecha de caducidad del producto (YYYY-MM-DD):");
+            String fechaCaducidadStr = t.leerString();
+            LocalDate fechaCaducidad = LocalDate.parse(fechaCaducidadStr);
+            Productos producto = new Productos(nombre, precio, precio, null, cantidad, true, fechaCaducidad);
+            productos.add(producto);
+        } else {
+            Productos producto = new Productos(nombre, precio, precio, null, cantidad, false, null);
+            productos.add(producto);
+        }
     }
 
     void menu() throws IOException {
@@ -50,7 +71,7 @@ public class Supermercado {
                 System.out.println("Elige una opción:");
                 opcion = t.leerInt();
                 switch (opcion) {
-                    case 1 -> altaLibros();
+                    case 1 -> añadirProducto();
                     case 0 -> System.out.println("Saliendo...");
                     default -> System.out.println("Opción no válida.");
                 }

@@ -15,16 +15,15 @@ public class Clientes {
             this.nombre = nombre;
             this.contraseña = contraseña;
             this.preferente = preferente;
-            this.descuentos = new Vector<>(5,5);
-            this.compras = new Vector<>(5,5);
-            this.carrito = new Vector<>(5,5);
-        }
-        else {
+            this.descuentos = new Vector<>(5, 5);
+            this.compras = new Vector<>(5, 5);
+            this.carrito = new Vector<>(5, 5);
+        } else {
             this.nombre = nombre;
             this.contraseña = contraseña;
             this.preferente = preferente;
-            this.compras = new Vector<>(5,5);
-            this.carrito = new Vector<>(5,5);
+            this.compras = new Vector<>(5, 5);
+            this.carrito = new Vector<>(5, 5);
         }
     }
 }
