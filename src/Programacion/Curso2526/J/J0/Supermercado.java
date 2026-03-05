@@ -22,13 +22,17 @@ public class Supermercado {
         supermercado.menu();
     }
 
-    void añadirProducto() throws IOException {
+    void anadirProducto() throws IOException {
         Teclado t = new Teclado();
         String nombre, oferta, caducable;
         double precio, precioOferta = 0;
-        LocalDateTime fechaCaducidad, fechaFinOferta;
+        LocalDateTime fechaCaducidad = null, fechaFinOferta = null;
         System.out.println("Introduce el nombre del producto:");
         nombre = t.leerString();
+        System.out.println("Introduce el precio del producto:");
+        precio = t.leerDouble();
+        System.out.println("Introduce la cantidad del producto:");
+        int cantidad = t.leerInt();
         System.out.println("¿El producto tiene oferta? (s/n)");
         oferta = t.leerString();
         if (oferta.equalsIgnoreCase("s")) {
@@ -37,22 +41,25 @@ public class Supermercado {
             System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
             String fechaFinOfertaStr = t.leerString();
             fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
-        } else {
-            System.out.println("Introduce el precio del producto:");
-            precio = t.leerDouble();
         }
-        System.out.println("Introduce la cantidad del producto:");
-        int cantidad = t.leerInt();
         System.out.println("¿El producto es caducable? (s/n)");
         caducable = t.leerString();
         if (caducable.equalsIgnoreCase("s")) {
             System.out.println("Introduce la fecha de caducidad (YYYY-MM-DD):");
             String fechaCaducidadStr = t.leerString();
-            fechaCaducidad = LocalDate.parse(fechaCaducidadStr);
+            fechaCaducidad = LocalDateTime.parse(fechaCaducidadStr);
         }
-        if (oferta.equalsIgnoreCase("s") && caducable.equalsIgnoreCase("s")) {
-            productos.add(new Producto(nombre, precioOferta, cantidad, finOferta, fechaCaducidad));
+        if (oferta.equalsIgnoreCase("s") && caducable.equalsIgnoreCase("s")) { //oferta y caducable
+            productos.add(new ProductoOfertaCaducable(nombre, precioOferta, cantidad, fechaFinOferta, fechaCaducidad));
         }
+        if (oferta.equalsIgnoreCase("s") && caducable.equalsIgnoreCase("n")) { //solo oferta
+            productos.add(new ProductoOferta(nombre, precioOferta, cantidad, fechaFinOferta));
+        }
+        if (oferta.equalsIgnoreCase("n") && caducable.equalsIgnoreCase("s")) { //solo caducable
+            productos.add(new ProductoCaducable(nombre, precio, cantidad, fechaCaducidad));
+        }
+        if (oferta.equalsIgnoreCase("n") && caducable.equalsIgnoreCase("n")) { //normal
+            productos.add(new Producto(nombre, precio, cantidad));
     }
 
     void listarProductos() {
