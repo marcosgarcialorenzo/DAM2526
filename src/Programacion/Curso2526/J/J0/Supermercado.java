@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class Supermercado {
     String nombre;
-    Vector<Clientes> clientes;
+    Vector<ClienteNormal> clientes;
     Vector<Productos> productos;
 
     public Supermercado(String nombre) {
@@ -17,7 +17,7 @@ public class Supermercado {
 
     public static void main(String[] args) throws IOException {
         Supermercado supermercado = new Supermercado("Supermercado XYZ");
-        Clientes admin = new Clientes("admin", "admin123", false);
+        Usuario admin = new ClienteNormal("admin", "admin123");
         supermercado.menu();
     }
 
@@ -105,7 +105,7 @@ public class Supermercado {
         String nombre = t.leerString();
         System.out.println("Introduce una contraseña:");
         String contraseña = t.leerString();
-        for (Clientes cliente : clientes) {
+        for (ClienteNormal cliente : clientes) {
             if (cliente.nombre.equals(nombre) && cliente.contraseña.equals(contraseña)) {
                 if (cliente.nombre.equals("admin") && cliente.contraseña.equals("admin123")) {
                     admin = true;
