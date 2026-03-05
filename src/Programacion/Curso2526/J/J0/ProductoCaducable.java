@@ -9,4 +9,13 @@ public class ProductoCaducable extends Producto {
         super(nombre, precio, cantidad);
         this.fechaCaducidad = fechaCaducidad;
     }
+
+    @Override
+    void mostrar() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Precio: " + precio + "€");
+        System.out.println("Cantidad: " + cantidad);
+        System.out.println("Fecha caducidad: " + fechaCaducidad);
+        System.out.println();
+    }
 }

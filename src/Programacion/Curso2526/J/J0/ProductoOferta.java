@@ -11,4 +11,13 @@ public class ProductoOferta extends Producto {
         this.precioOferta = precioOferta;
         this.fechaFinOferta = fechaFinOferta;
     }
+
+    @Override
+    void mostrar() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Precio oferta: " + precio + "€");
+        System.out.println("Cantidad: " + cantidad);
+        System.out.println("Fecha fin oferta: " + fechaFinOferta);
+        System.out.println();
+    }
 }

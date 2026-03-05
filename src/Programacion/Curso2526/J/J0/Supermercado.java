@@ -60,23 +60,13 @@ public class Supermercado {
         }
         if (oferta.equalsIgnoreCase("n") && caducable.equalsIgnoreCase("n")) { //normal
             productos.add(new Producto(nombre, precio, cantidad));
+        }
     }
 
     void listarProductos() {
-        for (Producto producto : productos) {
-            System.out.println("Nombre: " + producto.nombre);
-            if (producto.precioOferta < producto.precio) {
-                System.out.println("Precio en oferta: " + producto.precioOferta);
-                System.out.println("Fin de la oferta: " + producto.finOferta);
-            } else {
-                System.out.println("Precio: " + producto.precio);
+            for (Producto producto : productos) {
+                producto.mostrar();
             }
-            System.out.println("Cantidad: " + producto.cantidad);
-            if (producto.caducable) {
-                System.out.println("Fecha de caducidad: " + producto.fechaCaducidad);
-            }
-            System.out.println();
-        }
     }
 
     void listarProductosAPuntoDeCaducar() {

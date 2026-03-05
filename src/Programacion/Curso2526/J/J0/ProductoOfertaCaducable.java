@@ -13,4 +13,14 @@ public class ProductoOfertaCaducable extends Producto {
         this.fechaFinOferta = fechaFinOferta;
         this.fechaCaducidad = fechaCaducidad;
     }
+
+    @Override
+    void mostrar() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Precio oferta: " + precio + "€");
+        System.out.println("Cantidad: " + cantidad);
+        System.out.println("Fecha fin oferta: " + fechaFinOferta);
+        System.out.println("Fecha caducidad: " + fechaCaducidad);
+        System.out.println();
+    }
 }
