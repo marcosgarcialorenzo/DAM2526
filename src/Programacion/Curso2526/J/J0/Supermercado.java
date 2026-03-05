@@ -163,6 +163,10 @@ public class Supermercado {
                 opcion = t.leerInt();
                 switch (opcion) {
                     case 1 -> System.out.println("Funcionalidad no implementada.");
+                    case 2 -> System.out.println("Funcionalidad no implementada.");
+                    case 3 -> System.out.println("Funcionalidad no implementada.");
+                    case 4 -> System.out.println("Funcionalidad no implementada.");
+                    case 5 -> listarProductos();
                     case 0 -> System.out.println("Saliendo...");
                     default -> System.out.println("Opción no válida.");
                 }
