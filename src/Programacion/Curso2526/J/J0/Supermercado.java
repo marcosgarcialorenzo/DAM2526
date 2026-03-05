@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class Supermercado {
     String nombre;
-    Vector<ClienteNormal> clientes;
+    Vector<Usuario> clientes;
     Vector<Producto> productos;
 
     public Supermercado(String nombre) {
@@ -18,6 +18,7 @@ public class Supermercado {
     public static void main(String[] args) throws IOException {
         Supermercado supermercado = new Supermercado("Supermercado XYZ");
         Usuario admin = new ClienteNormal("admin", "admin123");
+        supermercado.clientes.add(admin);
         supermercado.menu();
     }
 
