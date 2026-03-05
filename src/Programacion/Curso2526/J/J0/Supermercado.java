@@ -79,18 +79,7 @@ public class Supermercado {
     void listarProductosConMenosDe5EnStock() {
         for (Producto producto : productos) {
             if (producto.cantidad < 5) {
-                System.out.println("Nombre: " + producto.nombre);
-                if (producto.precioOferta < producto.precio) {
-                    System.out.println("Precio en oferta: " + producto.precioOferta);
-                    System.out.println("Fin de la oferta: " + producto.finOferta);
-                } else {
-                    System.out.println("Precio: " + producto.precio);
-                }
-                System.out.println("Cantidad: " + producto.cantidad);
-                if (producto.caducable) {
-                    System.out.println("Fecha de caducidad: " + producto.fechaCaducidad);
-                }
-                System.out.println();
+                producto.mostrar();
             }
         }
     }
