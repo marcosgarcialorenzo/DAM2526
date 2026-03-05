@@ -23,4 +23,9 @@ public class ProductoCaducable extends Producto {
     boolean estaPorCaducar() {
         return fechaCaducidad.isBefore(LocalDateTime.now().plusDays(7));
     }
+
+    @Override
+    boolean caducable() {
+        return true;
+    }
 }

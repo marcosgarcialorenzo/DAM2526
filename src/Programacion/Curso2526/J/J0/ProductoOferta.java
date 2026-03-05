@@ -20,4 +20,9 @@ public class ProductoOferta extends Producto {
         System.out.println("Fecha fin oferta: " + fechaFinOferta);
         System.out.println();
     }
+
+    @Override
+    boolean enOferta() {
+        return true;
+    }
 }

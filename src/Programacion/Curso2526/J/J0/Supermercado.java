@@ -85,6 +85,34 @@ public class Supermercado {
         }
     }
 
+    void ponerProductoEnOferta() throws IOException {
+        Teclado t = new Teclado();
+        System.out.println("Introduce el nombre del producto que quieres poner en oferta:");
+        String nombre = t.leerString();
+        for (Producto producto : productos) {
+            if (producto.enOferta()) {
+                System.out.println("El producto ya está en oferta.");
+                return;
+            } else {
+                if (producto.caducable()) { // ProductoCaducable o ProductoOfertaCaducable
+                    System.out.println("Introduce el precio de la oferta:");
+                    double precioOferta = t.leerDouble();
+                    System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
+                    String fechaFinOfertaStr = t.leerString();
+                    LocalDateTime fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
+                    productos.set(productos.indexOf(producto), new ProductoOfertaCaducable(producto.nombre, precioOferta, producto.cantidad, fechaFinOferta, ((ProductoCaducable) producto).fechaCaducidad));
+                } else { // Producto a ProductoOferta
+                    System.out.println("Introduce el precio de la oferta:");
+                    double precioOferta = t.leerDouble();
+                    System.out.println("Introduce la fecha de fin de la oferta (YYYY-MM-DDTHH:MM):");
+                    String fechaFinOfertaStr = t.leerString();
+                    LocalDateTime fechaFinOferta = LocalDateTime.parse(fechaFinOfertaStr);
+                    productos.set(productos.indexOf(producto), new ProductoOferta(producto.nombre, precioOferta, producto.cantidad, fechaFinOferta));
+                }
+            }
+        }
+    }
+
     void menu() throws IOException {
         Teclado t = new Teclado();
         int opcion;
@@ -117,6 +145,7 @@ public class Supermercado {
                     case 2 -> listarProductos();
                     case 3 -> listarProductosAPuntoDeCaducar();
                     case 4 -> listarProductosConMenosDe5EnStock();
+                    case 5 -> ponerProductoEnOferta();
                     case 0 -> System.out.println("Saliendo...");
                     default -> System.out.println("Opción no válida.");
                 }

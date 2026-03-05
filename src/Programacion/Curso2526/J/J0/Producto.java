@@ -23,4 +23,12 @@ public class Producto {
     boolean estaPorCaducar() {
         return false;
     }
+
+    boolean caducable() {
+        return false;
+    }
+
+    boolean enOferta() {
+        return false;
+    }
 }
