@@ -127,7 +127,7 @@ public class Supermercado {
                     System.out.println("No hay suficiente stock.");
                 } else {
                     if (producto.caducable() && producto.enOferta()) {
-                        cliente.carrito.add(new ProductoOfertaCaducable(producto.nombre, producto.precio, cantidad, ((ProductoOferta) producto).fechaFinOferta, ((ProductoCaducable) producto).fechaCaducidad));
+                        cliente.carrito.add(new ProductoOfertaCaducable(producto.nombre, producto.precio, cantidad, ((ProductoOfertaCaducable) producto).fechaFinOferta, ((ProductoOfertaCaducable) producto).fechaCaducidad));
                     }
                     if (producto.caducable() && ! producto.enOferta()) {
                         cliente.carrito.add(new ProductoCaducable(producto.nombre, producto.precio, cantidad, ((ProductoCaducable) producto).fechaCaducidad));
