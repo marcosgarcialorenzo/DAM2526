@@ -28,16 +28,16 @@ DAM2526/
 │       ├── Curso2425/
 │       │   └── Examenes/
 │       └── Curso2526/
-│           ├── A/   → Clases básicas (Fraccion, Punto, Rectangulo, etc.)
-│           ├── B/   → Ejercicios con métodos y bucles
-│           ├── C/   → Clases con validaciones
-│           ├── D/   → Arrays y colecciones
-│           ├── E/   → Proyectos (Radares, Baraja, Máquina Expendedora, etc.)
-│           ├── F/   → Strings y procesamiento de texto
-│           ├── G/   → Interfaces gráficas y teclado
+│           ├── A/   → Ejercicios básicos (variables, operadores, etc.)
+│           ├── B/   → Estructuras de control (if, switch, bucles, etc.)
+│           ├── C/   → Estructuras de control avanzadas (break, continue, etc.)
+│           ├── D/   → Arrays
+│           ├── E/   → Matrices y objetos de arrays
+│           ├── F/   → Strings
+│           ├── G/   → Excepciones y manejo de errores
 │           ├── H/   → Recursividad (Fibonacci, etc.)
 │           ├── I/   → Ficheros y directorios
-│           ├── J/   → (En desarrollo)
+│           ├── J/   → Herencia y OO avanzada
 │           ├── K/   → Colecciones (Vector, ArrayList, etc.)
 │           └── ExamenesMGL/
 │               ├── Evaluacion1/
@@ -45,24 +45,6 @@ DAM2526/
 ```
 
 ---
-
-## 🗃️ Contenido
-
-### 💻 Programación (Java)
-
-| Carpeta | Descripción                  |
-|---------|------------------------------|
-| **A** | Ejercios basicos             |
-| **B** | Estructura de control 1      |
-| **C** | Estructura de control 2      |
-| **D** | Arrays                       |
-| **E** | Matrices y objetos de arrays |
-| **F** | Strings                      |
-| **G** | Excepiones                   |
-| **H** | Recursividad                 |
-| **I** | Ficheros                     |
-| **K** | Colecciones                  |
-
 
 ## 🛠️ Tecnologías Utilizadas
 
