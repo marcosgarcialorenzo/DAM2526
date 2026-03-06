@@ -160,6 +160,12 @@ public class Supermercado {
         cliente.carrito.clear();
     }
 
+    void listarComprasRealizadas(Cliente cliente) {
+        for (Producto producto : cliente.compras) {
+            producto.mostrar();
+        }
+    }
+
     void menu() throws IOException {
         Teclado t = new Teclado();
         int opcion;
@@ -216,7 +222,7 @@ public class Supermercado {
                     case 1 -> anadirProductoAlCarrito(cliente);
                     case 2 -> listarProductosCarrito(cliente);
                     case 3 -> comprarProductosCarrito(cliente);
-                    case 4 -> System.out.println("Funcionalidad no implementada.");
+                    case 4 -> listarComprasRealizadas(cliente);
                     case 5 -> listarProductos();
                     case 0 -> System.out.println("Saliendo...");
                     default -> System.out.println("Opción no válida.");
