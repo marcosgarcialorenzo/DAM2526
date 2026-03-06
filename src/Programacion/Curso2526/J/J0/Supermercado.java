@@ -45,7 +45,7 @@ public class Supermercado {
         System.out.println("¿El producto es caducable? (s/n)");
         caducable = t.leerString();
         if (caducable.equalsIgnoreCase("s")) {
-            System.out.println("Introduce la fecha de caducidad (YYYY-MM-DD):");
+            System.out.println("Introduce la fecha de caducidad (YYYY-MM-DDTHH:MM):"); // 2026-03-10T00:00
             String fechaCaducidadStr = t.leerString();
             fechaCaducidad = LocalDateTime.parse(fechaCaducidadStr);
         }
@@ -128,11 +128,9 @@ public class Supermercado {
                 } else {
                     if (producto.caducable() && producto.enOferta()) {
                         cliente.carrito.add(new ProductoOfertaCaducable(producto.nombre, producto.precio, cantidad, ((ProductoOfertaCaducable) producto).fechaFinOferta, ((ProductoOfertaCaducable) producto).fechaCaducidad));
-                    }
-                    if (producto.caducable() && ! producto.enOferta()) {
+                    } else if (producto.caducable() && ! producto.enOferta()) {
                         cliente.carrito.add(new ProductoCaducable(producto.nombre, producto.precio, cantidad, ((ProductoCaducable) producto).fechaCaducidad));
-                    }
-                    if (! producto.caducable() && producto.enOferta()) {
+                    } else if (! producto.caducable() && producto.enOferta()) {
                         cliente.carrito.add(new ProductoOferta(producto.nombre, producto.precio, cantidad, ((ProductoOferta) producto).fechaFinOferta));
                     } else {
                         cliente.carrito.add(new Producto(producto.nombre, producto.precio, cantidad));
@@ -265,11 +263,12 @@ public class Supermercado {
                                 clientes.set(clientes.indexOf(user), cliente);
 
                             } else {
-                                cliente = new Cliente(user.nombre, contrasena);
+                                cliente = new Cliente(nombre, contrasena);
                                 cliente.compras.addAll(user.compras);
                                 cliente.carrito.addAll(user.carrito);
                                 clientes.set(clientes.indexOf(user), cliente);
                             }
+                            return;
                         } else {
                             System.out.println("Usuario no encontrado. Inténtalo de nuevo.");
                         }

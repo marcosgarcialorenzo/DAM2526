@@ -20,8 +20,9 @@ public class Cliente {
     }
 
     void mostrar() {
-        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Nombre de usuario: " + this.nombre);
         System.out.println("Contraseña: " + this.contrasena);
         System.out.println("No es cliente preferente");
+        System.out.println();
     }
 }

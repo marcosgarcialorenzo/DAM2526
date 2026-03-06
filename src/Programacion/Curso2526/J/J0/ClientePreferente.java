@@ -21,8 +21,9 @@ public class ClientePreferente extends Cliente {
 
     @Override
     void mostrar() {
-        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Nombre de usuario: " + this.nombre);
         System.out.println("Contraseña: " + this.contrasena);
         System.out.println("Es cliente preferente");
+        System.out.println();
     }
 }
