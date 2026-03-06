@@ -142,13 +142,13 @@ public class Supermercado {
         }
     }
 
-    void listarProductosCarrito (Cliente cliente) {
+    void listarProductosCarrito(Cliente cliente) {
         for (Producto producto : cliente.carrito) {
             producto.mostrar();
         }
     }
 
-    void comprarProductosCarrito (Cliente cliente) {
+    void comprarProductosCarrito(Cliente cliente) {
         cliente.compras.addAll(cliente.carrito);
         for (Producto productoCarrito : cliente.carrito) {
             for (Producto producto : productos) {
@@ -168,66 +168,100 @@ public class Supermercado {
 
     void menu() throws IOException {
         Teclado t = new Teclado();
-        int opcion;
+        int opcion, opcion2;
         boolean admin = false;
         boolean encontrado = false;
         Cliente cliente = null;
-        System.out.println("Introduce un nombre de usuario:");
-        String nombre = t.leerString();
-        System.out.println("Introduce una contraseña:");
-        String contrasena = t.leerString();
-        for (Cliente user : clientes) {
-            if (user.nombre.equals("admin") && user.contrasena.equals("admin123")) {
-                admin = true;
-            } else if (user.nombre.equals(nombre) && user.contrasena.equals(contrasena)) {
-                encontrado = true;
-                if (user.esClientePreferente()) {
-                    cliente = new ClientePreferente(user.nombre, contrasena);
-                } else {
-                    cliente = new Cliente(user.nombre, contrasena);
+        do {
+            System.out.println("1. Administrador");
+            System.out.println("2. Cliente");
+            System.out.println("0. Salir");
+            System.out.println("Elige una opción:");
+            opcion2 = t.leerInt();
+            switch (opcion2) {
+                case 1 -> { //si es admin
+                    System.out.println("Introduce un nombre de usuario de un administrador:");
+                    String nombreAdmin = t.leerString(); //admin
+                    System.out.println("Introduce la contraseña:");
+                    String contrasenaAdmin = t.leerString(); //admin123
+                    for (Cliente user : clientes) {
+                        if (user.nombre.equals(nombreAdmin) && user.contrasena.equals(contrasenaAdmin)) {
+                            admin = true;
+                        } else {
+                            System.out.println("Usuario no encontrado. Inténtalo de nuevo.");
+                        }
+                    }
+                    if (admin) {
+                        do {
+                            System.out.println("1. Añadir producto");
+                            System.out.println("2. Listado de productos");
+                            System.out.println("3. Listado de productos con menos de una semana para caducar");
+                            System.out.println("3. Listado de productos con menos 5 unidades en stock");
+                            System.out.println("5. Poner un producto en oferta");
+                            System.out.println("0. Salir");
+                            System.out.println("Elige una opción:");
+                            opcion = t.leerInt();
+                            switch (opcion) {
+                                case 1 -> anadirProducto();
+                                case 2 -> listarProductos();
+                                case 3 -> listarProductosAPuntoDeCaducar();
+                                case 4 -> listarProductosConMenosDe5EnStock();
+                                case 5 -> ponerProductoEnOferta();
+                                case 0 -> System.out.println("Saliendo...");
+                                default -> System.out.println("Opción no válida.");
+                            }
+                        } while (opcion != 0);
+                    }
                 }
+                case 2 -> { //si es user normal y no es admin
+                    System.out.println("Introduce un nombre de usuario:");
+                    String nombre = t.leerString();
+                    System.out.println("Introduce la contraseña:");
+                    String contrasena = t.leerString();
+                    for (Cliente user : clientes) {
+                        if (user.nombre.equals(nombre) && user.contrasena.equals(contrasena)) {
+                            encontrado = true;
+                            if (user.esClientePreferente()) {
+                                cliente = new ClientePreferente(user.nombre, contrasena);
+                                cliente.compras.addAll(user.compras);
+                                cliente.carrito.addAll(user.carrito);
+                                clientes.set(clientes.indexOf(user), cliente);
+
+                            } else {
+                                cliente = new Cliente(user.nombre, contrasena);
+                                cliente.compras.addAll(user.compras);
+                                cliente.carrito.addAll(user.carrito);
+                                clientes.set(clientes.indexOf(user), cliente);
+                            }
+                        } else {
+                            System.out.println("Usuario no encontrado. Inténtalo de nuevo.");
+                        }
+                    }
+                    if (encontrado) {
+                        do {
+                            System.out.println("1. Añadir producto al carrito");
+                            System.out.println("2. Listar productos en el carrito");
+                            System.out.println("3. Comprar productos del carrito");
+                            System.out.println("4. Listar compras realizadas");
+                            System.out.println("5. Listar productos");
+                            System.out.println("0. Salir");
+                            System.out.println("Elige una opción:");
+                            opcion = t.leerInt();
+                            switch (opcion) {
+                                case 1 -> anadirProductoAlCarrito(cliente);
+                                case 2 -> listarProductosCarrito(cliente);
+                                case 3 -> comprarProductosCarrito(cliente);
+                                case 4 -> listarComprasRealizadas(cliente);
+                                case 5 -> listarProductos();
+                                case 0 -> System.out.println("Saliendo...");
+                                default -> System.out.println("Opción no válida.");
+                            }
+                        } while (opcion != 0);
+                    }
+                }
+                case 0 -> System.out.println("Saliendo...");
+                default -> System.out.println("Opción no válida.");
             }
-        }
-        if (admin) { //si es admin
-            do {
-                System.out.println("1. Añadir producto");
-                System.out.println("2. Listado de productos");
-                System.out.println("3. Listado de productos con menos de una semana para caducar");
-                System.out.println("3. Listado de productos con menos 5 unidades en stock");
-                System.out.println("5. Poner un producto en oferta");
-                System.out.println("0. Salir");
-                System.out.println("Elige una opción:");
-                opcion = t.leerInt();
-                switch (opcion) {
-                    case 1 -> anadirProducto();
-                    case 2 -> listarProductos();
-                    case 3 -> listarProductosAPuntoDeCaducar();
-                    case 4 -> listarProductosConMenosDe5EnStock();
-                    case 5 -> ponerProductoEnOferta();
-                    case 0 -> System.out.println("Saliendo...");
-                    default -> System.out.println("Opción no válida.");
-                }
-            } while (opcion != 0);
-        } else if ((encontrado)) { //si es user normal y no es admin
-            do {
-                System.out.println("1. Añadir producto al carrito");
-                System.out.println("2. Listar productos en el carrito");
-                System.out.println("3. Comprar productos del carrito");
-                System.out.println("4. Listar compras realizadas");
-                System.out.println("5. Listar productos");
-                System.out.println("0. Salir");
-                System.out.println("Elige una opción:");
-                opcion = t.leerInt();
-                switch (opcion) {
-                    case 1 -> anadirProductoAlCarrito(cliente);
-                    case 2 -> listarProductosCarrito(cliente);
-                    case 3 -> comprarProductosCarrito(cliente);
-                    case 4 -> listarComprasRealizadas(cliente);
-                    case 5 -> listarProductos();
-                    case 0 -> System.out.println("Saliendo...");
-                    default -> System.out.println("Opción no válida.");
-                }
-            } while (opcion != 0);
-        }
+        } while (opcion2 != 0);
     }
 }
