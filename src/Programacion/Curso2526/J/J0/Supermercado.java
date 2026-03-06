@@ -166,6 +166,32 @@ public class Supermercado {
         }
     }
 
+    void anadirCliente() throws IOException {
+        Teclado t = new Teclado();
+        boolean existe = false;
+        System.out.println("Introduce el nombre del nuevo cliente:");
+        String nombre = t.leerString();
+        System.out.println("Introduce la contraseña del nuevo cliente:");
+        String contrasena = t.leerString();
+        for (Cliente cliente : clientes) {
+            if (cliente.nombre.equals(nombre)) {
+                System.out.println("El nombre de usuario ya existe. Inténtalo de nuevo.");
+                return;
+            } else {
+                existe = true;
+            }
+        }
+        if (existe) {
+            System.out.println("¿El cliente es preferente? (s/n)");
+            String preferente = t.leerString();
+            if (preferente.equalsIgnoreCase("s")) {
+                clientes.add(new ClientePreferente(nombre, contrasena));
+            } else {
+                clientes.add(new Cliente(nombre, contrasena));
+            }
+        }
+    }
+
     void menu() throws IOException {
         Teclado t = new Teclado();
         int opcion, opcion2;
@@ -198,6 +224,7 @@ public class Supermercado {
                             System.out.println("3. Listado de productos con menos de una semana para caducar");
                             System.out.println("3. Listado de productos con menos 5 unidades en stock");
                             System.out.println("5. Poner un producto en oferta");
+                            System.out.println("6. Añadir cliente");
                             System.out.println("0. Salir");
                             System.out.println("Elige una opción:");
                             opcion = t.leerInt();
@@ -207,6 +234,7 @@ public class Supermercado {
                                 case 3 -> listarProductosAPuntoDeCaducar();
                                 case 4 -> listarProductosConMenosDe5EnStock();
                                 case 5 -> ponerProductoEnOferta();
+                                case 6 -> anadirCliente();
                                 case 0 -> System.out.println("Saliendo...");
                                 default -> System.out.println("Opción no válida.");
                             }
