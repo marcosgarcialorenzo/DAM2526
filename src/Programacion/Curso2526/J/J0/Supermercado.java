@@ -200,7 +200,7 @@ public class Supermercado {
         Teclado t = new Teclado();
         int opcion, opcion2;
         boolean admin = false;
-        boolean encontrado = false;
+        boolean encontrado = true;
         Cliente cliente = null;
         do {
             System.out.println("1. Administrador");
@@ -255,13 +255,11 @@ public class Supermercado {
                     String contrasena = t.leerString();
                     for (Cliente user : clientes) {
                         if (user.nombre.equals(nombre) && user.contrasena.equals(contrasena)) {
-                            encontrado = true;
                             if (user.esClientePreferente()) {
                                 cliente = new ClientePreferente(user.nombre, contrasena);
                                 cliente.compras.addAll(user.compras);
                                 cliente.carrito.addAll(user.carrito);
                                 clientes.set(clientes.indexOf(user), cliente);
-
                             } else {
                                 cliente = new Cliente(nombre, contrasena);
                                 cliente.compras.addAll(user.compras);
@@ -271,6 +269,7 @@ public class Supermercado {
                             return;
                         } else {
                             System.out.println("Usuario no encontrado. Inténtalo de nuevo.");
+                            encontrado = false;
                         }
                     }
                     if (encontrado) {
