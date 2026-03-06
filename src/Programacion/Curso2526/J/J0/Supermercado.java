@@ -243,7 +243,7 @@ public class Supermercado {
                                 case 4 -> listarProductosConMenosDe5EnStock();
                                 case 5 -> ponerProductoEnOferta();
                                 case 6 -> anadirCliente();
-                                case 7 -> System.out.println("Opción no válida.");
+                                case 7 -> listarClientes();
                                 case 0 -> System.out.println("Saliendo...");
                                 default -> System.out.println("Opción no válida.");
                             }
