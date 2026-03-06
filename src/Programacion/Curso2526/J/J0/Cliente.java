@@ -18,4 +18,10 @@ public class Cliente {
     boolean esClientePreferente() {
         return false;
     }
+
+    void mostrar() {
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Contraseña: " + this.contrasena);
+        System.out.println("No es cliente preferente");
+    }
 }

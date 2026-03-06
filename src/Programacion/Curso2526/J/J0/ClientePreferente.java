@@ -18,4 +18,11 @@ public class ClientePreferente extends Cliente {
     boolean esClientePreferente (){
         return true;
     }
+
+    @Override
+    void mostrar() {
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Contraseña: " + this.contrasena);
+        System.out.println("Es cliente preferente");
+    }
 }

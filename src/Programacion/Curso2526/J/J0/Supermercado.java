@@ -192,6 +192,12 @@ public class Supermercado {
         }
     }
 
+    void listarClientes() {
+        for (Cliente cliente : clientes) {
+            cliente.mostrar();
+        }
+    }
+
     void menu() throws IOException {
         Teclado t = new Teclado();
         int opcion, opcion2;
@@ -218,6 +224,7 @@ public class Supermercado {
                         }
                     }
                     if (admin) {
+                        System.out.println("Acceso concedido. Bienvenido, " + nombreAdmin + ".");
                         do {
                             System.out.println("1. Añadir producto");
                             System.out.println("2. Listado de productos");
@@ -225,6 +232,7 @@ public class Supermercado {
                             System.out.println("3. Listado de productos con menos 5 unidades en stock");
                             System.out.println("5. Poner un producto en oferta");
                             System.out.println("6. Añadir cliente");
+                            System.out.println("7. Listar clientes");
                             System.out.println("0. Salir");
                             System.out.println("Elige una opción:");
                             opcion = t.leerInt();
@@ -235,6 +243,7 @@ public class Supermercado {
                                 case 4 -> listarProductosConMenosDe5EnStock();
                                 case 5 -> ponerProductoEnOferta();
                                 case 6 -> anadirCliente();
+                                case 7 -> System.out.println("Opción no válida.");
                                 case 0 -> System.out.println("Saliendo...");
                                 default -> System.out.println("Opción no válida.");
                             }
@@ -266,6 +275,7 @@ public class Supermercado {
                         }
                     }
                     if (encontrado) {
+                        System.out.println("Acceso concedido. Bienvenido, " + nombre + ".");
                         do {
                             System.out.println("1. Añadir producto al carrito");
                             System.out.println("2. Listar productos en el carrito");

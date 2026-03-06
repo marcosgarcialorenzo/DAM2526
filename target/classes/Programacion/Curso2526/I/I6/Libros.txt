@@ -1,0 +1,100 @@
+La celestina;1;false
+Don Quijote;2;false
+Lazarillo de Tormes;3;false
+El Cantar del Mio Cid;4;false
+Fuenteovejuna;5;true
+La vida es sueño;6;false
+El Buscón;7;false
+La Regenta;8;false
+Fortunata y Jacinta;9;false
+Marianela;10;false
+Platero y yo;11;false
+Campos de Castilla;12;false
+Niebla;13;false
+San Manuel Bueno Mártir;14;false
+Bodas de sangre;15;false
+Yerma;16;false
+La casa de Bernarda Alba;17;false
+Rimas y leyendas;18;false
+El árbol de la ciencia;19;false
+Luces de bohemia;20;false
+El coronel no tiene quien le escriba;21;false
+Cien años de soledad;22;false
+Crónica de una muerte anunciada;23;false
+Rayuela;24;false
+Ficciones;25;false
+El Aleph;26;false
+Pedro Páramo;27;false
+La sombra del viento;28;false
+El tiempo entre costuras;29;false
+La colmena;30;false
+Nada;31;false
+Rebelión en la granja;32;false
+1984;33;false
+Un mundo feliz;34;false
+Fahrenheit 451;35;false
+El señor de las moscas;36;false
+Matar a un ruiseñor;37;false
+El gran Gatsby;38;false
+En el camino;39;false
+Ulises;40;false
+La metamorfosis;41;false
+El proceso;42;false
+Crimen y castigo;43;false
+Los hermanos Karamazov;44;false
+Anna Karenina;45;false
+Guerra y paz;46;false
+Madame Bovary;47;false
+Los miserables;48;false
+El conde de Montecristo;49;false
+Los tres mosqueteros;50;false
+Drácula;51;false
+Frankenstein;52;false
+El retrato de Dorian Gray;53;false
+La isla del tesoro;54;false
+Robinson Crusoe;55;false
+Viaje al centro de la Tierra;56;false
+Veinte mil leguas de viaje submarino;57;false
+La vuelta al mundo en 80 días;58;false
+El principito;59;false
+Alicia en el país de las maravillas;60;false
+Peter Pan;61;false
+El mago de Oz;62;false
+Las aventuras de Sherlock Holmes;63;false
+El sabueso de los Baskerville;64;false
+El nombre de la rosa;65;false
+El código Da Vinci;66;false
+Los pilares de la Tierra;67;false
+Juego de tronos;68;false
+Choque de reyes;69;false
+Tormenta de espadas;70;false
+Festín de cuervos;71;false
+Danza de dragones;72;false
+Harry Potter y la piedra filosofal;73;false
+Harry Potter y la cámara secreta;74;false
+Harry Potter y el prisionero de Azkaban;75;false
+Harry Potter y el cáliz de fuego;76;false
+Harry Potter y la orden del fénix;77;false
+Harry Potter y el misterio del príncipe;78;false
+Harry Potter y las reliquias de la muerte;79;false
+El hobbit;80;false
+La comunidad del anillo;81;false
+Las dos torres;82;false
+El retorno del rey;83;false
+La historia interminable;84;false
+La isla misteriosa;85;false
+El perfume;86;false
+La carretera;87;false
+El guardián entre el centeno;88;false
+El viejo y el mar;89;false
+Por quién doblan las campanas;90;false
+La naranja mecánica;91;false
+El psicoanalista;92;false
+El alquimista;93;false
+La ladrona de libros;94;false
+El niño con el pijama de rayas;95;false
+La chica del tren;96;false
+El juego del ángel;97;false
+El prisionero del cielo;98;false
+El laberinto de los espíritus;99;false
+La ciudad de las bestias;100;false
