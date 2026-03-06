@@ -204,7 +204,7 @@ public class Supermercado {
         Cliente cliente = null;
         do {
             System.out.println("1. Administrador");
-            System.out.println("2. Cliente");
+            System.out.println("2. Cliente"); // los ClientesPreferentes tiene la posibilidad de recibir descuentos, pero no nunca sucede
             System.out.println("0. Salir");
             System.out.println("Elige una opción:");
             opcion2 = t.leerInt();
