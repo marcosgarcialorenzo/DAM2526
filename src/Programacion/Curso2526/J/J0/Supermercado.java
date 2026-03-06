@@ -148,6 +148,18 @@ public class Supermercado {
         }
     }
 
+    void comprarProductosCarrito (Cliente cliente) {
+        cliente.compras.addAll(cliente.carrito);
+        for (Producto productoCarrito : cliente.carrito) {
+            for (Producto producto : productos) {
+                if (producto.nombre.equals(productoCarrito.nombre)) {
+                    producto.cantidad -= productoCarrito.cantidad;
+                }
+            }
+        }
+        cliente.carrito.clear();
+    }
+
     void menu() throws IOException {
         Teclado t = new Teclado();
         int opcion;
@@ -203,7 +215,7 @@ public class Supermercado {
                 switch (opcion) {
                     case 1 -> anadirProductoAlCarrito(cliente);
                     case 2 -> listarProductosCarrito(cliente);
-                    case 3 -> System.out.println("Funcionalidad no implementada.");
+                    case 3 -> comprarProductosCarrito(cliente);
                     case 4 -> System.out.println("Funcionalidad no implementada.");
                     case 5 -> listarProductos();
                     case 0 -> System.out.println("Saliendo...");
