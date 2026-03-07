@@ -1,5 +1,5 @@
-package Programacion.Curso2526; /**
- * @author Jose Manuel Perez Lobato
+package Programacion.Curso2526; /*
+  @author Jose Manuel Perez Lobato
  * @version 1.0
  */
 
@@ -8,45 +8,46 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Teclado {
+    public static void main(String[] args) throws IOException {
+
+        Teclado t = new Teclado();
+
+        System.out.println("Dar char");
+        char c = t.leerChar();
+        System.out.println("Char:" + c + ":");
+        System.out.println("Dar int");
+        int numero = t.leerInt();
+        System.out.println("Int:" + numero + ":");
+        System.out.println("Dar double");
+        double d = t.leerDouble();
+        System.out.println("Double:" + d + ":");
+        System.out.println("Dar String");
+        String s = t.leerString();
+        System.out.println("String:" + s + ":");
+    }
+    /* Sería mejor utilizar siempre un BufferedReader y readLine() pero para que sirva como ejemplo uso el System.in.read() aunque hay que tener precaución con el salto de l�nea (leerFinLinea) por qué si no se pone: si meten blancos después del número no se eliminan si se pone: en Unix y justo después del número dan return tendré que dar otra vez al return
+     */
+
     /**
-     * Lee un caracter y elimina del buffer de teclado todos los que est�n en esa l�nea, incluido
+     * Lee un carácter y elimina del buffer de teclado todos los que est�n en esa l�nea, incluido
      * el final de la l�nea.
      *
      * @throws IOException
      */
     void leerFinLinea() throws IOException {
         char c = ' ';
-        while (c != '\n')
+        while (c != '\n') {
             c = (char) System.in.read();
+        }
     }
-    /* Seria mejor utilizar siempre un BufferedReader y readLine() pero para que sirva como ejemplo uso el System.in.read() aunque hay que tener precauci�n con el salto de l�nea (leerFinLinea) por que si no se pone: si meten blancos despues del numero no se eliminan si se pone: en Unix y justo despues del numero dan return tendre que dar otra vez al return
-     */
-/*int leerInt() throws IOException{
-char c;
-int numero=0;
-  c= (char) System.in.read();
-  while (c>='0' && c<='9'){
-    numero=((int)c-(int)'0')+10*numero;
-    c=(char) System.in.read();
-  }
-  leerFinLinea(c);
-  return numero;
-}*/
-/*int leerInt() throws IOException {
-InputStreamReader isr=new InputStreamReader(System.in);
-BufferedReader br= new BufferedReader(isr);
-  String s=br.readLine();
-  int i= Integer.parseInt(s);
-  return (i);
-}*/
 
     /**
-     * Lee un n�mero entero de teclado y lo devuelve al invocador. Si lo le�do no es un n�mero entero repite la petici�n
-     * hasta que se introduzca un n�mero entero v�lido.
-     *  Descarta el resto de la l�nea.
+     * Lee un n�mero entero de teclado y lo devuelve al invocador. Si lo le�do no es un n�mero entero repite la petición
+     * hasta que se introduzca un número entero válido.
+     * Descarta el resto de la línea.
      *
-     * @throws IOException
      * @return int
+     * @throws IOException
      */
     public int leerInt() throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -66,16 +67,16 @@ BufferedReader br= new BufferedReader(isr);
     }
 
     /**
-     * Lee un caracter de teclado y lo devuelve al invocador. Descarta el resto de la l�nea
+     * Lee un carácter de teclado y lo devuelve al invocador. Descarta el resto de la l�nea
      * vaciando el buffer.
      *
-     * @throws IOException
      * @return char
+     * @throws IOException
      */
     char leerChar() throws IOException {
         char c;
         c = (char) System.in.read();
-        //Si no se desea descartar el resto de la l�nea se deber�a eliminar la siguiente instrucci�n.
+        //Si no se desea descartar el resto de la l�nea se deber�a eliminar la siguiente instrucción.
         leerFinLinea();
         return (c);
     }
@@ -83,51 +84,31 @@ BufferedReader br= new BufferedReader(isr);
     /**
      * Lee una l�nea de texto de teclado y la devuelve al invocador.
      *
-     * @throws IOException
      * @return String
+     * @throws IOException
      */
     public String leerString() throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
-        String s = br.readLine();
-        return (s);
+        return (br.readLine());
     }
 
     /**
      * Lee un n�mero double de teclado y lo devuelve al invocador. Si lo le�do no es un n�mero real se producir�
-     * una excepci�n de tipo  java.lang.NumberFormatException
+     * una excepción de tipo java.lang.NumberFormatException
      * Descarta el resto de la l�nea.
      *
+     * @return double
      * @throws IOException
      * @throws NumberFormatException
-     * @return double
      */
     double leerDouble() throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String s = br.readLine();
-        // La siguiente instrucci�n puede generar una excepci�n NumberFormatException.
+        // La siguiente instrucción puede generar una excepción NumberFormatException.
         //Para evitarlo se puede hacer un tratamiento similar al realizado en leerInt
-        double d = Double.valueOf(s).doubleValue();
-        // tambien valdria double d= Double.parseDouble(s);
-        return (d);
-    }
-
-    public static void main(String[] args) throws IOException {
-
-        Teclado t = new Teclado();
-
-        System.out.println("Dar char");
-        char c = t.leerChar();
-        System.out.println("Char:" + c + ":");
-        System.out.println("Dar int");
-        int numero = t.leerInt();
-        System.out.println("Int:" + numero + ":");
-        System.out.println("Dar double");
-        double d = t.leerDouble();
-        System.out.println("Double:" + d + ":");
-        System.out.println("Dar String");
-        String s = t.leerString();
-        System.out.println("String:" + s + ":");
+        // también valdría double d= Double.parseDouble(s);
+        return (Double.valueOf(s).doubleValue());
     }
 }
