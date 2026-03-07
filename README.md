@@ -8,6 +8,10 @@ Repositorio con ejercicios y proyectos del ciclo formativo **DAM (Desarrollo de 
 
 ```
 DAM2526/
+├── pom.xml
+├── DAM2526.iml
+├── README.md
+│
 ├── src/
 │   ├── BasesDeDatos/
 │   │   └── Curso2526/
@@ -27,18 +31,47 @@ DAM2526/
 │   └── Programacion/
 │       ├── Curso2425/
 │       │   └── Examenes/
+│       │       └── Ev1/
+│       │
 │       └── Curso2526/
-│           ├── A/   → Ejercicios básicos (variables, operadores, etc.)
-│           ├── B/   → Estructuras de control (if, switch, bucles, etc.)
-│           ├── C/   → Estructuras de control avanzadas (break, continue, etc.)
+│           ├── Teclado.java
+│           ├── TecladoGrafico.java
+│           ├── TestAlumno.java
+│           │
+│           ├── A/   → Ejercicios básicos (clases, objetos, constructores)
+│           │   ├── A2/-A13/
+│           │
+│           ├── B/   → Estructuras de control (if, switch, bucles)
+│           │   ├── B1/-B15/
+│           │
+│           ├── C/   → Estructuras avanzadas (break, continue)
+│           │   ├── C1/-C6/
+│           │
 │           ├── D/   → Arrays
-│           ├── E/   → Matrices y objetos de arrays
+│           │   ├── D1/-D6/
+│           │
+│           ├── E/   → Matrices y arrays de objetos
+│           │   ├── E1/-E9/
+│           │   └── HundirLaFlota/
+│           │
 │           ├── F/   → Strings
+│           │   ├── F1/-F7/
+│           │
 │           ├── G/   → Excepciones y manejo de errores
-│           ├── H/   → Recursividad (Fibonacci, etc.)
+│           │   ├── G1/-G3/
+│           │
+│           ├── H/   → Recursividad
+│           │   ├── H1/-H2/
+│           │
 │           ├── I/   → Ficheros y directorios
-│           ├── J/   → Herencia y OO avanzada
+│           │   ├── I1/-I6/
+│           │
+│           ├── J/   → Herencia y POO avanzada
+│           │   ├── J1/
+│           │
 │           ├── K/   → Colecciones (Vector, ArrayList, etc.)
+│           │   └── K0/
+│           │
 │           └── ExamenesMGL/
 │               ├── Evaluacion1/
 │               └── Evaluacion2/
