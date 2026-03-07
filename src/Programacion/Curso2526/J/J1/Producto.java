@@ -1,6 +1,4 @@
-package Programacion.Curso2526.J.J0;
-
-import java.time.LocalDateTime;
+package Programacion.Curso2526.J.J1;
 
 public class Producto {
     String nombre;
