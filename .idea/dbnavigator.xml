@@ -6,18 +6,12 @@
   </component>
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
-      <assistant-state connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="910BC8929DEE4A789ECB099D60BF05F4" availability="AVAILABLE" acknowledgement="ENGAGED" selected="true">
-        <chats>
-          <chat id="910BC8929DEE4A789ECB099D60BF05F4" title="" session-signature="" timestamp="1773043235216">
-            <messages />
-            <context provider="" profile="" model="" action="" interactive="true" />
-          </chat>
-        </chats>
+      <assistant-state connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
         <tools />
       </assistant-state>
       <assistant-state connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
@@ -27,6 +21,12 @@
     <selection-state>
       <model-selection />
     </selection-state>
+  </component>
+  <component name="DBNavigator.Project.DatabaseBrowserManager">
+    <autoscroll-to-editor value="false" />
+    <autoscroll-from-editor value="true" />
+    <show-object-properties value="false" />
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="71e002d2-2358-427b-9abe-6aede0c6b1c7">
@@ -45,12 +45,21 @@
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="71e002d2-2358-427b-9abe-6aede0c6b1c7" />
   </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
+  </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
-    <mapping file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/PLSQL/8/ejem.plsql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
+    <mapping file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/PLSQL/8.1.1/8.1.1.1.plsql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
+    <mapping file-url="file://$APPLICATION_CONFIG_DIR$/consoles/db/de2baa46-cd50-44ae-a3eb-cfa40709a031/console.sql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces>
+      <mapping database-type="ORACLE" interface-id="DEFAULT" />
+    </recently-used-interfaces>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
@@ -107,7 +116,7 @@
           <charset value="UTF-8" />
           <session-management value="true" />
           <ddl-file-binding value="true" />
-          <database-logging value="false" />
+          <database-logging value="true" />
           <connect-automatically value="true" />
           <restore-workspace value="true" />
           <restore-workspace-deep value="false" />
@@ -615,5 +624,21 @@
         </visibility-settings>
       </environment>
     </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables>
+      <file file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/PLSQL/8/Ejercicio1.plsql">
+        <variable name="&amp;introducenumero1" data-type="NUMERIC">
+          <value>2</value>
+        </variable>
+        <variable name="&amp;introducenumero2" data-type="NUMERIC">
+          <value>3</value>
+        </variable>
+      </file>
+    </execution-variables>
+    <execution-variable-types>
+      <variable connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" name="&amp;introducenumero2" data-type="LITERAL" />
+      <variable connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" name="&amp;introducenumero1" data-type="LITERAL" />
+    </execution-variable-types>
   </component>
 </project>
