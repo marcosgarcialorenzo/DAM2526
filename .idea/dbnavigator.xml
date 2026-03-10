@@ -14,6 +14,9 @@
       <assistant-state connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
         <tools />
       </assistant-state>
+      <assistant-state connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
+        <tools />
+      </assistant-state>
     </assistants>
     <selection-state>
       <model-selection />
@@ -46,8 +49,13 @@
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/PLSQL/8.1.1/8.1.1.1/8.1.1.1.plsql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
     <mapping file-url="file://$APPLICATION_CONFIG_DIR$/consoles/db/de2baa46-cd50-44ae-a3eb-cfa40709a031/console.sql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
+    <mapping file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/SQL/6.1 Personas/6.1 Tablas.sql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
     <mapping file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/PLSQL/TablasUsadas.sql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
+  </component>
+  <component name="DBNavigator.Project.JavaUploadManager">
+    <download-states />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
