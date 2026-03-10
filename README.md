@@ -15,9 +15,12 @@ DAM2526/
 ├── src/
 │   ├── BasesDeDatos/
 │   │   └── Curso2526/
-│   │       ├── Examenes/
+│   │       ├── ExamenesMGL/
 │   │       │   └── SQL/
 │   │       │       └── ConsultasSelect/
+│   │       ├── PLSQL/
+│   │       │   ├── TablasUsadas.sql
+│   │       │   └── 8.1.1/
 │   │       └── SQL/
 │   │           ├── 6.1 Personas/
 │   │           ├── 6.2 Multinacional/
@@ -39,38 +42,41 @@ DAM2526/
 │           ├── TestAlumno.java
 │           │
 │           ├── A/   → Ejercicios básicos (clases, objetos, constructores)
-│           │   ├── A2/-A13/
+│           │   └── A2/-A13/
 │           │
 │           ├── B/   → Estructuras de control (if, switch, bucles)
-│           │   ├── B1/-B15/
+│           │   └── B1/-B15/
 │           │
 │           ├── C/   → Estructuras avanzadas (break, continue)
-│           │   ├── C1/-C6/
+│           │   └── C1/-C6/
 │           │
 │           ├── D/   → Arrays
-│           │   ├── D1/-D6/
+│           │   └── D1/-D6/
 │           │
 │           ├── E/   → Matrices y arrays de objetos
 │           │   ├── E1/-E9/
 │           │   └── HundirLaFlota/
 │           │
 │           ├── F/   → Strings
-│           │   ├── F1/-F7/
+│           │   └── F1/-F7/
 │           │
 │           ├── G/   → Excepciones y manejo de errores
-│           │   ├── G1/-G3/
+│           │   └── G1/-G3/
 │           │
 │           ├── H/   → Recursividad
-│           │   ├── H1/-H2/
+│           │   └── H1/-H2/
 │           │
 │           ├── I/   → Ficheros y directorios
-│           │   ├── I1/-I6/
+│           │   └── I1/-I6/
 │           │
 │           ├── J/   → Herencia y POO avanzada
-│           │   ├── J1/
+│           │   └── J1/-J2/
 │           │
 │           ├── K/   → Colecciones (Vector, ArrayList, etc.)
-│           │   └── K0/
+│           │   └── K0/-K2/
+│           │
+│           ├── L/   → Interfaces y clases abstractas
+│           │   └── L1/-L4/
 │           │
 │           └── ExamenesMGL/
 │               ├── Evaluacion1/
