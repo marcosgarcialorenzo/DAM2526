@@ -42,7 +42,7 @@ public class VersionLambda {
 
     void sumarNumerosCon2Digitos(List<Integer> lista) {
         int suma = lista.stream()
-                .filter(n -> n >= 10 && n <= 99)
+                .filter(n -> n >= 10 && n <= 99) //solo tiene en cuenta los números de 2 dígitos positivos
                 .mapToInt(Integer::intValue)
                 .sum();
         System.out.println(suma);
@@ -50,7 +50,7 @@ public class VersionLambda {
 
     void contarNumerosCon2Digitos(List<Integer> lista) {
         int total = (int) lista.stream()
-                .filter(n -> n >= 10 && n <= 99)
+                .filter(n -> n >= 10 && n <= 99) //solo tiene en cuenta los números de 2 dígitos positivos
                 .count();
         System.out.println(total);
     }
