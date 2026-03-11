@@ -18,3 +18,8 @@
 18;Salsa de Tomate;2.25;15
 19;Mayonesa;2.00;18
 20;Mostaza;1.75;22
+21;Jamón Ibérico;75.00;5
+22;Whisky Premium;89.50;8
+23;Vino Reserva;55.00;12
+24;Caviar;120.00;3
+25;Aceite de Trufa;65.00;6

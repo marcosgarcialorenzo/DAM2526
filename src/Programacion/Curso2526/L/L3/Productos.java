@@ -23,6 +23,7 @@ public class Productos {
         Vector<Productos> productos = new Vector<>(5, 3);
         obj.cargarFichero(txt, productos);
         obj.mostrarProductoDeMayorPrecio(productos);
+        obj.mostrarProductosDeMasDe50EurosDeMayorAMenor(productos);
     }
 
     @Override
@@ -34,6 +35,14 @@ public class Productos {
         productos.stream()
                 .max(Comparator.comparingDouble(p -> p.precio))
                 .ifPresent(p -> System.out.println("Producto de mayor precio: " + p));
+    }
+
+    void mostrarProductosDeMasDe50EurosDeMayorAMenor(Vector<Productos> productos) {
+        System.out.println("Productos de mas de 50 euros de mayor a menor precio:");
+        productos.stream()
+                .filter(p -> p.precio > 50)
+                .sorted(Comparator.comparingDouble(p -> -p.precio))
+                .forEach(System.out::println);
     }
 
     private void cargarFichero(File txt, Vector<Productos> productos) {
