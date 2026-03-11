@@ -1,6 +1,7 @@
 package Programacion.Curso2526.L.L4;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.BufferedReader;
@@ -12,6 +13,7 @@ import java.util.Vector;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Producto {
     int id;
     String nombre;
@@ -27,6 +29,7 @@ public class Producto {
         System.out.println("Lista de productos con precio menor a 10 " + obj.productosConPrecioMenorA10(productos));
         System.out.println("Lista de productos con nombre de mas de 10 caracteres y cantidad menor a 10 " + obj.productosCon10CaracteresYMenosDe10DeCantidad(productos));
         obj.incrementarPrecio10Porciento(productos);
+        System.out.println("Producto que empieza por A y tiene menos de 10 de cantidad " + obj.mostrarProductoQueEmpiezaPorAYTieneMenosDe10DeCantidad(productos));
     }
 
     @Override
@@ -76,5 +79,12 @@ public class Producto {
 
     void incrementarPrecio10Porciento(Vector<Producto> productos) {
         productos.forEach(p -> p.precio *= 1.10); // incrementa el precio de cada producto en un 10% (precio = precio * 1.10)
+    }
+
+    Producto mostrarProductoQueEmpiezaPorAYTieneMenosDe10DeCantidad(Vector<Producto> productos) {
+        return productos.stream()
+                .filter(p -> p.getNombre().toLowerCase().startsWith("a") && p.getCantidad() < 10)
+                .findFirst()
+                .orElse(new Producto(- 1, "NADA", 0.0, 0));
     }
 }
