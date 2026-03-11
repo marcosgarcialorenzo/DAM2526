@@ -33,16 +33,16 @@ public class Productos {
 
     void mostrarProductoDeMayorPrecio(Vector<Productos> productos) {
         productos.stream()
-                .max(Comparator.comparingDouble(p -> p.precio))
-                .ifPresent(p -> System.out.println("Producto de mayor precio: " + p));
+                .max(Comparator.comparingDouble(p -> p.precio)) // busca el máximo precio de cada p
+                .ifPresent(p -> System.out.println("Producto de mayor precio: " + p)); // si p esta presente, lo imprime
     }
 
     void mostrarProductosDeMasDe50EurosDeMayorAMenor(Vector<Productos> productos) {
         System.out.println("Productos de mas de 50 euros de mayor a menor precio:");
         productos.stream()
-                .filter(p -> p.precio > 50)
-                .sorted(Comparator.comparingDouble(p -> -p.precio))
-                .forEach(System.out::println);
+                .filter(p -> p.precio > 50) // filtra solo productos con precio mayor a 50 (mira si cada p cumple la condición(p.precio > 50))
+                .sorted(Comparator.comparingDouble(p -> - p.precio)) // ordena de mayor a menor (el - invierte el orden)
+                .forEach(System.out::println); // imprime cada producto usando method reference
     }
 
     private void cargarFichero(File txt, Vector<Productos> productos) {
