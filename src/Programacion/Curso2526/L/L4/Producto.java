@@ -58,9 +58,10 @@ public class Producto {
                 .ifPresent(System.out::println); // si el producto esta presente, lo imprime
     }
 
-    List<Producto> productosConPrecioMenorA10(Vector<Producto> productos) {
+    List<String> productosConPrecioMenorA10(Vector<Producto> productos) {
         return productos.stream()
                 .filter(p -> p.precio < 10) // filtra solo productos con precio menor a 10 (mira si cada p cumple la condición(p.precio < 10))
+                .map(p -> p.nombre)
                 .toList(); // convierte el stream resultante en una lista
     }
 
