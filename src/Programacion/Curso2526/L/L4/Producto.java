@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Vector;
 
 @AllArgsConstructor
@@ -23,6 +24,7 @@ public class Producto {
         Vector<Producto> productos = new Vector<>(5, 3);
         obj.cargarFichero(txt, productos);
         obj.mostrarTercerProductoMasCaro(productos);
+        System.out.println("Lista de productos con precio menor a 10 " + obj.productosConPrecioMenorA10(productos));
     }
 
     @Override
@@ -53,5 +55,13 @@ public class Producto {
                 .skip(2) // salta los primeros 2 elementos del stream
                 .findFirst() // obtiene el primer elemento del stream resultante (el tercer producto más caro)
                 .ifPresent(System.out::println); // si el producto esta presente, lo imprime
+    }
+
+    List productosConPrecioMenorA10(Vector<Producto> productos) {
+        List<Producto> productosMenoresA10;
+        productosMenoresA10 = productos.stream()
+                .filter(p -> p.precio < 10)
+                .toList();
+        return productosMenoresA10;
     }
 }
