@@ -25,11 +25,11 @@ public class Producto {
         File txt = new File("C:\\Users\\marco\\IdeaProjects\\DAM2526\\src\\Programacion\\Curso2526\\L\\L4\\Productos.txt");
         Vector<Producto> productos = new Vector<>(5, 3);
         obj.cargarFichero(txt, productos);
-        obj.mostrarTercerProductoMasCaro(productos);
-        System.out.println("Lista de productos con precio menor a 10 " + obj.productosConPrecioMenorA10(productos));
-        System.out.println("Lista de productos con nombre de mas de 10 caracteres y cantidad menor a 10 " + obj.productosCon10CaracteresYMenosDe10DeCantidad(productos));
+        obj.mostrarProducto3MasCaro(productos);
+        System.out.println("Lista de productos con precio menor a 10 " + obj.buscarProductoPrecioMenor10(productos));
+        System.out.println("Lista de productos con nombre de mas de 10 caracteres y cantidad menor a 10 " + obj.buscarProductoCantidadMenor10Y10Caracteres(productos));
         obj.incrementarPrecio10Porciento(productos);
-        System.out.println("Producto que empieza por A y tiene menos de 10 de cantidad " + obj.mostrarProductoQueEmpiezaPorAYTieneMenosDe10DeCantidad(productos));
+        System.out.println("Producto que empieza por A y tiene menos de 10 de cantidad " + obj.buscarProductoEmpiezaConAYCantidadMenor10(productos));
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Producto {
         }
     }
 
-    void mostrarTercerProductoMasCaro(Vector<Producto> productos) {
+    void mostrarProducto3MasCaro(Vector<Producto> productos) {
         System.out.println("El tercer producto mas caro es:");
         productos.stream()
                 .sorted(Comparator.comparingDouble(p -> - p.precio)) // ordena de mayor a menor (el - invierte el orden)
@@ -62,14 +62,14 @@ public class Producto {
                 .ifPresent(System.out::println); // si el producto esta presente, lo imprime
     }
 
-    List<String> productosConPrecioMenorA10(Vector<Producto> productos) {
+    List<String> buscarProductoPrecioMenor10(Vector<Producto> productos) {
         return productos.stream()
                 .filter(p -> p.precio < 10) // filtra solo productos con precio menor a 10 (mira si cada p cumple la condición(p.precio < 10))
                 .map(p -> p.nombre) // mapea a String (transforma un Producto a un String)
                 .toList(); // convierte el stream resultante en una lista
     }
 
-    List<String> productosCon10CaracteresYMenosDe10DeCantidad(Vector<Producto> productos) {
+    List<String> buscarProductoCantidadMenor10Y10Caracteres(Vector<Producto> productos) {
         return productos.stream()
                 .filter(p -> p.cantidad < 10) // primero filtra productos con cantidad menor a 10
                 .map(p -> p.nombre) // mapea a String (transforma un Producto a un String)
@@ -81,7 +81,7 @@ public class Producto {
         productos.forEach(p -> p.precio *= 1.10); // incrementa el precio de cada producto en un 10% (precio = precio * 1.10)
     }
 
-    Producto mostrarProductoQueEmpiezaPorAYTieneMenosDe10DeCantidad(Vector<Producto> productos) {
+    Producto buscarProductoEmpiezaConAYCantidadMenor10(Vector<Producto> productos) {
         return productos.stream()
                 .filter(p -> p.getNombre().toLowerCase().startsWith("a") && p.getCantidad() < 10)
                 .findFirst()
