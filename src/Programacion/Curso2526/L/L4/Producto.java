@@ -49,9 +49,9 @@ public class Producto {
     void mostrarTercerProductoMasCaro(Vector<Producto> productos) {
         System.out.println("El tercer producto mas caro es:");
         productos.stream()
-                .sorted(Comparator.comparingDouble(p -> - p.precio))
-                .skip(2)
-                .findFirst()
-                .ifPresent(System.out::println);
+                .sorted(Comparator.comparingDouble(p -> - p.precio)) // ordena de mayor a menor (el - invierte el orden)
+                .skip(2) // salta los primeros 2 elementos del stream
+                .findFirst() // obtiene el primer elemento del stream resultante (el tercer producto más caro)
+                .ifPresent(System.out::println); // si el producto esta presente, lo imprime
     }
 }
