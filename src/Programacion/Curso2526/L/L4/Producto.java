@@ -26,6 +26,7 @@ public class Producto {
         obj.mostrarTercerProductoMasCaro(productos);
         System.out.println("Lista de productos con precio menor a 10 " + obj.productosConPrecioMenorA10(productos));
         System.out.println("Lista de productos con nombre de mas de 10 caracteres y cantidad menor a 10 " + obj.productosCon10CaracteresYMenosDe10DeCantidad(productos));
+        obj.incrementarPrecio10Porciento(productos);
     }
 
     @Override
@@ -71,5 +72,9 @@ public class Producto {
                 .map(p -> p.nombre) // mapea a String (transforma un Producto a un String)
                 .filter(nombre -> nombre.length() > 10) // ahora filtra por longitud == 10 (lambda recibe String)
                 .toList(); // convierte el stream resultante en una lista de Strings
+    }
+
+    void incrementarPrecio10Porciento(Vector<Producto> productos) {
+        productos.forEach(p -> p.precio *= 1.10);
     }
 }
