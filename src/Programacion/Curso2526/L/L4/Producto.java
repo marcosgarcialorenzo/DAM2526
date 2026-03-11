@@ -61,7 +61,7 @@ public class Producto {
     List<String> productosConPrecioMenorA10(Vector<Producto> productos) {
         return productos.stream()
                 .filter(p -> p.precio < 10) // filtra solo productos con precio menor a 10 (mira si cada p cumple la condición(p.precio < 10))
-                .map(p -> p.nombre)
+                .map(p -> p.nombre) // mapea a String (transforma un Producto a un String)
                 .toList(); // convierte el stream resultante en una lista
     }
 
