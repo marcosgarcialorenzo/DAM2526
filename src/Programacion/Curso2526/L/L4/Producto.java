@@ -30,6 +30,7 @@ public class Producto {
         System.out.println("Lista de productos con nombre de mas de 10 caracteres y cantidad menor a 10 " + obj.buscarProductoCantidadMenor10Y10Caracteres(productos));
         obj.incrementarPrecio10Porciento(productos);
         System.out.println("Producto que empieza por A y tiene menos de 10 de cantidad " + obj.buscarProductoEmpiezaConAYCantidadMenor10(productos));
+        System.out.println("¿Hay algún producto con cantidad 0? " + obj.buscarProductoCantidad0(productos));
     }
 
     @Override
@@ -86,5 +87,10 @@ public class Producto {
                 .filter(p -> p.getNombre().toLowerCase().startsWith("a") && p.getCantidad() < 10) // filtra productos que empiezan con "A" (ignora mayúsculas) y tienen cantidad menor a 10
                 .findFirst() // devuelve el primer producto que cumple la condición del filter
                 .orElse(new Producto(- 1, "NADA", 0.0, 0)); // devuelve esto si no se cumple la condición del filter
+    }
+
+    boolean buscarProductoCantidad0(Vector<Producto> productos) {
+        return productos.stream()
+                .anyMatch(p -> p.getCantidad() == 0); // devuelve true si al menos un producto tiene cantidad igual a 0 y false en caso contrario
     }
 }
