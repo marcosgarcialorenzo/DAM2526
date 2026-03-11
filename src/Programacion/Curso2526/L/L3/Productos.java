@@ -49,9 +49,9 @@ public class Productos {
     void mostrar5ProductosMasCaros(Vector<Productos> productos) {
         System.out.println("Los 5 productos mas caros:");
         productos.stream()
-                .sorted(Comparator.comparingDouble(p -> - p.precio))
-                .limit(5)
-                .forEach(System.out::println);
+                .sorted(Comparator.comparingDouble(p -> - p.precio)) // ordena de mayor a menor (el - invierte el orden)
+                .limit(5) // limita a los primeros 5 elementos del stream
+                .forEach(System.out::println); // imprime cada producto usando method reference
     }
 
     private void cargarFichero(File txt, Vector<Productos> productos) {
