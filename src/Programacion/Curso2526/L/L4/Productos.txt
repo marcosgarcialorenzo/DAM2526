@@ -1,0 +1,25 @@
+01;Galletas;2.50;20
+02;Chocolate;1.75;15
+03;Leche;0.99;30
+04;Pan;1.20;25
+05;Queso;3.50;10
+06;Yogur;0.80;40
+07;Cereal;4.00;12
+08;Jugo de Naranja;2.00;18
+09;Mantequilla;2.75;8
+10;Café;5.00;5
+11;Té;3.00;20
+12;Azúcar;1.50;25
+13;Sal;0.50;50
+14;Aceite;4.50;10
+15;Arroz;1.20;30
+16;Frijoles;1.00;40
+17;Pasta;1.80;20
+18;Salsa de Tomate;2.25;15
+19;Mayonesa;2.00;18
+20;Mostaza;1.75;22
+21;Jamón Ibérico;75.00;5
+22;Whisky Premium;89.50;8
+23;Vino Reserva;55.00;12
+24;Caviar;120.00;3
+25;Aceite de Trufa;65.00;6
