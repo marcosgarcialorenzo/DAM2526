@@ -97,6 +97,6 @@ public class Producto {
 
     boolean buscarProductoCantidadMayor0(Vector<Producto> productos) {
         return productos.stream()
-                .allMatch(p -> p.getCantidad() > 0);
+                .allMatch(p -> p.getCantidad() > 0); // devuelve true si todos los productos tienen cantidad mayor a 0 y false en caso contrario
     }
 }
