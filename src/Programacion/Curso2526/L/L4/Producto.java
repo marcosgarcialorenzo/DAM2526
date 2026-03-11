@@ -66,9 +66,9 @@ public class Producto {
 
     List<String> productosCon10CaracteresYMenosDe10DeCantidad(Vector<Producto> productos) {
         return productos.stream()
-                .filter(p -> p.cantidad < 10)
-                .map(p -> p.nombre)
-                .filter(nombre -> nombre.length() > 10)
-                .toList();
+                .filter(p -> p.cantidad < 10) // primero filtra productos con cantidad menor a 10
+                .map(p -> p.nombre) // mapea a String (transforma un Producto a un String)
+                .filter(nombre -> nombre.length() > 10) // ahora filtra por longitud == 10 (lambda recibe String)
+                .toList(); // convierte el stream resultante en una lista de Strings
     }
 }
