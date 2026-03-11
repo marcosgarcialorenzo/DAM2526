@@ -24,6 +24,7 @@ public class Productos {
         obj.cargarFichero(txt, productos);
         obj.mostrarProductoDeMayorPrecio(productos);
         obj.mostrarProductosDeMasDe50EurosDeMayorAMenor(productos);
+        obj.mostrar5ProductosMasCaros(productos);
     }
 
     @Override
@@ -43,6 +44,14 @@ public class Productos {
                 .filter(p -> p.precio > 50) // filtra solo productos con precio mayor a 50 (mira si cada p cumple la condición(p.precio > 50))
                 .sorted(Comparator.comparingDouble(p -> - p.precio)) // ordena de mayor a menor (el - invierte el orden)
                 .forEach(System.out::println); // imprime cada producto usando method reference
+    }
+
+    void mostrar5ProductosMasCaros(Vector<Productos> productos) {
+        System.out.println("Los 5 productos mas caros:");
+        productos.stream()
+                .sorted(Comparator.comparingDouble(p -> - p.precio))
+                .limit(5)
+                .forEach(System.out::println);
     }
 
     private void cargarFichero(File txt, Vector<Productos> productos) {
