@@ -46,8 +46,7 @@ public class Productos {
     }
 
     private void cargarFichero(File txt, Vector<Productos> productos) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(txt));
+        try (BufferedReader br = new BufferedReader(new FileReader(txt))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
@@ -57,9 +56,8 @@ public class Productos {
                 int cantidad = Integer.parseInt(datos[3]);
                 productos.add(new Productos(id, nombre, precio, cantidad));
             }
-            br.close();
         } catch (Exception e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
+            System.err.println("Error al leer el archivo: " + e.getMessage());
         }
     }
 }
