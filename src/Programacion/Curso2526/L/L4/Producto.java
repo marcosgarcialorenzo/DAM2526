@@ -75,6 +75,6 @@ public class Producto {
     }
 
     void incrementarPrecio10Porciento(Vector<Producto> productos) {
-        productos.forEach(p -> p.precio *= 1.10);
+        productos.forEach(p -> p.precio *= 1.10); // incrementa el precio de cada producto en un 10% (precio = precio * 1.10)
     }
 }
