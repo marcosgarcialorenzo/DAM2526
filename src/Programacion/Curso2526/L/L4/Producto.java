@@ -83,8 +83,8 @@ public class Producto {
 
     Producto buscarProductoEmpiezaConAYCantidadMenor10(Vector<Producto> productos) {
         return productos.stream()
-                .filter(p -> p.getNombre().toLowerCase().startsWith("a") && p.getCantidad() < 10)
-                .findFirst()
-                .orElse(new Producto(- 1, "NADA", 0.0, 0));
+                .filter(p -> p.getNombre().toLowerCase().startsWith("a") && p.getCantidad() < 10) // filtra productos que empiezan con "A" (ignora mayúsculas) y tienen cantidad menor a 10
+                .findFirst() // devuelve el primer producto que cumple la condición del filter
+                .orElse(new Producto(- 1, "NADA", 0.0, 0)); // devuelve esto si no se cumple la condición del filter
     }
 }
