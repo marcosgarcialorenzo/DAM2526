@@ -31,6 +31,7 @@ public class Producto {
         obj.incrementarPrecio10Porciento(productos);
         System.out.println("Producto que empieza por A y tiene menos de 10 de cantidad " + obj.buscarProductoEmpiezaConAYCantidadMenor10(productos));
         System.out.println("¿Hay algún producto con cantidad 0? " + obj.buscarProductoCantidad0(productos));
+        System.out.println("¿Todos los productos tienen cantidad mayor a 0? " + obj.buscarProductoCantidadMayor0(productos));
     }
 
     @Override
@@ -92,5 +93,10 @@ public class Producto {
     boolean buscarProductoCantidad0(Vector<Producto> productos) {
         return productos.stream()
                 .anyMatch(p -> p.getCantidad() == 0); // devuelve true si al menos un producto tiene cantidad igual a 0 y false en caso contrario
+    }
+
+    boolean buscarProductoCantidadMayor0(Vector<Producto> productos) {
+        return productos.stream()
+                .allMatch(p -> p.getCantidad() > 0);
     }
 }
