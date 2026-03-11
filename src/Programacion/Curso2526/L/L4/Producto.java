@@ -25,6 +25,7 @@ public class Producto {
         obj.cargarFichero(txt, productos);
         obj.mostrarTercerProductoMasCaro(productos);
         System.out.println("Lista de productos con precio menor a 10 " + obj.productosConPrecioMenorA10(productos));
+        System.out.println("Lista de productos con nombre de mas de 10 caracteres y cantidad menor a 10 " + obj.productosCon10CaracteresYMenosDe10DeCantidad(productos));
     }
 
     @Override
@@ -61,5 +62,13 @@ public class Producto {
         return productos.stream()
                 .filter(p -> p.precio < 10) // filtra solo productos con precio menor a 10 (mira si cada p cumple la condición(p.precio < 10))
                 .toList(); // convierte el stream resultante en una lista
+    }
+
+    List<String> productosCon10CaracteresYMenosDe10DeCantidad(Vector<Producto> productos) {
+        return productos.stream()
+                .filter(p -> p.cantidad < 10)
+                .map(p -> p.nombre)
+                .filter(nombre -> nombre.length() > 10)
+                .toList();
     }
 }
