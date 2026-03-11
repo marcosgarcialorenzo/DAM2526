@@ -60,8 +60,8 @@ public class Producto {
     List productosConPrecioMenorA10(Vector<Producto> productos) {
         List<Producto> productosMenoresA10;
         productosMenoresA10 = productos.stream()
-                .filter(p -> p.precio < 10)
-                .toList();
+                .filter(p -> p.precio < 10) // filtra solo productos con precio menor a 10 (mira si cada p cumple la condición(p.precio < 10))
+                .toList(); // convierte el stream resultante en una lista
         return productosMenoresA10;
     }
 }
