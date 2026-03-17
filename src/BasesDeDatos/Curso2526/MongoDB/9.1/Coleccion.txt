@@ -1,0 +1,202 @@
+db.Multinacional.insertMany([
+  {
+    "_id": 1,
+    "nombreEmpresa": "GETRONICS",
+    "nombreJefe": "LUIS PERES",
+    "nombreEmpleado": "ANTONIO",
+    "sueldoNeto": 1500,
+    "edad": 25,
+    "fechaIngreso": "2000/10/6",
+    "categoria": "TECNICO"
+  },
+  {
+    "_id": 2,
+    "nombreEmpresa": "GETRONICS",
+    "nombreJefe": "JULIAN MARTIN",
+    "nombreEmpleado": "LUIS",
+    "sueldoNeto": 2100,
+    "edad": 27,
+    "fechaIngreso": "2001/11/7",
+    "categoria": "ANALISTA"
+  },
+  {
+    "_id": 3,
+    "nombreEmpresa": "ATOS",
+    "nombreJefe": "ANTONIO FERNANDEZ",
+    "nombreEmpleado": "JAVIER",
+    "sueldoNeto": 2100,
+    "edad": 28,
+    "fechaIngreso": "2005/12/8",
+    "categoria": "ANALISTA"
+  },
+  {
+    "_id": 4,
+    "nombreEmpresa": "ALBA",
+    "nombreJefe": "JOSE RODRIGUEZ",
+    "nombreEmpleado": "MARTA",
+    "sueldoNeto": 1000,
+    "edad": 29,
+    "fechaIngreso": "2003/11/8",
+    "categoria": "OPERADOR"
+  },
+  {
+    "_id": 5,
+    "nombreEmpresa": "ALBA",
+    "nombreJefe": "JOSE RODRIGUEZ",
+    "nombreEmpleado": "JULIAN",
+    "sueldoNeto": 1500,
+    "edad": 27,
+    "fechaIngreso": "2003/10/8",
+    "categoria": "TECNICO"
+  },
+  {
+    "_id": 6,
+    "nombreEmpresa": "ALBA",
+    "nombreJefe": "JOSE RODRIGUEZ",
+    "nombreEmpleado": "CARLOS",
+    "sueldoNeto": 1500,
+    "edad": 25,
+    "fechaIngreso": "2004/11/28",
+    "categoria": "TECNICO"
+  },
+  {
+    "_id": 7,
+    "nombreEmpresa": "ALBA",
+    "nombreJefe": "LUIS RODRIGUEZ",
+    "nombreEmpleado": "MARIA",
+    "sueldoNeto": 1500,
+    "edad": 29,
+    "fechaIngreso": "2004/11/18",
+    "categoria": "TECNICO"
+  },
+  {
+    "_id": 8,
+    "nombreEmpresa": "ALBA",
+    "nombreJefe": "LUIS RODRIGUEZ",
+    "nombreEmpleado": "PEPE",
+    "sueldoNeto": 1000,
+    "edad": 29,
+    "fechaIngreso": "2005/11/8",
+    "categoria": "OPERADOR"
+  },
+  {
+    "_id": 9,
+    "nombreEmpresa": "ALBA",
+    "nombreJefe": "LUIS RODRIGUEZ",
+    "nombreEmpleado": "MARCOS",
+    "sueldoNeto": 2100,
+    "edad": 25,
+    "fechaIngreso": "2003/11/8",
+    "categoria": "ANALISTA"
+  },
+  {
+    "_id": 10,
+    "nombreEmpresa": "ALBA",
+    "nombreJefe": "LUIS RODRIGUEZ",
+    "nombreEmpleado": "PEDRO",
+    "sueldoNeto": 2100,
+    "edad": 29,
+    "fechaIngreso": "2005/11/8",
+    "categoria": "ANALISTA"
+  },
+  {
+    "_id": 11,
+    "nombreEmpresa": "IBM",
+    "nombreJefe": "CLARA MORENO",
+    "nombreEmpleado": "JUAN",
+    "sueldoNeto": 2300,
+    "edad": 30,
+    "fechaIngreso": "2008/03/12",
+    "categoria": "INGENIERO"
+  },
+  {
+    "_id": 12,
+    "nombreEmpresa": "MICROSOFT",
+    "nombreJefe": "PEDRO SANTOS",
+    "nombreEmpleado": "ANA",
+    "sueldoNeto": 2400,
+    "edad": 28,
+    "fechaIngreso": "2010/05/23",
+    "categoria": "DESARROLLADOR"
+  },
+  {
+    "_id": 13,
+    "nombreEmpresa": "APPLE",
+    "nombreJefe": "MARIA LOPEZ",
+    "nombreEmpleado": "IVAN",
+    "sueldoNeto": 2500,
+    "edad": 32,
+    "fechaIngreso": "2012/07/14",
+    "categoria": "DISEÑADOR"
+  },
+  {
+    "_id": 14,
+    "nombreEmpresa": "GOOGLE",
+    "nombreJefe": "DAVID PEREZ",
+    "nombreEmpleado": "CARLA",
+    "sueldoNeto": 2600,
+    "edad": 31,
+    "fechaIngreso": "2011/09/19",
+    "categoria": "PRODUCT MANAGER"
+  },
+  {
+    "_id": 15,
+    "nombreEmpresa": "ORACLE",
+    "nombreJefe": "SUSANA RAMIREZ",
+    "nombreEmpleado": "DIEGO",
+    "sueldoNeto": 2700,
+    "edad": 33,
+    "fechaIngreso": "2013/02/17",
+    "categoria": "DBA"
+  },
+  {
+    "_id": 16,
+    "nombreEmpresa": "SAP",
+    "nombreJefe": "ANDRES GOMEZ",
+    "nombreEmpleado": "LAURA",
+    "sueldoNeto": 2550,
+    "edad": 29,
+    "fechaIngreso": "2015/06/25",
+    "categoria": "CONSULTOR"
+  },
+  {
+    "_id": 17,
+    "nombreEmpresa": "DELL",
+    "nombreJefe": "ESTHER NUÑEZ",
+    "nombreEmpleado": "ROBERTO",
+    "sueldoNeto": 2400,
+    "edad": 30,
+    "fechaIngreso": "2014/08/10",
+    "categoria": "SOPORTE"
+  },
+  {
+    "_id": 18,
+    "nombreEmpresa": "CISCO",
+    "nombreJefe": "GABRIEL TORRES",
+    "nombreEmpleado": "NATALIA",
+    "sueldoNeto": 2500,
+    "edad": 27,
+    "fechaIngreso": "2016/04/12",
+    "categoria": "REDES"
+  },
+  {
+    "_id": 19,
+    "nombreEmpresa": "HP",
+    "nombreJefe": "MARTA SERRANO",
+    "nombreEmpleado": "FERNANDO",
+    "sueldoNeto": 2450,
+    "edad": 31,
+    "fechaIngreso": "2017/03/09",
+    "categoria": "SOPORTE"
+  },
+  {
+    "_id": 20,
+    "nombreEmpresa": "TESLA",
+    "nombreJefe": "RAUL MARTINEZ",
+    "nombreEmpleado": "SOFIA",
+    "sueldoNeto": 2600,
+    "edad": 26,
+    "fechaIngreso": "2019/11/01",
+    "categoria": "INGENIERO"
+  }
+]);

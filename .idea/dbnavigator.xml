@@ -11,13 +11,10 @@
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
-      <assistant-state connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="5A48E9EBEABB44EBA016A7F4B757C52E" availability="AVAILABLE" acknowledgement="ENGAGED" selected="true">
-        <chats>
-          <chat id="5A48E9EBEABB44EBA016A7F4B757C52E" title="" session-signature="" timestamp="1773238932876">
-            <messages />
-            <context provider="" profile="" model="" action="" interactive="true" />
-          </chat>
-        </chats>
+      <assistant-state connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
+        <tools />
+      </assistant-state>
+      <assistant-state connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
         <tools />
       </assistant-state>
     </assistants>
@@ -46,13 +43,16 @@
     <prerequisites />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="71e002d2-2358-427b-9abe-6aede0c6b1c7" />
+    <connection id="71e002d2-2358-427b-9abe-6aede0c6b1c7">
+      <session name="Session 1" id="ace7fc80-7411-45d6-89d9-5be7ba5e608f" />
+    </connection>
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
     <mapping file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/PLSQL/8.1.1/8.1.1.1/8.1.1.1.plsql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
+    <mapping file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/PLSQL/8.2/8.2.2/8.2.2.4.plsql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
     <mapping file-url="file://$APPLICATION_CONFIG_DIR$/consoles/db/de2baa46-cd50-44ae-a3eb-cfa40709a031/console.sql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
     <mapping file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/SQL/6.1 Personas/6.1 Tablas.sql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />
     <mapping file-url="file://$PROJECT_DIR$/src/BasesDeDatos/Curso2526/PLSQL/TablasUsadas.sql" connection-id="71e002d2-2358-427b-9abe-6aede0c6b1c7" session-id="MAIN" current-schema="EJEM" />

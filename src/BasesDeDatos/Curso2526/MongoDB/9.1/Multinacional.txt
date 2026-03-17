@@ -1,0 +1,75 @@
+1. Mostrar el nombre de la empresa, del jefe y del empleado de toda la colección
+multinacional
+
+db.Multinacional.find(
+  {},
+  {
+    _id: 0,
+    nombreEmpresa: 1,
+    nombreJefe: 1,
+    nombreEmpleado: 1
+  }
+)
+
+2. Mostrar todos los datos que tengan la categoría 'ANALISTA'
+
+db.Multinacional.find(
+  {categoria: 'ANALISTA'}
+)
+
+3. Mostrar el nombre del jefe y empleado de la empresa 'GETRONICS'
+
+db.Multinacional.find(
+  {nombreEmpresa: 'GETRONICS'},
+  {
+    _id: 0,
+    nombreJefe: 1,
+    nombreEmpleado: 1
+  }
+)
+
+4. Mostrar jefe y empleado de todos los ANALISTAS agrupados por nombre de
+empresa
+
+db.Multinacional.find(
+  {categoria: 'ANALISTA'},
+  {
+    _id: 0,
+    nombreEmpresa: 1,
+    nombreJefe: 1,
+    nombreEmpleado: 1
+  }
+).sort({nombreEmpresa: 1}) // 1 = orden ascendente
+
+
+
+
+
+
+
+
+
+db.Multinacional.aggregate([
+
+  { $match: { categoria: "ANALISTA" } },
+
+
+  { 
+    $group: {
+      _id: {
+        nombreEmpresa: "$nombreEmpresa",
+        nombreJefe: "$nombreJefe",
+        nombreEmpleado: "$nombreEmpleado"
+      }
+    }
+  },
+
+  { 
+    $project: {
+      _id: 0,
+      nombreEmpresa: "$_id.nombreEmpresa",
+      nombreJefe: "$_id.nombreJefe",
+      nombreEmpleado: "$_id.nombreEmpleado"
+    }
+  }
+])
