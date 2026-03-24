@@ -31,30 +31,9 @@ db.Multinacional.find(
 4. Mostrar jefe y empleado de todos los ANALISTAS agrupados por nombre de
 empresa
 
-db.Multinacional.find(
-  {categoria: 'ANALISTA'},
-  {
-    _id: 0,
-    nombreEmpresa: 1,
-    nombreJefe: 1,
-    nombreEmpleado: 1
-  }
-).sort({nombreEmpresa: 1}) // 1 = orden ascendente
-
-
-
-
-
-
-
-
-
 db.Multinacional.aggregate([
-
   { $match: { categoria: "ANALISTA" } },
-
-
-  { 
+  {
     $group: {
       _id: {
         nombreEmpresa: "$nombreEmpresa",
@@ -63,13 +42,74 @@ db.Multinacional.aggregate([
       }
     }
   },
-
-  { 
+  {
     $project: {
       _id: 0,
       nombreEmpresa: "$_id.nombreEmpresa",
       nombreJefe: "$_id.nombreJefe",
       nombreEmpleado: "$_id.nombreEmpleado"
+    }
+  }
+])
+
+5. Mostrar jefe y empleado de ANALISTAS ordenados por nombre del jefe
+
+db.Multinacional.find(
+  { categoria: "ANALISTA" },
+  {
+    _id: 0,
+    nombreJefe: 1,
+    nombreEmpleado: 1
+  }
+).sort({ nombreJefe: 1 })
+
+6. Mostrar jefe y empleado de quienes ganan menos de 1800 euros
+
+db.Multinacional.find(
+  { sueldoNeto: { $lt: 1800 } },
+  {
+    _id: 0,
+    nombreJefe: 1,
+    nombreEmpleado: 1
+  }
+)
+
+7. Jefe y empleado cuya fecha de ingreso fue a partir del año 2002
+
+db.Multinacional.find(
+  { fechaIngreso: { $gte: "2002/01/01" } }, // greater than or equal (≥)
+  {
+    _id: 0,
+    nombreJefe: 1,
+    nombreEmpleado: 1
+  }
+)
+
+8. Contar cuántos empleados tienen la categoría "TECNICO"
+
+db.Multinacional.aggregate([
+  { $match: { categoria: "TECNICO" } },
+  { $count: "total" }
+])
+
+9. Mostrar cuántos empleados hay por cada empresa. USAR AGGREGATE
+
+db.Multinacional.aggregate([
+  {
+    $group: {
+      _id: "$nombreEmpresa",
+      totalEmpleados: { $sum: 1 }
+    }
+  }
+])
+
+18. Mostrar el sueldo total por empresa (suma de sueldos netos)
+
+db.Multinacional.aggregate([
+  {
+    $group: {
+      _id: "$nombreEmpresa",                // Agrupa por empresa
+      sueldoTotal: { $sum: "$sueldoNeto" } // Suma de sueldos netos
     }
   }
 ])
