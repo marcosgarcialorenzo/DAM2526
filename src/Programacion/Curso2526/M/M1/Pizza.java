@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Pizza {
     private static final int MAX_INGREDIENTES_BASICA = 4;
-    private ArrayList<Ingredientes> ingredientes;
+    private ArrayList<Ingrediente> ingredientes;
 
     public Pizza() {
         this.ingredientes = new ArrayList<>();
     }
 
-    public List<Ingredientes> getIngredientes() {
+    public List<Ingrediente> getIngredientes() {
         return new ArrayList<>(ingredientes);
     }
 
@@ -24,14 +24,14 @@ public class Pizza {
         return MAX_INGREDIENTES_BASICA;
     }
 
-    public int anadirIngredientes(List<Integer> codigos, HashMap<Integer, Ingredientes> catalogo) {
+    public int anadirIngredientes(List<Integer> codigos, HashMap<Integer, Ingrediente> catalogo) {
         int noAnadidos = 0;
         for (Integer codigo : codigos) {
             if (ingredientes.size() >= getMaxIngredientes()) {
                 noAnadidos++;
                 continue;
             }
-            Ingredientes ingrediente = catalogo.get(codigo);
+            Ingrediente ingrediente = catalogo.get(codigo);
             if (ingrediente != null) {
                 ingredientes.add(ingrediente);
             } else {

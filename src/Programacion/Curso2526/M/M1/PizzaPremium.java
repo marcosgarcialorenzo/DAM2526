@@ -1,5 +1,8 @@
 package Programacion.Curso2526.M.M1;
 
+import lombok.Getter;
+
+@Getter
 public class PizzaPremium extends Pizza {
     private int tipoBase;// 0-normal, 1-extrafina, 2-borde queso
 
@@ -8,10 +11,6 @@ public class PizzaPremium extends Pizza {
             throw new IllegalArgumentException("Tipo de base no válido: " + tipoBase);
         }
         this.tipoBase = tipoBase;
-    }
-
-    public int getTipoBase() {
-        return tipoBase;
     }
 
     @Override
