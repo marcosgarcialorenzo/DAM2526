@@ -36,7 +36,8 @@ public class CalculadoraBinaria extends JFrame {
 
     private void manejarBoton(String texto) {
         switch (texto) {
-            case "0" -> {}
+            case "0" -> {
+            }
             case "1" -> {
                 if (esperando) {
                     display.setText(texto); // Primer dígito del segundo número
