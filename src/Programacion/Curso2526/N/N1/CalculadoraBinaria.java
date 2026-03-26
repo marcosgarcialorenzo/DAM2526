@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class CalculadoraBinaria extends JFrame {
 
-    private JTextField display = new JTextField("0"); // Pantalla de la calculadora
+    private final JTextField display = new JTextField("0"); // Pantalla de la calculadora
     private String primerNumero = ""; // Primer operando
     private boolean esperando = false; // True tras pulsar +, esperando el segundo número
 
