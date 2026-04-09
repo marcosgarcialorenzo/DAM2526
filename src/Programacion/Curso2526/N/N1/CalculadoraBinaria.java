@@ -12,7 +12,7 @@ public class CalculadoraBinaria extends JFrame {
     public CalculadoraBinaria() {
         super("Calculadora Binaria"); // Establece el título de la ventana
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Establece que se hace al cerrar la ventana, en este caso saliendo de la aplicación
-        getContentPane().setLayout(new BorderLayout(8, 8));
+        getContentPane().setLayout(new BorderLayout(8, 8)); //  Establece el tipo de Layout para la ventana principal(el contenedor principal de la ventana)
         display.setEditable(false); // Bloquea la escritura directa por teclado para forzar el uso de los botones
         display.setFont(new Font("SansSerif", Font.PLAIN, 20)); // Asigna la tipografía y el tamaño del texto
         getContentPane().add(display, BorderLayout.NORTH); // Ubica la pantalla en la zona superior de la ventana
