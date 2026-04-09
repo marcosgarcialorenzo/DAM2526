@@ -50,12 +50,8 @@ public class CalculadoraBinaria extends JFrame {
                 esperando = true;
             }
             case "=" -> {
-                // Convertimos de binario (base 2) a decimal (long), sumamos y mostramos el resultado otra vez en binario.
-                long n1 = Long.parseLong(primerNumero, 2);
-                long n2 = Long.parseLong(display.getText(), 2);
-                long resultado = n1 + n2; // Suma aritmética real
-
-                display.setText(Long.toBinaryString(resultado)); // Convierte de nuevo a texto binario
+                long resultado = Long.parseLong(primerNumero, 2) + Long.parseLong(display.getText(), 2);// Convertimos de base 2 a long y sumamos
+                display.setText(Long.toBinaryString(resultado)); // Convierte de long a un String de binarios
                 primerNumero = "";
             }
             case "C" -> {
