@@ -1,61 +1,66 @@
 package Programacion.Curso2526.N.N1;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.*; // Importa los componentes gráficos (JFrame, JButton, JTextField, etc.)
+import java.awt.*;    // Importa las herramientas de diseño y fuentes (BorderLayout, GridLayout, Font)
 
 public class CalculadoraBinaria extends JFrame {
 
-    private final JTextField display = new JTextField("0"); // Pantalla de la calculadora
-    private String primerNumero = ""; // Primer operando
-    private boolean esperando = false; // True tras pulsar +, esperando el segundo número
+    private final JTextField display = new JTextField("0");
+    private String primerNumero = "";
+    private boolean esperando = false;
 
     public CalculadoraBinaria() {
-        setTitle("Calculadora Binaria");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new BorderLayout(8, 8)); // Zonas NORTH/CENTER/SOUTH/EAST/WEST, 8px entre ellas(horizontal y vertical)
-        getRootPane().setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Margen interior
-        // Display
-        display.setEditable(false);
-        display.setFont(new Font("SansSerif", Font.PLAIN, 20));
-        add(display, BorderLayout.NORTH);
-        // Botones
-        JPanel panelBotones = new JPanel(new GridLayout(1, 5, 6, 0)); // 1 fila, 5 col, 6px horizontal, 0px vertical
+        super("Calculadora Binaria"); // Establece el título de la ventana
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // Establece que se hace al cerrar la ventana, en este caso saliendo de la aplicación
+        // Define el gestor de diseño principal, con una separación (gap) de 80px en vertical y horizontal
+        getContentPane().setLayout(new BorderLayout(80, 80));
+        display.setEditable(false); // Bloquea la escritura directa por teclado para forzar el uso de los botones
+        display.setFont(new Font("SansSerif", Font.PLAIN, 20)); // Asigna la tipografía y el tamaño del texto
+        getContentPane().add(display, BorderLayout.NORTH); // Ubica la pantalla en la zona superior de la ventana
+        JPanel panelBotones = new JPanel(new GridLayout(1, 5, 6, 0));
         for (String texto : new String[]{"1", "0", "+", "=", "C"}) {
-            JButton boton = new JButton(texto);
-            boton.addActionListener(e -> manejarBoton(texto)); // 'e' es el evento del clic, se manda a manejarBoton
-            panelBotones.add(boton);
+            JButton boton = new JButton(texto); // Crea el botón con su texto correspondiente
+            boton.addActionListener(e -> manejarBoton(texto));
+            panelBotones.add(boton); // Añade el botón recién creado al panel
         }
-        add(panelBotones, BorderLayout.CENTER);
-        setSize(340, 120);
-        setLocationRelativeTo(null); // Centra la ventana
+        getContentPane().add(panelBotones, BorderLayout.CENTER); // Ubica el panel de botones en el centro
+        setSize(340, 120); // Dimensiona la ventana (ancho x alto)
+        setVisible(true); // Se hace visible después de crear todo
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new CalculadoraBinaria().setVisible(true)); // Lanza la ventana en el hilo EDT
+        // En Swing, la ventana debe crearse en el Event Dispatch Thread (EDT).
+        SwingUtilities.invokeLater(CalculadoraBinaria::new); // se puede poner (() -> new CalculadoraBinaria())
     }
 
     private void manejarBoton(String texto) {
         switch (texto) {
-            case "0" -> {
-            }
-            case "1" -> {
-                if (esperando) {
-                    display.setText(texto); // Primer dígito del segundo número
+            case "0", "1" -> {
+                if (esperando) { // Si acabamos de pulsar '+', empezamos a escribir el segundo numero desde cero.
+                    display.setText(texto);
                     esperando = false;
                 } else {
-                    display.setText(display.getText().equals("0") ? texto : display.getText() + texto); // Reemplaza "0" o concatena
+                    if (display.getText().equals("0")) {
+                        display.setText(texto); // Si solo hay un "0", lo sobrescribe para no mostrar "01"
+                    } else {
+                        display.setText(display.getText() + texto); //concatena
+                    }
                 }
             }
             case "+" -> {
-                primerNumero = display.getText(); // Guarda el primer operando
+                primerNumero = display.getText();
                 esperando = true;
             }
             case "=" -> {
-                long resultado = Long.parseLong(primerNumero, 2) + Long.parseLong(display.getText(), 2); // Binario → long → suma
-                display.setText(Long.toBinaryString(resultado)); // Resultado → binario
+                // Convertimos de binario (base 2) a decimal (long), sumamos y mostramos el resultado otra vez en binario.
+                long n1 = Long.parseLong(primerNumero, 2);
+                long n2 = Long.parseLong(display.getText(), 2);
+                long resultado = n1 + n2; // Suma aritmética real
+
+                display.setText(Long.toBinaryString(resultado)); // Convierte de nuevo a texto binario
                 primerNumero = "";
             }
-            case "C" -> { // Reinicia todo
+            case "C" -> {
                 display.setText("0");
                 primerNumero = "";
                 esperando = false;
