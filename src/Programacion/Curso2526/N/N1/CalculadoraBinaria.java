@@ -12,7 +12,7 @@ public class CalculadoraBinaria extends JFrame {
     public CalculadoraBinaria() {
         super("Calculadora Binaria"); // Establece el título de la ventana
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Establece que se hace al cerrar la ventana, en este caso saliendo de la aplicación
-        getContentPane().setLayout(new BorderLayout(80, 80));
+        getContentPane().setLayout(new BorderLayout(8, 8));
         display.setEditable(false); // Bloquea la escritura directa por teclado para forzar el uso de los botones
         display.setFont(new Font("SansSerif", Font.PLAIN, 20)); // Asigna la tipografía y el tamaño del texto
         getContentPane().add(display, BorderLayout.NORTH); // Ubica la pantalla en la zona superior de la ventana
@@ -23,7 +23,7 @@ public class CalculadoraBinaria extends JFrame {
             panelBotones.add(boton); // Añade el botón recién creado al panel
         }
         getContentPane().add(panelBotones, BorderLayout.CENTER); // Ubica el panel de botones en el centro
-        setSize(340, 120); // Dimensiona la ventana (ancho x alto)
+        pack(); // Ajusta la ventana al tamaño preferido de los componentes y evita que queden recortados
         setVisible(true); // Se hace visible después de crear todo
     }
 
