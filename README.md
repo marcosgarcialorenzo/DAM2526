@@ -18,9 +18,12 @@ DAM2526/
 │   │       ├── ExamenesMGL/
 │   │       │   └── SQL/
 │   │       │       └── ConsultasSelect/
+│   │       ├── MongoDB/
+│   │       │   └── 9.1/
 │   │       ├── PLSQL/
 │   │       │   ├── TablasUsadas.sql
-│   │       │   └── 8.1.1/
+│   │       │   ├── 8.1.1/
+│   │       │   └── 8.2/
 │   │       └── SQL/
 │   │           ├── 6.1 Personas/
 │   │           ├── 6.2 Multinacional/
@@ -78,6 +81,13 @@ DAM2526/
 │           ├── L/   → Interfaces y clases abstractas
 │           │   └── L1/-L4/
 │           │
+│           ├── M/   → JDBC y acceso a bases de datos
+│           │   └── M1/
+│           │
+│           ├── N/   → Entornos gráficos
+│           │   └── N1/
+│           │
+│           │
 │           └── ExamenesMGL/
 │               ├── Evaluacion1/
 │               └── Evaluacion2/
@@ -87,8 +97,10 @@ DAM2526/
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Java** (JDK 25+)
-- **SQL** (MySQL/MariaDB)
+- **Java** (JDK 21, configurado en Maven)
+- **Maven** (gestión de build y dependencias)
+- **SQL** (MySQL/MariaDB) y **MongoDB**
+- **Lombok** y **H2 Database**
 - **IDE**: IntelliJ IDEA
 
 ---
