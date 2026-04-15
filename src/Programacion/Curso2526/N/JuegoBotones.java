@@ -18,7 +18,6 @@ public class JuegoBotones extends JFrame {
         super("Examen Junio 2425");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout(8, 8));
-        display = new JLabel("Por favor espere", SwingConstants.CENTER);
         display.setFont(new Font("SansSerif", Font.PLAIN, 18));
         getContentPane().add(display, BorderLayout.SOUTH);
         JPanel panelBotones = new JPanel(new GridLayout(1, 3, 6, 0));
