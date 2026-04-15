@@ -1,4 +1,4 @@
-package Programacion.Curso2526.N.N1;
+package Programacion.Curso2526.N;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Examen2425Ev3Ej2 extends JFrame {
+public class JuegoBotones extends JFrame {
 
     JLabel display;
     JButton[] botones = new JButton[3];
@@ -14,7 +14,7 @@ public class Examen2425Ev3Ej2 extends JFrame {
     Random random = new Random();
     int objetivoActual = - 1;
 
-    public Examen2425Ev3Ej2() {
+    public JuegoBotones() {
         super("Examen Junio 2425");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout(8, 8));
@@ -38,7 +38,7 @@ public class Examen2425Ev3Ej2 extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(Examen2425Ev3Ej2::new); // se puede poner (() -> new CalculadoraBinaria())
+        SwingUtilities.invokeLater(JuegoBotones::new); // se puede poner (() -> new CalculadoraBinaria())
     }
 
     void elegirObjetivo() {
