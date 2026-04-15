@@ -85,8 +85,8 @@ DAM2526/
 │           │   └── M1/
 │           │
 │           ├── N/   → Entornos gráficos
-│           │   └── N1/
-│           │
+│           │   ├─── N1/
+│           │   └── JuegoBotones/
 │           │
 │           └── ExamenesMGL/
 │               ├── Evaluacion1/
