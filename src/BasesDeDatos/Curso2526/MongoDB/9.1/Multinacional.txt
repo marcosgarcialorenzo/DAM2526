@@ -1,7 +1,7 @@
 1. Mostrar el nombre de la empresa, del jefe y del empleado de toda la colección
 multinacional
 
-db.Multinacional.find(
+db.multinacional.find(
   {},
   {
     _id: 0,
@@ -13,13 +13,13 @@ db.Multinacional.find(
 
 2. Mostrar todos los datos que tengan la categoría 'ANALISTA'
 
-db.Multinacional.find(
+db.multinacional.find(
   {categoria: 'ANALISTA'}
 )
 
 3. Mostrar el nombre del jefe y empleado de la empresa 'GETRONICS'
 
-db.Multinacional.find(
+db.multinacional.find(
   {nombreEmpresa: 'GETRONICS'},
   {
     _id: 0,
@@ -31,7 +31,7 @@ db.Multinacional.find(
 4. Mostrar jefe y empleado de todos los ANALISTAS agrupados por nombre de
 empresa
 
-db.Multinacional.aggregate([
+db.multinacional.aggregate([
   { $match: { categoria: "ANALISTA" } },
   {
     $group: {
@@ -54,7 +54,7 @@ db.Multinacional.aggregate([
 
 5. Mostrar jefe y empleado de ANALISTAS ordenados por nombre del jefe
 
-db.Multinacional.find(
+db.multinacional.find(
   { categoria: "ANALISTA" },
   {
     _id: 0,
@@ -65,7 +65,7 @@ db.Multinacional.find(
 
 6. Mostrar jefe y empleado de quienes ganan menos de 1800 euros
 
-db.Multinacional.find(
+db.multinacional.find(
   { sueldoNeto: { $lt: 1800 } },
   {
     _id: 0,
@@ -76,7 +76,7 @@ db.Multinacional.find(
 
 7. Jefe y empleado cuya fecha de ingreso fue a partir del año 2002
 
-db.Multinacional.find(
+db.multinacional.find(
   { fechaIngreso: { $gte: "2002/01/01" } }, // greater than or equal (≥)
   {
     _id: 0,
@@ -87,14 +87,14 @@ db.Multinacional.find(
 
 8. Contar cuántos empleados tienen la categoría "TECNICO"
 
-db.Multinacional.aggregate([
+db.multinacional.aggregate([
   { $match: { categoria: "TECNICO" } },
   { $count: "total" }
 ])
 
 9. Mostrar cuántos empleados hay por cada empresa. USAR AGGREGATE
 
-db.Multinacional.aggregate([
+db.multinacional.aggregate([
   {
     $group: {
       _id: "$nombreEmpresa",
@@ -105,7 +105,7 @@ db.Multinacional.aggregate([
 
 18. Mostrar el sueldo total por empresa (suma de sueldos netos)
 
-db.Multinacional.aggregate([
+db.multinacional.aggregate([
   {
     $group: {
       _id: "$nombreEmpresa",                // Agrupa por empresa

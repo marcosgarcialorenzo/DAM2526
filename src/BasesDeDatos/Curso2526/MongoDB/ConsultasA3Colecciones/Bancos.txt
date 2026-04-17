@@ -1,0 +1,246 @@
+1. Mostrar todas las cuentas
+
+db.cuentas.find()
+
+2. Mostrar todas las sucursales
+
+db.sucursales.find()
+
+3. Mostrar el total clientes apellido PEREZ
+
+-- forma1 
+
+db.clientes.countDocuments({apellidos: {$eq: "PEREZ"}}) 
+-- forma2
+
+db.clientes.countDocuments({apellidos: "PEREZ"}) 
+
+
+4. Mostrar las sucursales cuya dirección empieza por ALCALA
+
+-- forma 1
+
+db.sucursales.find(	{ direccion: { $regex: /^ALCALA/ } },
+			{ _id: 0 }
+); 
+-- forma 2
+
+db.sucursales.find(	{ direccion: /^ALCALA/  }
+); 
+
+
+5. Mostrar el total de cuentas
+
+db.cuentas.countDocuments()
+db.cuentas.find().count
+
+6. Mostrar las cuentas de clientes que se apelliden SANCHEZ
+
+-- forma 1
+
+db.clientes.aggregate([
+  {
+    $match: { apellidos: "SANCHEZ" }
+  },
+  {
+    $lookup: {
+      from: "cuentas",
+      localField: "codcuenta",
+      foreignField: "codcuenta",
+      as: "cuenta_info"
+    }
+  },
+  {
+    $unwind: "$cuenta_info"
+  },
+  {
+    $project: 	{
+			_id:0, codcuenta:"$cuenta_info.codcuenta",nomcuenta:"$cuenta_info.nomcuenta"
+		}
+  }
+]) 
+
+-- forma 2 (CUIDADO SOLO FUNCIONA CUANDO HAY UN SOLO APELLIDO SANCHEZ)
+
+db.cuentas.find(	{
+  			codcuenta: db.clientes.findOne({ apellidos: "SANCHEZ" }).codcuenta
+			},
+			{ _id: 0, codcuenta: 1, nomcuenta: 1 }
+		); 
+
+
+-- insertar uno
+db.clientes.insertOne({
+codcliente: 6, Dni: "111112222", nombre: "PEDRO", apellidos: "SANCHEZ", codcuenta: 222222222 })
+
+
+7. Mostrar las cuentas que hay en calle ALCALA
+
+db.clientes.find({ direccion: /^ALCALA/  }
+
+8. Mostrar el nombre de cuenta y dirección de las sucursales del BBVA
+
+db.cuentas.aggregate([
+  {
+    $lookup: {
+      from: "sucursales",
+      localField: "codsucursal",
+      foreignField: "codsucursal",
+      as: "sucursales"
+    }
+  },
+   {
+    $match: {
+      "sucursales.nomsucursal": "BBVA"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      nomcuenta: 1,
+      direccion: 1
+    }
+  }
+]) 
+
+9. Mostrar todas las cuentas que empiecen por TRASTERO
+
+db.cuentas.find({ nomcuenta: /^TRASTERO/  }
+
+10. Mostrar todas las cuentas TRASTERO cuya dirección empieza por C
+
+db.cuentas.find({ 	nomcuenta: /^TRASTERO/,
+			dirección: /^C/
+		}
+
+11. Mostrar los clientes con cuenta en CAJA MADRID  
+
+
+
+12. Mostrar las sucursales con al menos un cliente
+
+db.sucursales.aggregate([
+  {
+    $lookup: {
+      from: "cuentas",
+      localField: "codsucursal",
+      foreignField: "codsucursal",
+      as: "cuentas"
+    }
+  },
+  {
+    $lookup: {
+      from: "clientes",
+      localField: "cuentas.codcuenta",
+      foreignField: "codcuenta",
+      as: "clientes"
+    }
+  },
+  {
+    $match: { "clientes.0": { $exists: true } }
+  },
+  {
+    $project: {
+      _id: 0,
+      nombre: "$nomsucursal"
+    }
+  }
+]); 
+
+
+13. Mostrar el nombre y apellidos de los clientes y nombre de su cuenta
+  
+  db.clientes.aggregate([
+  {
+    $lookup: {
+      from: "cuentas",
+      localField: "codcuenta",
+      foreignField: "codcuenta",
+      as: "cuenta"
+    }
+  },
+  { $unwind: "$cuenta" },
+  {
+    $project: {
+      _id: 0,
+      nombre: 1,
+      apellidos: 1,
+      nomcuenta: "$cuenta.nomcuenta"
+    }
+  }
+]) 
+ 
+14. Cuentas con su sucursal
+
+db.cuentas.aggregate([
+  {
+    $lookup: {
+      from: "sucursales",
+      localField: "codsucursal",
+      foreignField: "codsucursal",
+      as: "sucursal_info"
+    }
+  },
+  {
+    $unwind: "$sucursal_info"
+  },
+  {
+    $project: {
+      _id: 0,
+      nomcuenta: 1,
+      nomsucursal: "$sucursal_info.nomsucursal"
+    }
+  }
+]) 
+
+
+15. Mostrar los clientes con cuenta en CASTELLANA
+
+db.clientes.aggregate([
+  {
+    $lookup: {
+      from: "cuentas",
+      localField: "codcuenta",
+      foreignField: "codcuenta",
+      as: "cuenta"
+    }
+  },
+  { $unwind: "$cuenta" },
+  {
+    $match: {
+      "cuenta.direccion": { $regex: "^CASTELLANA" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      nombre: 1,
+      apellidos: 1
+    }
+  }
+]);
+
+
+16. Mostrar las sucursales con cuentas TRASTERO
+
+db.cuentas.aggregate([
+  {
+    $match: { nomcuenta: /^TRASTERO/ }
+  },
+  {
+    $lookup: {
+      from: "sucursales",
+      localField: "codsucursal",
+      foreignField: "codsucursal",
+      as: "sucursal_info"
+    }
+  },
+  {
+    $unwind: "$sucursal_info"
+  },
+  {
+    $project: {
+      _id: "$sucursal_info.nomsucursal"
+    }
+  }
+])

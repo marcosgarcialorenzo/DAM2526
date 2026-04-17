@@ -1,0 +1,27 @@
+db.clientes.insertMany([
+{ codcliente: 1, Dni: "3550418", nombre: "GUILLERMO", apellidos: "SANCHEZ", codcuenta: 111111111 },
+{ codcliente: 2, Dni: "34555555", nombre: "LUIS", apellidos: "PEREZ", codcuenta: 333333333 },
+{ codcliente: 3, Dni: "77777777", nombre: "ANTONIO", apellidos: "DIAZ", codcuenta: 555555555 },
+{ codcliente: 4, Dni: "88888888", nombre: "CARLOS", apellidos: "ORTIZ", codcuenta: 666666666 },
+{ codcliente: 5, Dni: "99999999", nombre: "JOSE", apellidos: "FERNANDEZ", codcuenta: 777777777 }
+]);
+
+db.cuentas.insertMany([
+{ codcuenta: 111111111, nomcuenta: "VIVIENDA 1", direccion: "ALCALA 125", codsucursal: 1234 },
+{ codcuenta: 222222222, nomcuenta: "VIVIENDA 2", direccion: "ALCALA 200", codsucursal: 1234 },
+{ codcuenta: 333333333, nomcuenta: "VIVIENDA 3", direccion: "ALCALA 23", codsucursal: 1234 },
+{ codcuenta: 444444444, nomcuenta: "TRASTERO 1", direccion: "GRAN VIA 1", codsucursal: 4444 },
+{ codcuenta: 555555555, nomcuenta: "TRASTERO 2", direccion: "CHAMBERI 11", codsucursal: 5555 },
+{ codcuenta: 666666666, nomcuenta: "TRASTERO 3", direccion: "CASTELLANA 123", codsucursal: 6666 },
+{ codcuenta: 777777777, nomcuenta: "LOCAL 1", direccion: "CASTELLANA 10", codsucursal: 7777 }
+]);
+
+db.sucursales.insertMany([
+{ codsucursal: 1234, nomsucursal: "BBVA", direccion: "ALCALA 125" },
+{ codsucursal: 2345, nomsucursal: "ING", direccion: "ALCALA 200" },
+{ codsucursal: 4567, nomsucursal: "BANKINTER", direccion: "ALCALA 23" },
+{ codsucursal: 4440, nomsucursal: "BANCO POPULAR", direccion: "GRAN VIA 1" },
+{ codsucursal: 5555, nomsucursal: "CAJA MADRID", direccion: "CHAMBERI 11" },
+{ codsucursal: 6666, nomsucursal: "CAIXA", direccion: "CASTELLANA 123" },
+{ codsucursal: 7777, nomsucursal: "BANCO SABADELL", direccion: "CASTELLANA 10" }
+]);

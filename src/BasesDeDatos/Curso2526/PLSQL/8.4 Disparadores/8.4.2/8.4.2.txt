@@ -1,0 +1,11 @@
+8. Actualizar precios.
+
+CREATE OR REPLACE TRIGGER tr_libros_precio_redondeo
+BEFORE INSERT OR UPDATE OF precio ON libros
+FOR EACH ROW
+BEGIN
+    IF :NEW.precio > 50 THEN
+        :NEW.precio := ROUND(:NEW.precio);
+    END IF;
+END;
+/

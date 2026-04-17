@@ -1,0 +1,25 @@
+create table libros(
+codigo number(6),
+titulo varchar2(40),
+autor varchar2(30),
+editorial varchar2(20),
+precio number(6,2),
+stock number(4)
+);
+create table control(
+usuario varchar2(30),
+fecha date,
+codigo number(6)
+);
+create table controlprecios(
+fecha date,
+codigo number(6),
+precioanterior number(6,2),
+precionuevo number(6,2)
+);
+
+insert into libros values(100,'Uno','Richard Bach','Planeta',25,100);
+insert into libros values(103,'El aleph','Borges','Emece',28,0);
+insert into libros values(105,'Matematica estas ahi','Paenza','Nuevo siglo',12,50);
+insert into libros values(120,'Aprenda PHP','Molina Mario','Nuevo siglo',55,200);
+insert into libros values(145,'Alicia en el pais de las maravillas','Carroll','Planeta',35,10);
