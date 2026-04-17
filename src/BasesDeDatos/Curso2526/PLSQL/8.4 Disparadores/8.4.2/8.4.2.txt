@@ -72,6 +72,7 @@ DELETE FROM libros WHERE codigo = 250;
 
 10. Inserccion de empleados
 
+SET SERVEROUTPUT ON;
 CREATE OR REPLACE TRIGGER TR_10
 BEFORE INSERT ON emple
 FOR EACH ROW
@@ -93,4 +94,3 @@ insert into emple values(7654,'SIERRA','VENDEDOR',7902,'17/12/85',1200,300,30); 
 select * from emple;
 
 DELETE FROM emple WHERE emp_no = 8000;
-
