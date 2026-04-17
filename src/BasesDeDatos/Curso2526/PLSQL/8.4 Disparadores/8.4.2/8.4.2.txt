@@ -1,7 +1,7 @@
 8. Actualizar precios.
 
 SET SERVEROUTPUT ON;
-CREATE OR REPLACE TRIGGER tr_libros_precio_redondeo
+CREATE OR REPLACE TRIGGER tr_8
 BEFORE INSERT OR UPDATE OF precio ON libros
 FOR EACH ROW
 BEGIN
@@ -71,3 +71,26 @@ SELECT * FROM libros;
 DELETE FROM libros WHERE codigo = 250;
 
 10. Inserccion de empleados
+
+CREATE OR REPLACE TRIGGER TR_10
+BEFORE INSERT ON emple
+FOR EACH ROW
+DECLARE
+    v_conteo NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_conteo 
+    FROM emple 
+    WHERE emp_no = :new.emp_no;
+    IF v_conteo >= 1 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'EL NOMBRE DEL EMPLEADO YA EXISTE'); --esto impide meter valores en la tabla
+    END IF;
+END;
+/
+
+insert into emple values(8000,'INSERTAR','VENDEDOR',7902,'17/12/85',1200,300,30); -- deberia dejar insertar
+insert into emple values(7654,'SIERRA','VENDEDOR',7902,'17/12/85',1200,300,30); -- no deberia dejar insertar
+
+select * from emple;
+
+DELETE FROM emple WHERE emp_no = 8000;
+
