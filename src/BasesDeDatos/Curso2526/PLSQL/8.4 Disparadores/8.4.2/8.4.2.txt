@@ -1,5 +1,6 @@
 8. Actualizar precios.
 
+SET SERVEROUTPUT ON;
 CREATE OR REPLACE TRIGGER tr_libros_precio_redondeo
 BEFORE INSERT OR UPDATE OF precio ON libros
 FOR EACH ROW
@@ -9,3 +10,64 @@ BEGIN
     END IF;
 END;
 /
+
+insert into libros values(250,'El experto en laberintos','Gaskin','Emece',30.80,200);
+insert into libros values(250,'El experto en laberintos','Gaskin','Emece',52.80,200);
+
+SELECT * FROM libros;
+
+DELETE FROM libros WHERE codigo = 250;
+
+9. Actualizar precios mensajes.
+
+--Apartado 1
+
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE TRIGGER tr_9_apartado1
+BEFORE INSERT OR UPDATE OF precio ON libros
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('TRIGGER DE LIBROS EJECUTADO');
+
+    IF :new.precio > 50 THEN
+        DBMS_OUTPUT.PUT_LINE('EL PRECIO SE HA REDONDEADO');
+        :new.precio := ROUND(:new.precio);
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('EL PRECIO NO SE HA REDONDEADO');
+    END IF;
+END;
+/
+
+insert into libros values(250,'El experto en laberintos','Gaskin','Emece',30.80,200);
+insert into libros values(250,'El experto en laberintos','Gaskin','Emece',52.80,200);
+
+SELECT * FROM libros;
+
+DELETE FROM libros WHERE codigo = 250;
+
+--Apartado 2
+
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE TRIGGER tr_9_apartado2
+BEFORE INSERT OR UPDATE OF precio ON libros
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('TRIGGER DE LIBROS EJECUTADO');
+
+    IF :new.precio > 50 THEN
+        :new.precio := ROUND(:new.precio);
+        DBMS_OUTPUT.PUT_LINE('EL PRECIO SE HA REDONDEADO');
+    ELSE
+        RAISE_APPLICATION_ERROR(-20001, 'El precio no se ha redondeado'); --esto impide meter valores por debajo de 50
+    END IF;
+END;
+/
+
+insert into libros values(250,'El experto en laberintos','Gaskin','Emece',30.80,200);
+insert into libros values(250,'El experto en laberintos','Gaskin','Emece',52.80,200);
+
+SELECT * FROM libros;
+
+DELETE FROM libros WHERE codigo = 250;
+
+10. Inserccion de empleados
