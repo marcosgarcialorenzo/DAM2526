@@ -9,7 +9,7 @@ import java.util.Random;
 public class JuegoBotones extends JFrame {
 
     private final int NUM_BOTONES = 3;
-    JLabel display;
+    JLabel display = new JLabel();
     JButton[] botones = new JButton[NUM_BOTONES];
     boolean[] pulsados = new boolean[NUM_BOTONES];
     Random random = new Random();
