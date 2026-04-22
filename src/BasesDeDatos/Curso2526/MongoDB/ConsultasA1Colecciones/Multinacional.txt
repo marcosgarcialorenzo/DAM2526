@@ -63,6 +63,12 @@ db.multinacional.find(
   }
 ).sort({ nombreJefe: 1 })
 
+db.multinacional.aggregate([
+  { $match: { categoria: "ANALISTA" } },
+  { $sort: { nombreJefe: 1 } },
+  { $project: { _id: 0, nombreJefe: 1, nombreEmpleado: 1 } }
+])
+
 6. Mostrar jefe y empleado de quienes ganan menos de 1800 euros
 
 db.multinacional.find(
