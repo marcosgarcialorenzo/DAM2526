@@ -1,6 +1,5 @@
 package Programacion.Curso2526.M.M3;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface DAOPersona {
@@ -14,5 +13,5 @@ public interface DAOPersona {
 
     List<Persona> obtenerTodasPersonas();
 
-    void menu() throws IOException;
-} 
+    List<Persona> obtenerPersonasPorRangoEdad(int edadMin, int edadMax);
+}

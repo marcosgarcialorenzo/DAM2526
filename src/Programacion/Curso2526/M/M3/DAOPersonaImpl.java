@@ -1,6 +1,5 @@
 package Programacion.Curso2526.M.M3;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,25 +12,6 @@ public class DAOPersonaImpl implements DAOPersona {
 
     public DAOPersonaImpl(Connection con) {
         this.conexion = con;
-    }
-
-    @Override
-    public void menu() throws IOException {
-        Teclado t = new Teclado();
-        System.out.println("1. Dar de alta");
-        System.out.println("2. Dar de baja");
-        System.out.println("3. Modificar edad");
-        System.out.println("4. Listado personas");
-        System.out.println("5. Mostrar edad media");
-        System.out.println("6. Listar personas en un rango de edad");
-        System.out.println("Introduce una opción");
-        int opcion = t.leerInt();
-        switch (opcion) {
-            case 1 -> {
-                System.out.println("Ingrese el nombre del persona");
-            }
-        }
-
     }
 
     @Override
@@ -67,7 +47,7 @@ public class DAOPersonaImpl implements DAOPersona {
             PreparedStatement ps = conexion.prepareStatement("UPDATE BDPRUEBA1.TABLA1PRUEBA SET nombre=?, numero=? WHERE id=?");
             ps.setString(1, p.nombre);
             ps.setInt(2, p.edad);
-            ps.setInt(3, p.id);
+            ps.setInt(3, id);
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -81,7 +61,6 @@ public class DAOPersonaImpl implements DAOPersona {
         try {
             PreparedStatement ps = conexion.prepareStatement("SELECT * FROM BDPRUEBA1.TABLA1PRUEBA WHERE id=?");
             ps.setInt(1, id);
-            ps.executeQuery();
             ResultSet personaAux = ps.executeQuery();
             if (personaAux.next()) {
                 String nombre = personaAux.getString("nombre");
@@ -114,7 +93,29 @@ public class DAOPersonaImpl implements DAOPersona {
             return personas;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
+            return personas;
+        }
+    }
+
+    @Override
+    public List<Persona> obtenerPersonasPorRangoEdad(int edadMin, int edadMax) {
+        List<Persona> personas = new ArrayList<>();
+        try {
+            PreparedStatement ps = conexion.prepareStatement(
+                    "SELECT * FROM BDPRUEBA1.TABLA1PRUEBA WHERE numero BETWEEN ? AND ? ORDER BY numero");
+            ps.setInt(1, edadMin);
+            ps.setInt(2, edadMax);
+            ResultSet personaAux = ps.executeQuery();
+            while (personaAux.next()) {
+                String nombre = personaAux.getString("nombre");
+                int edad = personaAux.getInt("numero");
+                int id = personaAux.getInt("id");
+                personas.add(new Persona(id, nombre, edad));
+            }
+            return personas;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return personas;
         }
     }
 }
