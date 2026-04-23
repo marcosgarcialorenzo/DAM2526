@@ -13,7 +13,7 @@ public interface DAOCoche {
 
     List<Coche> obtenerCoches();
 
-    double sumarPreciosCochesPorAntiguedad(Coche c);
+    double sumarPreciosCochesPorAntiguedad(int antiguedad);
 
     List<String> obtenerMatriculasPorMarca(String marca);
 }

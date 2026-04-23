@@ -77,8 +77,20 @@ public class DAOCocheImpl implements DAOCoche {
     }
 
     @Override
-    public double sumarPreciosCochesPorAntiguedad(Coche c) {
-        return 0;
+    public double sumarPreciosCochesPorAntiguedad(int antiguedad) {
+        double suma = 0;
+        try {
+            PreparedStatement ps = conexion.prepareStatement("SELECT SUM(precio) AS suma FROM BDPRUEBA1.COCHES WHERE antiguedad=?");
+            ps.setInt(1, antiguedad);
+            ResultSet cocheAux = ps.executeQuery();
+            if (cocheAux.next()) {
+                suma = cocheAux.getDouble("suma");
+            }
+            return suma;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return suma;
+        }
     }
 
     @Override
