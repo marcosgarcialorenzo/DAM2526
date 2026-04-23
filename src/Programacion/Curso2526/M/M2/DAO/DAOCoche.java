@@ -7,7 +7,7 @@ import java.util.List;
 public interface DAOCoche {
     boolean insertarCoche(Coche c);
 
-    boolean eliminarCoche(int id);
+    boolean eliminarCoche(String matricula);
 
     boolean actualizarPreciosCoches(Coche c);
 

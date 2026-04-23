@@ -27,8 +27,16 @@ public class DAOCocheImpl implements DAOCoche {
     }
 
     @Override
-    public boolean eliminarCoche(int id) {
-        return false;
+    public boolean eliminarCoche(String matricula) {
+        try {
+            PreparedStatement ps = conexion.prepareStatement("DELETE FROM BDPRUEBA1.COCHES WHERE matricula=?");
+            ps.setString(1, matricula);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
