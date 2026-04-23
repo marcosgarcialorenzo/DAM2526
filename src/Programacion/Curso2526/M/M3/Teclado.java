@@ -102,7 +102,7 @@ public class Teclado {
      * @throws IOException
      * @throws NumberFormatException
      */
-    double leerDouble() throws IOException {
+    public double leerDouble() throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String s = br.readLine();

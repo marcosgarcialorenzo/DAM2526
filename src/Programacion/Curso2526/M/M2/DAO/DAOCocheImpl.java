@@ -95,7 +95,7 @@ public class DAOCocheImpl implements DAOCoche {
     @Override
     public List<String> obtenerMatriculasPorMarca(String modelo) { //TOYOTA-YARIS
         List<String> matriculas = new ArrayList<>();
-        String marca = modelo.split("-")[1]; //YARIS
+        String marca = modelo.split("-")[0]; //TOYOTA
         try {
             PreparedStatement ps = conexion.prepareStatement("SELECT matricula FROM BDPRUEBA1.COCHES WHERE MODELO=?");
             ps.setString(1, marca);
