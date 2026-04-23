@@ -1,4 +1,4 @@
-package Programacion.Curso2526.M.M3;
+package Programacion.Curso2526.M.M2.configuracion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
