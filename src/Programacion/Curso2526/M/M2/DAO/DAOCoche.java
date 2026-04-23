@@ -15,5 +15,5 @@ public interface DAOCoche {
 
     double sumarPreciosCochesPorAntiguedad(int antiguedad);
 
-    List<String> obtenerMatriculasPorMarca(String modelo);
+    List<String> obtenerMatriculasPorMarca(String marca);
 }

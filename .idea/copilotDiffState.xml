@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/src/Programacion/Curso2526/M/M2/DAO/DAOCoche.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/Programacion/Curso2526/M/M2/DAO/DAOCoche.java" />
+              <option name="originalContent" value="package Programacion.Curso2526.M.M2.DAO;&#10;&#10;import Programacion.Curso2526.M.M2.modelo.Coche;&#10;&#10;import java.util.List;&#10;&#10;public interface DAOCoche {&#10;    boolean insertarCoche(Coche c);&#10;&#10;    boolean eliminarCoche(String matricula);&#10;&#10;    boolean actualizarPreciosCoches(double incremento);&#10;&#10;    List&lt;Coche&gt; obtenerCoches();&#10;&#10;    double sumarPreciosCochesPorAntiguedad(int antiguedad);&#10;&#10;    List&lt;String&gt; obtenerMatriculasPorMarca(String modelo);&#10;}" />
+              <option name="updatedContent" value="package Programacion.Curso2526.M.M2.DAO;&#10;&#10;import Programacion.Curso2526.M.M2.modelo.Coche;&#10;&#10;import java.util.List;&#10;&#10;public interface DAOCoche {&#10;    boolean insertarCoche(Coche c);&#10;&#10;    boolean eliminarCoche(String matricula);&#10;&#10;    boolean actualizarPreciosCoches(double incremento);&#10;&#10;    List&lt;Coche&gt; obtenerCoches();&#10;&#10;    double sumarPreciosCochesPorAntiguedad(int antiguedad);&#10;&#10;    List&lt;String&gt; obtenerMatriculasPorMarca(String marca);&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
