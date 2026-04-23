@@ -1,13 +1,11 @@
 package Programacion.Curso2526.M.M2.servivcio;
 
-import Programacion.Curso2526.M.M2.DAO.DAOCoche;
 import Programacion.Curso2526.M.M2.DAO.DAOCocheImpl;
 import Programacion.Curso2526.M.M2.modelo.Coche;
-import Programacion.Curso2526.M.M3.DAOPersonaImpl;
 import Programacion.Curso2526.M.M3.Teclado;
 
-import javax.sound.midi.SoundbankResource;
 import java.io.IOException;
+import java.util.List;
 
 public class servicios {
     static void mostrarMenu() {
@@ -40,16 +38,16 @@ public class servicios {
                     pedirMatricula(dao);
                 }
                 case 3 -> {
-                    crearCoche(dao);
+                    pedirIncremento(dao);
                 }
                 case 4 -> {
-                    crearCoche(dao);
+                    listarCoches(dao);
                 }
                 case 5 -> {
-                    crearCoche(dao);
+                    pedirAntiguedad(dao);
                 }
                 case 6 -> {
-                    crearCoche(dao);
+                    pedirMarca(dao);
                 }
                 default -> {
                     System.out.println("Opción no valida.");
@@ -91,5 +89,37 @@ public class servicios {
         double incremento = 1 + (porcentaje / 100.0);
         boolean ok = dao.actualizarPreciosCoches(incremento);
         System.out.println(ok ? "Precios actualizados correctamente." : "No se pudieron actualizar los precios.");
+    }
+
+    private static void listarCoches(DAOCocheImpl dao) throws IOException {
+        List<Coche> coches = dao.obtenerCoches();
+        if (coches.isEmpty()) {
+            System.out.println("No hay coches almacenadas.");
+            return;
+        }
+        System.out.println("\n--- LISTADO DE COCHES ---");
+        coches.forEach(System.out::println);
+    }
+
+    private static void pedirAntiguedad(DAOCocheImpl dao) throws IOException {
+        Teclado t = new Teclado();
+        System.out.println("\n--- SUMA PRECIOS POR ANTIGÜEDAD ---");
+        System.out.println("Introduce la antigüedad de los coches a sumar:");
+        int antiguedad = t.leerInt();
+        double suma = dao.sumarPreciosCochesPorAntiguedad(antiguedad);
+        System.out.println("La suma de los precios de los coches con " + antiguedad + " años de antigüedad es: " + suma);
+    }
+
+    private static void pedirMarca(DAOCocheImpl dao) throws IOException {
+        Teclado t = new Teclado();
+        System.out.println("\n--- LISTADO DE COCHES POR MARCA ---");
+        System.out.println("Introduce la marca de los coches a listar:");
+        String marca = t.leerString();
+        List<String> coches = dao.obtenerMatriculasPorMarca(marca);
+        if (coches.isEmpty()) {
+            System.out.println("No hay coches de la marca: " + marca + " guardados.");
+            return;
+        }
+        coches.forEach(System.out::println);
     }
 }
