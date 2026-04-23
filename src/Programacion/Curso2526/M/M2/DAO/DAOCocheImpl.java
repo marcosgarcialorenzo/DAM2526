@@ -1,10 +1,13 @@
 package Programacion.Curso2526.M.M2.DAO;
 
 import Programacion.Curso2526.M.M2.modelo.Coche;
+import Programacion.Curso2526.M.M3.Persona;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOCocheImpl implements DAOCoche {
@@ -53,8 +56,24 @@ public class DAOCocheImpl implements DAOCoche {
     }
 
     @Override
-    public List<Coche> obtenerCoches(String modelo) {
-        return List.of();
+    public List<Coche> obtenerCoches() {
+        List<Coche> coches = new ArrayList<>();
+        try {
+            PreparedStatement ps = conexion.prepareStatement("SELECT * FROM BDPRUEBA1.COCHES ");
+            ResultSet cocheAux = ps.executeQuery();
+            while (cocheAux.next()) {
+                String matricula = cocheAux.getString("Matricula");
+                String modelo = cocheAux.getString("MODELO");
+                int antiguedad = cocheAux.getInt("ANTIGUEDAD");
+                double precio = cocheAux.getDouble("PRECIO");
+                Coche c = new Coche(matricula, modelo, antiguedad, precio);
+                coches.add(c);
+            }
+            return coches;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return coches;
+        }
     }
 
     @Override

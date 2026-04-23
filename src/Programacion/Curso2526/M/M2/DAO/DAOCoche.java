@@ -11,7 +11,7 @@ public interface DAOCoche {
 
     boolean actualizarPreciosCoches(double incremento);
 
-    List<Coche> obtenerCoches(String modelo);
+    List<Coche> obtenerCoches();
 
     double sumarPreciosCochesPorAntiguedad(Coche c);
 
