@@ -1,7 +1,6 @@
 package Programacion.Curso2526.M.M2.DAO;
 
 import Programacion.Curso2526.M.M2.modelo.Coche;
-import Programacion.Curso2526.M.M3.Persona;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +15,7 @@ public class DAOCocheImpl implements DAOCoche {
     @Override
     public boolean insertarCoche(Coche c) {
         try {
-            PreparedStatement ps = conexion.prepareStatement("INSERT INTO BDPRUEBA1.COCHES (matricula, modelo, antiguedad, precio) VALUES (?,?,?,?)");
+            PreparedStatement ps = conexion.prepareStatement("INSERT INTO BDPRUEBA1.COCHES (Matricula, MODELO, ANTIGUEDAD, PRECIO) VALUES (?,?,?,?)");
             ps.setString(1, c.getMatricula());
             ps.setString(2, c.getModelo());
             ps.setInt(3, c.getAntiguedad());
@@ -32,7 +31,7 @@ public class DAOCocheImpl implements DAOCoche {
     @Override
     public boolean eliminarCoche(String matricula) {
         try {
-            PreparedStatement ps = conexion.prepareStatement("DELETE FROM BDPRUEBA1.COCHES WHERE matricula=?");
+            PreparedStatement ps = conexion.prepareStatement("DELETE FROM BDPRUEBA1.COCHES WHERE Matricula=?");
             ps.setString(1, matricula);
             ps.executeUpdate();
             return true;
@@ -45,7 +44,7 @@ public class DAOCocheImpl implements DAOCoche {
     @Override
     public boolean actualizarPreciosCoches(double incremento) {
         try {
-            PreparedStatement ps = conexion.prepareStatement("UPDATE BDPRUEBA1.COCHES SET precio=precio*?");
+            PreparedStatement ps = conexion.prepareStatement("UPDATE BDPRUEBA1.COCHES SET PRECIO=PRECIO*?");
             ps.setDouble(1, incremento);
             ps.executeUpdate();
             return true;
@@ -80,7 +79,7 @@ public class DAOCocheImpl implements DAOCoche {
     public double sumarPreciosCochesPorAntiguedad(int antiguedad) {
         double suma = 0;
         try {
-            PreparedStatement ps = conexion.prepareStatement("SELECT SUM(precio) AS suma FROM BDPRUEBA1.COCHES WHERE antiguedad=?");
+            PreparedStatement ps = conexion.prepareStatement("SELECT SUM(precio) AS suma FROM BDPRUEBA1.COCHES WHERE ANTIGUEDAD=?");
             ps.setInt(1, antiguedad);
             ResultSet cocheAux = ps.executeQuery();
             if (cocheAux.next()) {
@@ -94,7 +93,21 @@ public class DAOCocheImpl implements DAOCoche {
     }
 
     @Override
-    public List<String> obtenerMatriculasPorMarca(String marca) {
-        return List.of();
+    public List<String> obtenerMatriculasPorMarca(String modelo) { //TOYOTA-YARIS
+        List<String> matriculas = new ArrayList<>();
+        String marca = modelo.split("-")[1]; //YARIS
+        try {
+            PreparedStatement ps = conexion.prepareStatement("SELECT matricula FROM BDPRUEBA1.COCHES WHERE MODELO=?");
+            ps.setString(1, marca);
+            ResultSet matriculaAux = ps.executeQuery();
+            while (matriculaAux.next()) {
+                String matricula = matriculaAux.getString("Matricula");
+                matriculas.add(matricula);
+            }
+            return matriculas;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return matriculas;
+        }
     }
 }
