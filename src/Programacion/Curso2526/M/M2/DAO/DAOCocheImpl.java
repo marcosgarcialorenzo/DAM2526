@@ -12,6 +12,10 @@ import java.util.List;
 public class DAOCocheImpl implements DAOCoche {
     private Connection conexion = null;
 
+    public DAOCocheImpl(Connection con) {
+        this.conexion = con;
+    }
+
     @Override
     public boolean insertarCoche(Coche c) {
         try {
