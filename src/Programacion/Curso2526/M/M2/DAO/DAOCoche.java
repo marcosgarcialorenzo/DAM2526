@@ -9,7 +9,7 @@ public interface DAOCoche {
 
     boolean eliminarCoche(String matricula);
 
-    boolean actualizarPreciosCoches(Coche c);
+    boolean actualizarPreciosCoches(double incremento);
 
     List<Coche> obtenerCoches(String modelo);
 

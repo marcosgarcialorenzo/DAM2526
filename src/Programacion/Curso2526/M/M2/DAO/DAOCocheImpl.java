@@ -40,8 +40,16 @@ public class DAOCocheImpl implements DAOCoche {
     }
 
     @Override
-    public boolean actualizarPreciosCoches(Coche c) {
-        return false;
+    public boolean actualizarPreciosCoches(double incremento) {
+        try {
+            PreparedStatement ps = conexion.prepareStatement("UPDATE BDPRUEBA1.COCHES SET precio=precio*?");
+            ps.setDouble(1, incremento);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
