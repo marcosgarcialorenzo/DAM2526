@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOCocheImpl implements DAOCoche {
-    private Connection conexion = null;
+    private final Connection conexion;
 
     public DAOCocheImpl(Connection con) {
         this.conexion = con;

@@ -28,30 +28,14 @@ public class servicios {
             System.out.print("Elige una opción: ");
             opcion = t.leerInt();
             switch (opcion) {
-                case 0 -> {
-                    System.out.println("Saliendo...");
-                }
-                case 1 -> {
-                    crearCoche(dao);
-                }
-                case 2 -> {
-                    pedirMatricula(dao);
-                }
-                case 3 -> {
-                    pedirIncremento(dao);
-                }
-                case 4 -> {
-                    listarCoches(dao);
-                }
-                case 5 -> {
-                    pedirAntiguedad(dao);
-                }
-                case 6 -> {
-                    pedirMarca(dao);
-                }
-                default -> {
-                    System.out.println("Opción no valida.");
-                }
+                case 0 -> System.out.println("Saliendo...");
+                case 1 -> crearCoche(dao);
+                case 2 -> pedirMatricula(dao);
+                case 3 -> pedirIncremento(dao);
+                case 4 -> listarCoches(dao);
+                case 5 -> pedirAntiguedad(dao);
+                case 6 -> pedirMarca(dao);
+                default -> System.out.println("Opción no valida.");
             }
         } while (opcion != 0);
     }
@@ -91,7 +75,7 @@ public class servicios {
         System.out.println(ok ? "Precios actualizados correctamente." : "No se pudieron actualizar los precios.");
     }
 
-    private static void listarCoches(DAOCocheImpl dao) throws IOException {
+    private static void listarCoches(DAOCocheImpl dao) {
         List<Coche> coches = dao.obtenerCoches();
         if (coches.isEmpty()) {
             System.out.println("No hay coches almacenadas.");

@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         ConexionBD conexion = new ConexionBD();
         try (Connection con = conexion.getConexionBD()) {
-            System.out.println("Conexion BD establecida");
+            System.out.println("Conexión BD establecida");
             DAOCocheImpl dao = new DAOCocheImpl(con);
             ejecutarMenu(dao);
         } catch (SQLException | ClassNotFoundException | IOException e) {
