@@ -109,6 +109,20 @@ db.multinacional.aggregate([
   }
 ])
 
+14. Mostrar cuántos empleados hay por categoría ordenados de mayor a menor
+
+db.multinacional.aggregate([
+  {
+    $group: {
+      _id: "$categoria",
+      totalEmpleados: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { totalEmpleados: -1 }
+  }
+])
+
 18. Mostrar el sueldo total por empresa (suma de sueldos netos)
 
 db.multinacional.aggregate([

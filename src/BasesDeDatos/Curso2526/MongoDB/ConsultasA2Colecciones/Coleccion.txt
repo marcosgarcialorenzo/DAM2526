@@ -1,0 +1,201 @@
+db.medicos.insertMany([
+  {
+    "_id": 201,
+    "nombre": "Dr. Juan Pérez",
+    "especialidad": "Cardiología",
+    "hospital_id": 111
+  },
+  {
+    "_id": 202,
+    "nombre": "Dra. María López",
+    "especialidad": "Pediatría",
+    "hospital_id": 111
+  },
+  {
+    "_id": 203,
+    "nombre": "Dr. Sergio Rodríguez",
+    "especialidad": "Oncología",
+    "hospital_id": 112
+  },
+  {
+    "_id": 204,
+    "nombre": "Dra. Ana García",
+    "especialidad": "Ginecología",
+    "hospital_id": 113
+  },
+  {
+    "_id": 205,
+    "nombre": "Dr. Luis Fernández",
+    "especialidad": "Neurología",
+    "hospital_id": 114
+  },
+  {
+    "_id": 206,
+    "nombre": "Dr. Javier Torres",
+    "especialidad": "Dermatología",
+    "hospital_id": 115
+  },
+  {
+    "_id": 207,
+    "nombre": "Dra. Carmen Díaz",
+    "especialidad": "Oftalmología",
+    "hospital_id": 116
+  },
+  {
+    "_id": 208,
+    "nombre": "Dr. Alberto Ramos",
+    "especialidad": "Traumatología",
+    "hospital_id": 117
+  },
+  {
+    "_id": 209,
+    "nombre": "Dra. Patricia Vega",
+    "especialidad": "Reumatología",
+    "hospital_id": 118
+  },
+  {
+    "_id": 210,
+    "nombre": "Dr. Fernando Ruiz",
+    "especialidad": "Endocrinología",
+    "hospital_id": 119
+  },
+  {
+    "_id": 211,
+    "nombre": "Dr. Diego Morales",
+    "especialidad": "Otorrinolaringología",
+    "hospital_id": 120
+  },
+  {
+    "_id": 212,
+    "nombre": "Dra. Laura Hernández",
+    "especialidad": "Psiquiatría",
+    "hospital_id": 121
+  },
+  {
+    "_id": 213,
+    "nombre": "Dr. Rubén Castillo",
+    "especialidad": "Urología",
+    "hospital_id": 122
+  },
+  {
+    "_id": 214,
+    "nombre": "Dra. Elena Navarro",
+    "especialidad": "Neumología",
+    "hospital_id": 123
+  },
+  {
+    "_id": 215,
+    "nombre": "Dr. Andrés Gómez",
+    "especialidad": "Medicina Interna",
+    "hospital_id": 124
+  }
+]);
+
+
+db.hospitales.insertMany([
+  {
+    "_id": 111,
+    "nombre": "Hospital General",
+    "direccion": "Av. Principal 123",
+    "ciudad": "Madrid",
+    "telefonos": ["123456789", "987654321"]
+  },
+  {
+    "_id": 112,
+    "nombre": "Hospital de la Paz",
+    "direccion": "Calle de la Salud 456",
+    "ciudad": "Madrid",
+    "telefonos": ["234567890", "876543210"]
+  },
+  {
+    "_id": 113,
+    "nombre": "Hospital Clínico",
+    "direccion": "Calle Médico 789",
+    "ciudad": "Barcelona",
+    "telefonos": ["345678901", "765432109"]
+  },
+  {
+    "_id": 114,
+    "nombre": "Hospital de Valencia",
+    "direccion": "Av. del Norte 321",
+    "ciudad": "Valencia",
+    "telefonos": ["456789012", "654321098"]
+  },
+  {
+    "_id": 115,
+    "nombre": "Hospital del Mar",
+    "direccion": "Calle del Mar 654",
+    "ciudad": "Barcelona",
+    "telefonos": ["567890123", "543210987"]
+  },
+  {
+    "_id": 116,
+    "nombre": "Hospital San José",
+    "direccion": "Calle Central 111",
+    "ciudad": "Sevilla",
+    "telefonos": ["678901234", "432109876"]
+  },
+  {
+    "_id": 117,
+    "nombre": "Hospital Universitario",
+    "direccion": "Av. Ciencia 222",
+    "ciudad": "Granada",
+    "telefonos": ["789012345", "321098765"]
+  },
+  {
+    "_id": 118,
+    "nombre": "Hospital Virgen del Rocío",
+    "direccion": "Calle Salud 333",
+    "ciudad": "Sevilla",
+    "telefonos": ["890123456", "210987654"]
+  },
+  {
+    "_id": 119,
+    "nombre": "Hospital San Rafael",
+    "direccion": "Calle Esperanza 444",
+    "ciudad": "Bilbao",
+    "telefonos": ["901234567", "109876543"]
+  },
+  {
+    "_id": 120,
+    "nombre": "Hospital Santa Lucía",
+    "direccion": "Av. Libertad 555",
+    "ciudad": "Murcia",
+    "telefonos": ["912345678", "198765432"]
+  },
+  {
+    "_id": 121,
+    "nombre": "Hospital del Sur",
+    "direccion": "Calle Sol 666",
+    "ciudad": "Málaga",
+    "telefonos": ["923456789", "187654321"]
+  },
+  {
+    "_id": 122,
+    "nombre": "Hospital Reina Sofía",
+    "direccion": "Calle Reina 777",
+    "ciudad": "Córdoba",
+    "telefonos": ["934567890", "176543210"]
+  },
+  {
+    "_id": 123,
+    "nombre": "Hospital Central de León",
+    "direccion": "Av. Castilla 888",
+    "ciudad": "León",
+    "telefonos": ["945678901", "165432109"]
+  },
+  {
+    "_id": 124,
+    "nombre": "Hospital Santiago Apóstol",
+    "direccion": "Calle Norte 999",
+    "ciudad": "Santiago",
+    "telefonos": ["956789012", "154321098"]
+  },
+  {
+    "_id": 125,
+    "nombre": "Hospital San Pedro",
+    "direccion": "Calle Rioja 101",
+    "ciudad": "Logroño",
+    "telefonos": ["967890123", "143210987"]
+  }
+]);
