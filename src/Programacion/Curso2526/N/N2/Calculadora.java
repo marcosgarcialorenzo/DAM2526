@@ -12,42 +12,30 @@ public class Calculadora extends JFrame {
     public Calculadora() {
         super("Calculadora");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        // 1. Establecer el layout del contenedor principal PRIMERO
         getContentPane().setLayout(new BorderLayout(8, 8));
-
-        // Paneles con layouts definidos
         JPanel panelOperandos = new JPanel(new GridLayout(2, 2, 6, 6));
         JPanel panelResultado = new JPanel(new GridLayout(1, 2, 6, 6));
         JPanel panelBotones = new JPanel(new GridLayout(1, 5, 6, 6));
-
         JLabel operando1Texto = new JLabel("Operando 1:");
         JLabel operando2Texto = new JLabel("Operando 2:");
         JLabel resultadoTexto = new JLabel("Resultado:");
-
-
         operando1.setEditable(true);
         operando2.setEditable(true);
         resultado.setEditable(false);
-
         panelOperandos.add(operando1Texto);
         panelOperandos.add(operando1);
         panelOperandos.add(operando2Texto);
         panelOperandos.add(operando2);
-
         panelResultado.add(resultadoTexto);
         panelResultado.add(resultado);
-
         for (String texto : new String[]{"+", "-", "*", "/", "C"}) {
             JButton boton = new JButton(texto);
             boton.addActionListener(e -> manejarBoton(texto));
             panelBotones.add(boton);
         }
-
         getContentPane().add(panelOperandos, BorderLayout.NORTH);
         getContentPane().add(panelBotones, BorderLayout.CENTER);
         getContentPane().add(panelResultado, BorderLayout.SOUTH);
-
         pack();
         setVisible(true);
     }
