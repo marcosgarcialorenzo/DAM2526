@@ -119,12 +119,12 @@ Un mensaje de commit debe seguir este formato:
 
 ### Tipos de Commit
 
-| Tipo       | Descripción                | Ejemplo                                                |
-|------------|----------------------------|--------------------------------------------------------|
-| `feat`     | Nueva funcionalidad        | `feat(K0): añadir método ordenar empleados por edad`   |
-| `fix`      | Corrección de errores      | `fix(E7): corregir división por cero en método multar` |
-| `docs`     | Documentación/comentarios  | `docs: añadir comentarios explicativos a F5`           |
-| `refactor` | Reestructuración de código | `refactor(Empresa): simplificar método modificarEdad`  |
+| Tipo       | Descripción               | Ejemplo                                                |
+|------------|---------------------------|--------------------------------------------------------|
+| `feat`     | Nueva funcionalidad       | `feat(K0): añadir método ordenar empleados por edad`   |
+| `fix`      | Corrección de errores     | `fix(E7): corregir división por cero en método multar` |
+| `docs`     | Documentación/comentarios | `docs(N1): añadir comentarios explicativos a F5`       |
+| `refactor` | Mejora de código          | `refactor(Empresa): simplificar método modificarEdad`  |
 
 
 ## 📄 Licencia

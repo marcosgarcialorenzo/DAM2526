@@ -1,8 +1,9 @@
-<tipo>(<alcance>): <descripción corta>
+$TIPO$($PAQUETE$): $DESCRIPCION$
 
-# --- Guía de Estilo ---
-# feat: Nueva funcionalidad
-# fix: Corrección de error
-# docs: Documentación
-# style: Formato (espacios, puntos y coma...)
-# refactor: Mejora de código sin cambiar lógica
+
+| Tipos      | Descripción               |
+|------------|---------------------------|
+| `feat`     | Nueva funcionalidad       | 
+| `fix`      | Corrección de errores     | 
+| `docs`     | Documentación/comentarios |
+| `refactor` | Mejora de código          |
