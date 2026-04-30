@@ -2,7 +2,6 @@ package Programacion.Curso2526.N.N2;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class Calculadora extends JFrame {
 
@@ -13,54 +12,67 @@ public class Calculadora extends JFrame {
     public Calculadora() {
         super("Calculadora");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // 1. Establecer el layout del contenedor principal PRIMERO
         getContentPane().setLayout(new BorderLayout(8, 8));
-        JPanel panelOperandos = new JPanel(new GridLayout(2, 2, 6, 0));
-        JPanel panelResultado = new JPanel(new GridLayout(1, 2, 6, 0));
-        JPanel panelBotones = new JPanel(new GridLayout(1, 6, 6, 0));
 
+        // Paneles con layouts definidos
+        JPanel panelOperandos = new JPanel(new GridLayout(2, 2, 6, 6));
+        JPanel panelResultado = new JPanel(new GridLayout(1, 2, 6, 6));
+        JPanel panelBotones = new JPanel(new GridLayout(1, 5, 6, 6));
 
-        JTextField operando1Texto = new JTextField("Operando 1");
-        JTextField operando2Texto = new JTextField("Operando 2");
-        JTextField resultadoTexto = new JTextField("Resultado");
+        JLabel operando1Texto = new JLabel("Operando 1:");
+        JLabel operando2Texto = new JLabel("Operando 2:");
+        JLabel resultadoTexto = new JLabel("Resultado:");
+
 
         operando1.setEditable(true);
-        operando1Texto.setEditable(false);
         operando2.setEditable(true);
-        operando2Texto.setEditable(false);
         resultado.setEditable(false);
-        resultadoTexto.setEditable(false);
 
-        panelOperandos.add(operando1, BorderLayout.NORTH);
-        panelOperandos.add(operando1Texto, BorderLayout.NORTH);
-        panelOperandos.add(operando2, BorderLayout.SOUTH);
-        panelOperandos.add(operando2Texto, BorderLayout.SOUTH);
-        panelResultado.add(resultado, BorderLayout.EAST);
-        panelResultado.add(resultadoTexto, BorderLayout.WEST);
-        for (String texto : new String[]{"+", "-", "*", "/", "C", "="}) {
+        panelOperandos.add(operando1Texto);
+        panelOperandos.add(operando1);
+        panelOperandos.add(operando2Texto);
+        panelOperandos.add(operando2);
+
+        panelResultado.add(resultadoTexto);
+        panelResultado.add(resultado);
+
+        for (String texto : new String[]{"+", "-", "*", "/", "C"}) {
             JButton boton = new JButton(texto);
             boton.addActionListener(e -> manejarBoton(texto));
             panelBotones.add(boton);
         }
+
         getContentPane().add(panelOperandos, BorderLayout.NORTH);
         getContentPane().add(panelBotones, BorderLayout.CENTER);
         getContentPane().add(panelResultado, BorderLayout.SOUTH);
+
         pack();
         setVisible(true);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(Calculadora::new); // se puede poner (() -> new CalculadoraBinaria())
     }
 
     private void manejarBoton(String texto) {
-        switch (texto) {
-            case "+" -> {
-                double ope1 = operando1.getText().charAt(0);
-                double ope2 = operando2.getText().charAt(0);
-                double resul = ope1 + ope2;
-                resultado.setText(String.valueOf(resul));
-
+        try {
+            double ope1 = Double.parseDouble(operando1.getText());
+            double ope2 = Double.parseDouble(operando2.getText());
+            switch (texto) {
+                case "+" -> resultado.setText(String.valueOf(ope1 + ope2));
+                case "-" -> resultado.setText(String.valueOf(ope1 - ope2));
+                case "*" -> resultado.setText(String.valueOf(ope1 * ope2));
+                case "/" -> resultado.setText(ope2 != 0 ? String.valueOf(ope1 / ope2) : "Error");
+                case "C" -> {
+                    operando1.setText("0");
+                    operando2.setText("0");
+                    resultado.setText("0");
+                }
             }
+        } catch (NumberFormatException e) {
+            resultado.setText("Error: Entrada no válida");
         }
     }
 }
