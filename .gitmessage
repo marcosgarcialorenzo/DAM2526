@@ -3,7 +3,7 @@ $TIPO$($PAQUETE$): $DESCRIPCION$
 
 | Tipos      | Descripción               |
 |------------|---------------------------|
-| `feat`     | Nueva funcionalidad       | 
+| `feat`     | Nuevas funcionalidades    |
 | `fix`      | Corrección de errores     | 
 | `docs`     | Documentación/comentarios |
-| `refactor` | Mejora de código          |
+| `refactor` | Mejoras de código         |
