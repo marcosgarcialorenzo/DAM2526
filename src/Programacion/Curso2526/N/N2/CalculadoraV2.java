@@ -13,9 +13,9 @@ public class CalculadoraV2 extends JFrame {
         super("Calculadora");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        getContentPane().setLayout(new BorderLayout(8, 8));
+        getContentPane().setLayout(new BorderLayout(8, 8));// Permite distribuir los componentes en cinco zonas: norte, sur, este, oeste y centro.
         JPanel panelOperandos = new JPanel(new BorderLayout(8, 8));
-        JPanel panelOperandosBoton = new JPanel(new GridLayout(1, 1, 6, 6));
+        JPanel panelOperandosBoton = new JPanel(new GridLayout(1, 1, 6, 6));// Permite distribuir los componentes usando filas y columnas.
         JPanel panelOperandosTexto = new JPanel(new GridLayout(2, 2, 6, 6));
         JPanel panelResultado = new JPanel(new GridLayout(1, 2, 6, 6));
         JPanel panelBotones = new JPanel(new GridLayout(1, 5, 6, 6));
@@ -78,11 +78,11 @@ public class CalculadoraV2 extends JFrame {
                     operando2.setText(entrada);
                 }
             }
-            return;
+            return; // Para que solo se ejecute una vez después de darle a 'Aceptar'
         }
         try {
             double ope1 = Double.parseDouble(operando1.getText());// Transforma de String a double para poder operar
-            double ope2 = Double.parseDouble(operando2.getText());// Transforma de String a double para poder opera
+            double ope2 = Double.parseDouble(operando2.getText());// Transforma de String a double para poder operar
             switch (texto) {
                 case "+" -> resultado.setText(String.valueOf(ope1 + ope2));
                 case "-" -> resultado.setText(String.valueOf(ope1 - ope2));
