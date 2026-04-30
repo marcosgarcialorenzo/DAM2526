@@ -12,29 +12,42 @@ public class CalculadoraV2 extends JFrame {
     public CalculadoraV2() {
         super("Calculadora");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         getContentPane().setLayout(new BorderLayout(8, 8));
-        JPanel panelOperandos = new JPanel(new GridLayout(2, 2, 6, 6));
+        JPanel panelOperandos = new JPanel(new BorderLayout(8, 8));
+        JPanel panelOperandosBoton = new JPanel(new GridLayout(1, 1, 6, 6));
+        JPanel panelOperandosTexto = new JPanel(new GridLayout(2, 2, 6, 6));
         JPanel panelResultado = new JPanel(new GridLayout(1, 2, 6, 6));
         JPanel panelBotones = new JPanel(new GridLayout(1, 5, 6, 6));
-        JButton operando1Texto = new JButton("Pedir operando 1:");
-        JButton operando2Texto = new JButton("Pedir operando 2:");
-        operando1Texto.addActionListener(e -> manejarBoton("Pedir operando1"));
-        operando2Texto.addActionListener(e -> manejarBoton("Pedir operando2"));
+
+        JButton operandoBoton = new JButton("Pedir operando");
+        operandoBoton.addActionListener(e -> manejarBoton("Pedir operando1"));
+        operandoBoton.addActionListener(e -> manejarBoton("Pedir operando2"));
+
+        JLabel operando1Texto = new JLabel("Operando 1:");
+        JLabel operando2Texto = new JLabel("Operando 2:");
         JLabel resultadoTexto = new JLabel("Resultado:");
+
         operando1.setEditable(false);
         operando2.setEditable(false);
         resultado.setEditable(false);
-        panelOperandos.add(operando1Texto);
-        panelOperandos.add(operando1);
-        panelOperandos.add(operando2Texto);
-        panelOperandos.add(operando2);
+
+        panelOperandosBoton.add(operandoBoton);
+        panelOperandosTexto.add(operando1Texto);
+        panelOperandosTexto.add(operando1);
+        panelOperandosTexto.add(operando2Texto);
+        panelOperandosTexto.add(operando2);
+        panelOperandos.add(panelOperandosTexto,  BorderLayout.EAST);
+        panelOperandos.add(panelOperandosBoton,  BorderLayout.WEST);
         panelResultado.add(resultadoTexto);
         panelResultado.add(resultado);
+
         for (String texto : new String[]{"+", "-", "*", "/", "C"}) {
             JButton boton = new JButton(texto);
             boton.addActionListener(e -> manejarBoton(texto));
             panelBotones.add(boton);
         }
+
         getContentPane().add(panelOperandos, BorderLayout.NORTH);
         getContentPane().add(panelBotones, BorderLayout.CENTER);
         getContentPane().add(panelResultado, BorderLayout.SOUTH);
@@ -47,30 +60,34 @@ public class CalculadoraV2 extends JFrame {
     }
 
     private void manejarBoton(String texto) {
+        if (texto.equals("C")) {
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Estás seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                operando1.setText("0");
+                operando2.setText("0");
+                resultado.setText("0");
+            }
+            return;
+        }
+        if (texto.startsWith("Pedir")) {
+            String entrada = JOptionPane.showInputDialog(this, "Introduce el operando:");
+            if (entrada != null) {
+                if (texto.endsWith("1")) {
+                    operando1.setText(entrada);
+                } else {
+                    operando2.setText(entrada);
+                }
+            }
+            return;
+        }
         try {
-            double ope1 = Double.parseDouble(operando1.getText());
-            double ope2 = Double.parseDouble(operando2.getText());
+            double ope1 = Double.parseDouble(operando1.getText());// Transforma de String a double para poder operar
+            double ope2 = Double.parseDouble(operando2.getText());// Transforma de String a double para poder opera
             switch (texto) {
                 case "+" -> resultado.setText(String.valueOf(ope1 + ope2));
                 case "-" -> resultado.setText(String.valueOf(ope1 - ope2));
                 case "*" -> resultado.setText(String.valueOf(ope1 * ope2));
-                case "/" -> resultado.setText(ope2 != 0 ? String.valueOf(ope1 / ope2) : "Error");
-                case "C" -> {
-                    int respuesta = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que quieres limpiar los operandos y el resultado?", "Confirmar limpieza", JOptionPane.YES_NO_OPTION);
-                    if (respuesta == JOptionPane.YES_OPTION) {
-                        operando1.setText("0");
-                        operando2.setText("0");
-                        resultado.setText("0");
-                    }
-                }
-                case "Pedir operando1" -> {
-                    String entrada = JOptionPane.showInputDialog(this, "Introduce el operando:");
-                    operando1.setText(entrada);
-                }
-                case "Pedir operando2" -> {
-                    String entrada = JOptionPane.showInputDialog(this, "Introduce el operando:");
-                    operando2.setText(entrada);
-                }
+                case "/" -> resultado.setText(ope2 != 0 ? String.valueOf(ope1 / ope2) : "Error: Div / 0");
             }
         } catch (NumberFormatException e) {
             resultado.setText("Error: Entrada no válida");
