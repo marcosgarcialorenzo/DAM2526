@@ -8,12 +8,14 @@ public class Medico {
     int horaInicio;
     int horaFin;
     int numPacientesAtendidos;
+
     public Medico(String idMedico, int horaInicio, int horaFin) {
         this.idMedico = idMedico;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
-        numPacientesAtendidos=0;
+        numPacientesAtendidos = 0;
     }
+
     public Medico(String idMedico, int horaInicio, int horaFin, int numPacientesAtendidos) {
         this.idMedico = idMedico;
         this.horaInicio = horaInicio;
