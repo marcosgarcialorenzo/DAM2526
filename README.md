@@ -82,11 +82,14 @@ DAM2526/
 │           │   └── L1/-L4/
 │           │
 │           ├── M/   → JDBC y acceso a bases de datos
-│           │   └── M1/
+│           │   ├── M1/
+│           │   ├── M2/
+│           │   └── Pizzeria/
 │           │
 │           ├── N/   → Entornos gráficos
-│           │   ├─── N1/
-│           │   └── JuegoBotones/
+│           │   ├── JuegoBotones.java
+│           │   ├── N1/
+│           │   └── N2/
 │           │
 │           └── ExamenesMGL/
 │               ├── Evaluacion1/
