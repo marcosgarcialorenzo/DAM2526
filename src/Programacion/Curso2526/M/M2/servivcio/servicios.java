@@ -2,7 +2,7 @@ package Programacion.Curso2526.M.M2.servivcio;
 
 import Programacion.Curso2526.M.M2.DAO.DAOCocheImpl;
 import Programacion.Curso2526.M.M2.modelo.Coche;
-import Programacion.Curso2526.M.M3.Teclado;
+import Programacion.Curso2526.M.M1.Teclado;
 
 import java.io.IOException;
 import java.util.List;

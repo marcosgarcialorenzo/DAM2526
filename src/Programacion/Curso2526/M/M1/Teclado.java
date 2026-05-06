@@ -1,4 +1,4 @@
-package Programacion.Curso2526.M.M3; /*
+package Programacion.Curso2526.M.M1; /*
   @author Jose Manuel Perez Lobato
  * @version 1.0
  */

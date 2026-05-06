@@ -1,4 +1,4 @@
-package Programacion.Curso2526.M.M3;
+package Programacion.Curso2526.M.M1;
 
 public class Persona {
     int id;

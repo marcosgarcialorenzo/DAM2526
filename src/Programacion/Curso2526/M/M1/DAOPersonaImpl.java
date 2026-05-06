@@ -1,4 +1,4 @@
-package Programacion.Curso2526.M.M3;
+package Programacion.Curso2526.M.M1;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +17,7 @@ public class DAOPersonaImpl implements DAOPersona {
     @Override
     public boolean anadirPersona(Persona p) {
         try {
+            //noinspection SqlResolve
             PreparedStatement ps = conexion.prepareStatement("INSERT INTO BDPRUEBA1.TABLA1PRUEBA (nombre, numero) VALUES (?,?)");
             ps.setString(1, p.nombre);
             ps.setInt(2, p.edad);

@@ -1,4 +1,4 @@
-package Programacion.Curso2526.M.M1;
+package Programacion.Curso2526.M.Pizzeria;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
