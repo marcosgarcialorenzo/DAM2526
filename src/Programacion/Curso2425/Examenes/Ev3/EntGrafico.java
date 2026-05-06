@@ -1,0 +1,72 @@
+package Programacion.Curso2425.Examenes.Ev3;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class EntGrafico extends JFrame {
+
+    private final int NUM_BOTONES = 3;
+    JLabel display = new JLabel();
+    JButton[] botones = new JButton[NUM_BOTONES];
+    boolean[] pulsados = new boolean[NUM_BOTONES];
+    Random random = new Random();
+    int objetivoActual = - 1;
+
+    public EntGrafico() {
+        super("Examen Junio 2425");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        getContentPane().setLayout(new BorderLayout(8, 8));
+        display.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        getContentPane().add(display, BorderLayout.SOUTH);
+        JPanel panelBotones = new JPanel(new GridLayout(1, 3, 6, 0));
+        for (int i = 0; i < botones.length; i++) {
+            int indice = i;
+            JButton boton = new JButton("Botón " + i);
+            boton.addActionListener(e -> manejarBoton(indice));
+            boton.setBackground(Color.BLUE);
+            boton.setForeground(Color.WHITE); // color de las letras
+            botones[i] = boton;
+            panelBotones.add(boton);
+        }
+        getContentPane().add(panelBotones, BorderLayout.CENTER);
+        elegirObjetivo();
+        pack();
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(EntGrafico::new); // se puede poner (() -> new CalculadoraBinaria())
+    }
+
+    void elegirObjetivo() {
+        List<Integer> disponibles = new ArrayList<>();
+        for (int i = 0; i < pulsados.length; i++) {
+            if (! pulsados[i]) {
+                disponibles.add(i);
+            }
+        }
+
+        if (disponibles.isEmpty()) {
+            objetivoActual = - 1;
+            display.setText("COMPLETADO: Todos los botones han sido pulsado en el orden correcto");
+            pack();
+            return;
+        }
+
+        objetivoActual = disponibles.get(random.nextInt(disponibles.size())); // coge un índice aleatorio entre la cantidad de disponibles
+        display.setText("Pulsa el botón " + objetivoActual);
+    }
+
+    private void manejarBoton(int indice) {
+        if (indice != objetivoActual) {
+            return;
+        }
+        pulsados[indice] = true;
+        botones[indice].setBackground(Color.RED);
+        botones[indice].setForeground(Color.BLACK);
+        elegirObjetivo();
+    }
+}
