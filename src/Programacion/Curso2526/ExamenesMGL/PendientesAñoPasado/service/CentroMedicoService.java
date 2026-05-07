@@ -33,9 +33,12 @@ public class CentroMedicoService {
         if (vSiguiente == null) {
             return - 1;
         }
-    /*2B-Rellenar el código para realizar las operaciones de atención indicada
-    y devolver el turno */
-        return 0;
+        // Incrementar el contador de pacientes atendidos del médico en la BD
+        medicoDAO.anadirVisitaMedico(idMedico);
+        // Eliminar el turno de la lista de espera
+        visitasHoyDAO.eliminarVisita(vSiguiente);
+
+        return vSiguiente.getNumTurno();
     }
 
     public List<String> listarVisitasHoy() {
@@ -53,9 +56,18 @@ public class CentroMedicoService {
 
     public List<Medico> getMedicosMasConsultas(int numMedicos) {
         List<Medico> allMedicos = medicoDAO.getTodosLosMedicos();
-        /*4B-Rellenar el código para devolver la lista de médicos (2) con más consultas.
-         * El cálculo se tiene que realizar procesando lo que devuelve el DAO */
-        return null;
+        if (allMedicos == null || allMedicos.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        // Ordenar por numero de pacientes atendidos en orden descendente
+        allMedicos.sort((m1, m2) -> Integer.compare(m2.getNumPacientesAtendidos(), m1.getNumPacientesAtendidos()));
+
+        // Retornar los primeros numMedicos
+        if (allMedicos.size() <= numMedicos) {
+            return allMedicos;
+        }
+        return allMedicos.subList(0, numMedicos);
     }
 
     public void guardarPacientes() {

@@ -15,7 +15,7 @@ public class VisitasHoyDAO implements VisitasHoyDAOItf {
     public int anadirVisita(int idPaciente, String idMedico) {
         Visita v = new Visita(idPaciente, idMedico);
         insertarVisita(v);
-        return listaVisitas.size();
+        return v.getNumTurno();
     }
 
     public Visita siguienteTurno(String idMedico) {

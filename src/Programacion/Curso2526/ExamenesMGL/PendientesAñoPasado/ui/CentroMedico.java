@@ -42,7 +42,7 @@ public class CentroMedico {
         System.out.println("Introduzca id Médico");
         String idMedico = t.leerString();
         /*1A-Rellenar el código para guardar los datos del paciente */
-        int nTurno = 0000;
+        int nTurno = servicioCentroMedico.anadirVisita(idPaciente, idMedico);
         if (nTurno >= 0) {
             System.out.println("El paciente será atendido. Su turno es " + nTurno);
         } else {
@@ -54,11 +54,29 @@ public class CentroMedico {
         System.out.println("Introduzca id Médico");
         String idMedico = t.leerString();
         /*2A-Rellenar el código para atención a un paciente utilizando los métodos de la clase de servicio*/
+        int turno = servicioCentroMedico.medicoAtiende(idMedico);
+        if (turno >= 0) {
+            System.out.println("Se atiende al paciente con turno: " + turno);
+        } else {
+            System.out.println("No hay pacientes en espera para este médico.");
+        }
     }
 
     private static void listarPacientesEspera(CentroMedicoService servicioCentroMedico) throws IOException {
         /*3A-Rellenar el código para mostrar los pacientes en espera  */
-
+        System.out.println("Introduzca id Médico");
+        String idMedico = t.leerString();
+        List<String> visitas = servicioCentroMedico.listarVisitasHoy();
+        System.out.println("\n--- Pacientes en espera para el médico " + idMedico + " ---");
+        if (visitas.isEmpty()) {
+            System.out.println("No hay pacientes en espera.");
+        } else {
+            for (String visita : visitas) {
+                if (visita.contains(idMedico)) {
+                    System.out.println(visita);
+                }
+            }
+        }
     }
 
     private static void mostrarMedicoMasConsultas(CentroMedicoService servicioCentroMedico) {
