@@ -1,0 +1,88 @@
+1. Empleados por departamento.
+
+CREATE OR REPLACE PROCEDURE ver_emple_por_dept(p_dept_no VARCHAR2) IS
+    CURSOR c_emple IS
+        SELECT apellido FROM EMPLE WHERE dept_no = p_dept_no;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Apellidos del depto ' || p_dept_no || ':');
+    FOR r_emple IN c_emple LOOP
+        DBMS_OUTPUT.PUT_LINE(r_emple.apellido);
+    END LOOP;
+END;
+/
+-- Ejecución
+EXECUTE ver_emple_por_dept('20');
+
+2. Departamentos.
+
+DECLARE
+    CURSOR c_dept IS
+        SELECT dnombre, loc FROM DEPART;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('NOMBRE Y LOCALIDAD DE TODOS LOS DEPARTAMENTOS');
+    FOR r_dept IN c_dept LOOP
+        DBMS_OUTPUT.PUT_LINE('Nombre: ' || r_dept.dnombre);
+        DBMS_OUTPUT.PUT_LINE('Localidad: ' || r_dept.loc);
+        DBMS_OUTPUT.PUT_LINE('-----------------------');
+    END LOOP;
+END;
+
+3. Empleados con comision >500.
+
+DECLARE
+    CURSOR c_comision IS
+        SELECT apellido, oficio, comision
+        FROM EMPLE
+        WHERE comision > 500;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('EMPLEADOS CON COMISIÓN MAYOR DE 500 EUROS:');
+    FOR r_emp IN c_comision LOOP
+        DBMS_OUTPUT.PUT_LINE('Apellido: ' || r_emp.apellido);
+        DBMS_OUTPUT.PUT_LINE('Oficio: ' || r_emp.oficio);
+        DBMS_OUTPUT.PUT_LINE('Comisión: ' || r_emp.comision);
+        DBMS_OUTPUT.PUT_LINE('---');
+    END LOOP;
+END;
+
+4. Apellidos secuencial.
+
+--FORMA 1
+
+DECLARE
+    CURSOR c1 IS SELECT apellido FROM EMPLE WHERE dept_no = 10;
+    v_cont NUMBER := 0;
+BEGIN
+    FOR r_emp IN c1 LOOP
+        v_cont := v_cont + 1;
+        DBMS_OUTPUT.PUT_LINE(v_cont || '. ' || r_emp.apellido);
+    END LOOP;
+END;
+
+--FORMA 2
+
+DECLARE
+    CURSOR c1 IS SELECT apellido FROM EMPLE WHERE dept_no = 10;
+    r_emp c1%ROWTYPE;
+BEGIN
+    OPEN c1;
+    LOOP
+        FETCH c1 INTO r_emp;
+        EXIT WHEN c1%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(TO_CHAR(c1%ROWCOUNT, '99.') || ' ' || r_emp.apellido);
+    END LOOP;
+    CLOSE c1;
+END;
+
+5. Empleados ordenados.
+
+DECLARE
+    CURSOR c_orden IS
+        SELECT apellido, fecha_alta
+        FROM EMPLE
+        ORDER BY fecha_alta ASC;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('APELLIDO Y FECHA DE ALTA (ORDENADOS):');
+    FOR r_emp IN c_orden LOOP
+        DBMS_OUTPUT.PUT_LINE(RPAD(r_emp.apellido, 15) || TO_CHAR(r_emp.fecha_alta, 'DD/MM/YY'));
+    END LOOP;
+END;
