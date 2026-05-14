@@ -1,0 +1,60 @@
+6. Buscar empleado.
+
+DECLARE
+    v_busqueda VARCHAR2(50) := '&apellido';
+    CURSOR c_busqueda IS
+        SELECT apellido, emp_no FROM EMPLE WHERE apellido = UPPER(v_busqueda);
+    v_cont NUMBER := 0;
+BEGIN
+    FOR r_emp IN c_busqueda LOOP
+        DBMS_OUTPUT.PUT_LINE(r_emp.apellido || ' ' || r_emp.emp_no);
+        v_cont := c_busqueda%ROWCOUNT;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('El número de empleados mostrados es ' || v_cont);
+END;
+
+7. Subida sueldo.
+
+CREATE OR REPLACE PROCEDURE subida_sueldo_optima (
+    p_dept_no NUMBER,
+    p_importe NUMBER,
+    p_porcentaje NUMBER
+) IS
+    CURSOR c1 IS
+        SELECT salario FROM EMPLE WHERE dept_no = p_dept_no FOR UPDATE;
+    v_sal_imp NUMBER;
+    v_sal_por NUMBER;
+BEGIN
+    FOR r_emp IN c1 LOOP
+        v_sal_imp := r_emp.salario + p_importe;
+        v_sal_por := r_emp.salario * (1 + p_porcentaje/100);
+
+        UPDATE EMPLE
+        SET salario = GREATEST(v_sal_imp, v_sal_por)
+        WHERE CURRENT OF c1;
+    END LOOP;
+    COMMIT;
+END;
+
+8. Actualizar comision.
+
+DECLARE
+    CURSOR c_comision IS
+        SELECT salario, comision FROM EMPLE FOR UPDATE;
+    v_nueva_com NUMBER;
+BEGIN
+    FOR r_emp IN c_comision LOOP
+        IF r_emp.salario BETWEEN 0 AND 1000 THEN
+            v_nueva_com := 200;
+        ELSIF r_emp.salario BETWEEN 1001 AND 2500 THEN
+            v_nueva_com := 300;
+        ELSE
+            v_nueva_com := 400;
+        END IF;
+
+        UPDATE EMPLE
+        SET comision = v_nueva_com
+        WHERE CURRENT OF c_comision;
+    END LOOP;
+    COMMIT;
+END;
