@@ -1,0 +1,149 @@
+7. Empleados mas que uno dado
+
+CREATE OR REPLACE PROCEDURE EMPLEADOS(p_apellido VARCHAR2) IS
+    v_salario NUMBER;
+    v_contador NUMBER;
+BEGIN
+    -- Obtener el salario del empleado dado
+    SELECT salario INTO v_salario FROM EMPLE WHERE apellido = p_apellido;
+
+    -- Contar empleados con salario mayor
+    SELECT COUNT(*) INTO v_contador FROM EMPLE WHERE salario > v_salario;
+
+    DBMS_OUTPUT.PUT_LINE('Empleados que ganan más que ' || p_apellido || ': ' || v_contador);
+
+    -- Criterio de mensajes
+    IF v_contador > 11 THEN
+        DBMS_OUTPUT.PUT_LINE('EL EMPLEADO GANA POCO');
+    ELSIF v_contador >= 2 THEN
+        DBMS_OUTPUT.PUT_LINE('EL EMPLEADO GANA NORMAL');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('EL EMPLEADO GANA MUCHO');
+    END IF;
+END;
+/
+-- Bloque de llamada
+BEGIN
+    EMPLEADOS('GIL');
+END;
+
+8. Oficio mayor.
+
+CREATE OR REPLACE PROCEDURE OFICIOMAYOR IS
+    v_oficio VARCHAR2(20);
+    v_aumento NUMBER := 0;
+BEGIN
+    -- Buscar oficio con mayor número de empleados
+    SELECT oficio INTO v_oficio
+    FROM EMPLE
+    GROUP BY oficio
+    ORDER BY COUNT(*) DESC
+    FETCH FIRST 1 ROW ONLY;
+
+    DBMS_OUTPUT.PUT_LINE('Oficio con más empleados: ' || v_oficio);
+
+    -- Determinar incremento
+    IF v_oficio = 'ANALISTA' THEN v_aumento := 10000;
+    ELSIF v_oficio IN ('VENDEDOR', 'EMPLEADO') THEN v_aumento := 1000;
+    ELSIF v_oficio = 'PRESIDENTE' THEN v_aumento := 20000;
+    END IF;
+
+    -- Actualizar salarios del oficio ganador
+    UPDATE EMPLE SET salario = salario + v_aumento WHERE oficio = v_oficio;
+    COMMIT;
+END;
+
+9. Modificar stock.
+
+DECLARE
+    v_min_cod NUMBER;
+    v_max_cod NUMBER;
+BEGIN
+    SELECT MIN(cod_producto), MAX(cod_producto) INTO v_min_cod, v_max_cod FROM PRODUCTOS;
+
+    UPDATE PRODUCTOS
+    SET stock = 20
+    WHERE cod_producto BETWEEN v_min_cod AND v_max_cod;
+    COMMIT;
+END;
+
+10. Modificar stock.
+
+DECLARE
+    v_min_precio NUMBER;
+    v_max_precio NUMBER;
+BEGIN
+    SELECT MIN(precio_uni), MAX(precio_uni) INTO v_min_precio, v_max_precio FROM PRODUCTOS;
+
+    UPDATE PRODUCTOS
+    SET stock = 20
+    WHERE precio_uni BETWEEN v_min_precio AND v_max_precio;
+    COMMIT;
+END;
+
+11. Suma salarios mayor.
+
+CREATE OR REPLACE PROCEDURE SUMASALARIOSMAYOR IS
+    v_dept_no NUMBER;
+    v_suma_sal NUMBER;
+    v_aumento NUMBER;
+BEGIN
+    SELECT dept_no, SUM(salario) INTO v_dept_no, v_suma_sal
+    FROM EMPLE
+    GROUP BY dept_no
+    ORDER BY SUM(salario) DESC
+    FETCH FIRST 1 ROW ONLY;
+
+    IF v_suma_sal < 1000000 THEN v_aumento := 25000;
+    ELSIF v_suma_sal BETWEEN 1000000 AND 1250000 THEN v_aumento := 20000;
+    ELSE v_aumento := 15000;
+    END IF;
+
+    UPDATE EMPLE SET salario = salario + v_aumento WHERE dept_no = v_dept_no;
+    DBMS_OUTPUT.PUT_LINE('Departamento: ' || v_dept_no || ' Suma: ' || v_suma_sal || ' Aumento: ' || v_aumento);
+    COMMIT;
+END;
+
+12. Suma salarios menor.
+
+CREATE OR REPLACE PROCEDURE SUMASALARIOSMENOR IS
+    v_dept_no NUMBER;
+    v_suma_sal NUMBER;
+    v_aumento NUMBER;
+BEGIN
+    SELECT dept_no, SUM(salario) INTO v_dept_no, v_suma_sal
+    FROM EMPLE
+    GROUP BY dept_no
+    ORDER BY SUM(salario) ASC
+    FETCH FIRST 1 ROW ONLY;
+
+    IF v_suma_sal < 1000000 THEN v_aumento := 25000;
+    ELSIF v_suma_sal BETWEEN 1000000 AND 1250000 THEN v_aumento := 20000;
+    ELSE v_aumento := 15000;
+    END IF;
+
+    UPDATE EMPLE SET salario = salario + v_aumento WHERE dept_no = v_dept_no;
+    DBMS_OUTPUT.PUT_LINE('Departamento: ' || v_dept_no || ' Suma: ' || v_suma_sal || ' Aumento: ' || v_aumento);
+    COMMIT;
+END;
+
+13. Contar maximo y minimo salarial.
+
+DECLARE
+    v_max NUMBER; v_min NUMBER; v_total NUMBER;
+    v_vend NUMBER; v_anal NUMBER; v_dire NUMBER; v_empl NUMBER;
+BEGIN
+    SELECT MAX(salario), MIN(salario) INTO v_max, v_min FROM EMPLE;
+
+    SELECT COUNT(*) INTO v_total FROM EMPLE WHERE salario NOT IN (v_max, v_min);
+    SELECT COUNT(*) INTO v_vend FROM EMPLE WHERE oficio = 'VENDEDOR' AND salario NOT IN (v_max, v_min);
+    SELECT COUNT(*) INTO v_anal FROM EMPLE WHERE oficio = 'ANALISTA' AND salario NOT IN (v_max, v_min);
+    SELECT COUNT(*) INTO v_dire FROM EMPLE WHERE oficio = 'DIRECTOR' AND salario NOT IN (v_max, v_min);
+    SELECT COUNT(*) INTO v_empl FROM EMPLE WHERE oficio = 'EMPLEADO' AND salario NOT IN (v_max, v_min);
+
+    DBMS_OUTPUT.PUT_LINE('Total fuera de extremos: ' || v_total);
+    DBMS_OUTPUT.PUT_LINE('Vendedores: ' || v_vend);
+    DBMS_OUTPUT.PUT_LINE('Directores: ' || v_dire);
+    DBMS_OUTPUT.PUT_LINE('Analistas: ' || v_anal);
+    DBMS_OUTPUT.PUT_LINE('Empleados: ' || v_empl);
+END;
