@@ -1,0 +1,316 @@
+1. Insertar empleados.
+
+CREATE OR REPLACE PROCEDURE insertar_empleados
+      (p_emp_no emple.emp_no%TYPE,
+       p_apellido emple.apellido%TYPE,
+       p_oficio emple.oficio%TYPE,
+       p_dir emple.dir%TYPE,
+       p_fecha_alta emple.fecha_alt%TYPE,
+       p_salario emple.salario%TYPE,
+       p_comision emple.comision%TYPE,
+       p_dept_no emple.dept_no%TYPE)
+   IS
+   BEGIN
+     INSERT INTO emple VALUES (p_emp_no, p_apellido, p_oficio, p_dir, p_fecha_alta, p_salario, p_comision, p_dept_no);
+   END;
+/
+
+
+EXECUTE insertar_empleados (7799, 'GALLEGO', 'ANALISTA', 7531, '12/02/02', 390000, NULL, 20);
+EXECUTE insertar_empleados (7790, 'MARTINEZ', 'EMPLEADO', 7631, '12/02/02', 390000, NULL, 20);
+
+SELECT * FROM emple;
+
+2. Visualizar empleados.
+
+FORMA 1 : BLOQUE BASICO
+----------------
+declare
+v_nom emple.apellido%TYPE;
+begin
+	select apellido into v_nom
+	from emple
+	where emp_no=&vn_emp;
+	dbms_output.put_line(v_nom);
+end;
+/
+
+FORMA 2 : BLOQUE MEJORADO
+------------------
+declare
+v_nom emple.apellido%TYPE;
+begin
+	select apellido into v_nom
+	from emple
+	where emp_no=&vn_emp;
+	dbms_output.put_line(v_nom);
+	exception
+		when no_data_found
+			dbms_output.put_line('error no existe el empleado');
+end;
+/
+
+FORMA 3 : BLOQUE EXCEPCION PROPIA
+--------------------------
+declare
+v_nom emple.apellido%TYPE;
+begin
+	select count(*) into contador_filas
+	from emple
+	where emp_no=&vn_emp;
+
+	if contador_fila=0 then
+		dbms_output.put_line('error no existe el empleado');
+	else
+		select apellido into v_nom
+		from emple
+		where emp_no=&vn_emp;
+		dbms_output.put_line(v_nom);
+	end;
+/
+
+FORMA 1 : PROCEDIMIENTO BASICO
+----------------
+CREATE OR REPLACE PROCEDURE visualizar (vn_emp emple.apellido%TYPE)
+IS
+begin
+	select apellido into v_nom
+	from emple
+	where emp_no=vn_emp;
+	dbms_output.put_line(v_nom);
+end;
+/
+
+FORMA 2 : PROCEDIMIENTO MEJORADO
+------------------
+CREATE OR REPLACE PROCEDURE visualizar (vn_emp emple.apellido%TYPE)
+IS
+begin
+select apellido into v_nom
+from emple
+where emp_no=vn_emp;
+dbms_output.put_line(v_nom);
+exception
+    when no_data_found
+		dbms_output.put_line('error no existe el empleado');
+end;
+/
+
+FORMA 3 : PROCEDIMIENTO EXCEPCION PROPIO
+--------------------------
+CREATE OR REPLACE PROCEDURE visualizar (vn_emp emple.apellido%TYPE)
+IS begin
+select count(*) into contador_filas
+from emple
+where emp_no=vn_emp;
+
+if contador_fila=0 then
+	dbms_output.put_line('error no existe el empleado');
+else
+	select apellido into v_nom
+	from emple
+	where emp_no=vn_emp;
+	dbms_output.put_line(v_nom);
+end;
+/
+
+3. Numero mas alto.
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+  v_max_deptno NUMBER(2);
+BEGIN
+  SELECT MAX(dept_no) INTO v_max_deptno
+  FROM depart;
+  DBMS_OUTPUT.PUT_LINE ('Mayor número de departamento: ' || v_max_deptno);
+
+  IF v_max_deptno < 20 THEN
+       DBMS_OUTPUT.PUT_LINE ('DEPARTAMENTO BAJO ');
+     ELSIF v_max_deptno BETWEEN 20 AND 30 THEN
+       DBMS_OUTPUT.PUT_LINE ('DEPARTAMENTO MEDIO ');
+     ELSIF v_max_deptno >=40 THEN
+       DBMS_OUTPUT.PUT_LINE ('DEPARTAMENTO ALTO ');
+     END IF;
+
+END;
+/
+
+4. Numero de empleados.
+
+FORMA BASICA
+------------
+
+CREATE PROCEDURE NUMEMPLEADOS (p_dept_no emple.dept_no%TYPE)
+  IS
+    V_num_emp NUMBER(2);
+  BEGIN
+    SELECT COUNT(*) INTO v_num_emp
+    FROM emple
+    WHERE dept_no = p_dept_no;
+    DBMS_OUTPUT.PUT_LINE('Número de empleados: '|| v_num_emp);
+  END;
+/
+
+FORMA MEJORADA
+--------------
+
+CREATE OR REPLACE
+PROCEDURE NUMEMPLEADOS (p_dept_no emple.dept_no%TYPE)
+  IS
+    V_num_emp NUMBER(2);
+  BEGIN
+    SELECT COUNT(*) INTO v_num_emp
+    FROM emple
+    WHERE dept_no = p_dept_no;
+    IF v_num_emp = 0
+		THEN
+			DBMS_OUTPUT.PUT_LINE('NO EXISTE ESE DEPARTAMENTO EN LA TABLA DE EMPLEADOS: ');
+		ELSE
+			DBMS_OUTPUT.PUT_LINE('Número de empleados: '|| v_num_emp);
+    END IF;
+  END;
+/
+
+5. Estadisticas empleados.
+
+CREATE OR REPLACE PROCEDURE ESTADISTICAS (p_dept_no emple.dept_no%TYPE)
+  IS
+    V_num_emp NUMBER(2);
+  BEGIN
+    SELECT COUNT(*) INTO v_num_emp
+    FROM emple
+    WHERE dept_no = p_dept_no;
+
+	IF v_num_emp = 0 THEN
+		DBMS_OUTPUT.PUT_LINE('NO EXISTE ESE DEPARTAMENTO EN LA TABLA DE EMPLEADOS: ');
+    ELSIF v_num_emp > 5 THEN
+		DBMS_OUTPUT.PUT_LINE(' Hay muchos empleados: '|| v_num_emp);
+
+    ELSIF v_num_emp < 5 THEN
+		DBMS_OUTPUT.PUT_LINE('Hay pocos empleados :'|| v_num_emp);
+    END IF;
+  END;
+/
+
+6. Modificar localidad.
+
+CREATE PROCEDURE MODIFICARLOCALIDAD
+  (p_dept_no depart.dept_no %TYPE,
+   p_loc depart.loc %TYPE)
+IS
+  BEGIN
+    SELECT COUNT(*) INTO v_num_emp
+    FROM emple
+    WHERE dept_no = p_dept_no;
+
+	IF v_num_emp = 0 THEN
+		DBMS_OUTPUT.PUT_LINE('NO EXISTE ESE DEPARTAMENTO  ');
+    ELSE
+		UPDATE depart
+			SET loc = p_loc
+			WHERE dept_no = p_dept_no;
+	END IF;
+  END;
+/
+
+7. Empleados mas que uno dado.
+
+CREATE OR REPLACE PROCEDURE EMPLEADOS (APE VARCHAR)
+IS
+      V_cobran_mas NUMBER(2);
+    BEGIN
+      SELECT COUNT (*) INTO v_cobran_mas
+      FROM emple
+      WHERE salario > (SELECT salario
+                       FROM emple
+                       WHERE apellido=APE);
+
+     DBMS_OUTPUT.PUT_LINE ('Nº de empleados que cobran más que : ' || APE || v_cobran_mas);
+   END;
+/
+
+Nº de empleados que cobran más que GIL: 1
+
+FOR I IN 3..8 LOOP
+
+    UPDATE EMPLE
+    SET SALARIO=SALARIO*0,1
+
+END LOOP;
+
+8. Oficio mayor.
+
+FORMA 1
+-------
+CREATE OR REPLACE PROCEDURE OFICIOMAYOR
+IS
+      v_oficio emple.oficio %TYPE;
+    BEGIN
+      SELECT oficio INTO v_oficio
+      FROM emple
+      GROUP BY oficio
+      HAVING COUNT(*) = (SELECT MAX(COUNT(*))
+                         FROM emple
+                         GROUP BY oficio);
+
+	  IF v_oficio='VENDEDOR' THEN
+			UPDATE emple
+			SET salario=salario+1000
+	  ELSIF v_oficio='EMPLEADO' or v_oficio='ANALISTA' THEN
+			UPDATE emple
+			SET salario=salario+10000
+      ELSIF v_oficio='PRESIDENTE' THEN
+			UPDATE emple
+			SET salario=salario+20000
+	  END IF;
+
+	DBMS_OUTPUT.PUT_LINE('  '||v_oficio);
+    END;
+
+
+FORMA 2
+-------
+
+CREATE OR REPLACE PROCEDURE OFICIOMAYOR
+IS
+	NUM NUMBER;
+	OFICIO2 VARCHAR2(10);
+BEGIN
+	SELECT COUNT(OFICIO) INTO NUM
+	FROM EMPLE
+	WHERE OFICIO =
+	(
+		SELECT MAX(OFICIO)
+		FROM EMPLE
+	);
+
+	SELECT OFICIO INTO OFICIO2
+	FROM EMPLE
+	GROUP BY OFICIO
+	HAVING COUNT(OFICIO)=NUM;
+
+	DBMS_OUTPUT.PUT_LINE('TIENE '||NUM||' '||OFICIO2);
+
+
+END;
+/
+
+9. Modificar stock.
+
+DECLARE
+   v_min productos.cod_producto%TYPE;
+   v_max productos.cod_producto%TYPE;
+   BEGIN
+     SELECT MIN(cod_producto), MAX(cod_producto) INTO v_min, v_max
+     FROM productos;
+
+     FOR v_cont IN v_min .. v_max LOOP
+       UPDATE productos
+       SET stock = 20
+       WHERE cod_producto=v_cont;
+     END LOOP;
+   END;
+/
+
+SELECT * FROM productos;
