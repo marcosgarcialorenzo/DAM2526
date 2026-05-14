@@ -1,0 +1,79 @@
+1. Usuarios y departamentos.
+
+--Apartado A
+
+CREATE OR REPLACE TRIGGER Actualiza_Vecinos
+AFTER UPDATE ON EMPLE
+BEGIN
+    INSERT INTO CONTROLA_USUARIOS (usuario, operacion, fecha)
+    VALUES (USER, 'UPDATE', SYSDATE);
+END;
+
+--Apartado B
+
+CREATE OR REPLACE TRIGGER Actualiza_Vecinos_Hora
+AFTER UPDATE ON EMPLE
+BEGIN
+    INSERT INTO CONTROLA_USUARIOS_HORA (usuario, operacion, fecha_hora)
+    VALUES (USER, 'UPDATE', TO_CHAR(SYSDATE, 'DD/MM/YY HH24:MI '));
+END;
+
+--Apartado C
+
+CREATE OR REPLACE TRIGGER COMPROBARDEPARTAMENTO
+BEFORE INSERT ON DEPART
+FOR EACH ROW
+DECLARE
+    v_existe NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_existe FROM DEPART WHERE DEPT_NO = :NEW.dept_no;
+    IF v_existe > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'EL DEPARTAMENTO YA EXISTE');
+    END IF;
+END;
+
+2. Subida de salario.
+
+CREATE OR REPLACE TRIGGER auditor_subida_salario
+AFTER UPDATE OF salario ON EMPLE -- Se dispara después de modificar el salario
+FOR EACH ROW
+BEGIN
+    INSERT INTO AUDITAR_EMPLE (mensaje)
+    VALUES ('SUBIDA SALARIO EMPLEADO ' || :NEW.emp_no);
+END;
+
+3. Borrar empleado.
+
+CREATE OR REPLACE TRIGGER tr_borrado_empleado
+AFTER DELETE ON EMPLE
+FOR EACH ROW
+BEGIN
+    INSERT INTO AUDITAR_EMPLE (emp_no, apellido, dept_no) -- Columnas especificadas
+    VALUES (:OLD.emp_no, :OLD.apellido, :OLD.dept_no);
+END;
+
+4.Borrar empleado(presidente).
+
+CREATE OR REPLACE TRIGGER tr_borrado_presidente
+AFTER DELETE ON EMPLE
+FOR EACH ROW
+WHEN (OLD.oficio = 'PRESIDENTE') -- Restricción de ejecución
+BEGIN
+    INSERT INTO AUDITAR_EMPLE (emp_no, apellido, dept_no)
+    VALUES (:OLD.emp_no, :OLD.apellido, :OLD.dept_no);
+END;
+
+5. Aumentar salario.
+
+CREATE OR REPLACE TRIGGER tr_auditar_salario_5
+AFTER UPDATE OF salario ON EMPLE
+FOR EACH ROW
+WHEN (NEW.salario > OLD.salario * 1.05) -- Solo si el aumento supera el 5%
+BEGIN
+    INSERT INTO AUDITAR_EMPLE (columna_auditoria) -- El nombre de la columna varía según tu tabla
+    VALUES (
+        TO_CHAR(SYSDATE, 'DD/MM/YY*HH24:MI*') || ' | Emp: ' || :OLD.emp_no ||
+        ' | Sal. Ant: ' || :OLD.salario || ' | Sal. Post: ' || :NEW.salario
+    );
+END;
+
