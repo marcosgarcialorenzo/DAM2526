@@ -1,3 +1,33 @@
+6. Auditar operaciones.
+
+CREATE OR REPLACE TRIGGER auditar_operaciones
+AFTER INSERT OR DELETE ON EMPLE
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        INSERT INTO audit_emple (coll)
+        VALUES (TO_CHAR(SYSDATE, 'DD/MM/YY HH24:MI') || ' - ' || :NEW.emp_no || ' - ' || :NEW.apellido || ' - INSERCION');
+    ELSIF DELETING THEN
+        INSERT INTO audit_emple (coll)
+        VALUES (TO_CHAR(SYSDATE, 'DD/MM/YY HH24:MI') || ' - ' || :OLD.emp_no || ' - ' || :OLD.apellido || ' - BORRADO');
+    END IF;
+END;
+
+7. Actualizar libros
+
+CREATE OR REPLACE TRIGGER tr_actualizar_libros
+BEFORE UPDATE ON libros
+FOR EACH ROW
+BEGIN
+    IF UPDATING('precio') THEN
+        INSERT INTO controlprecios (fecha, codigo, precioanterior, precionuevo)
+        VALUES (SYSDATE, :OLD.codigo, :OLD.precio, :NEW.precio);
+    ELSE
+        INSERT INTO control (usuario, fecha, codigo)
+        VALUES (USER, SYSDATE, :OLD.codigo);
+    END IF;
+END;
+
 8. Actualizar precios.
 
 SET SERVEROUTPUT ON;
@@ -94,3 +124,46 @@ insert into emple values(7654,'SIERRA','VENDEDOR',7902,'17/12/85',1200,300,30); 
 select * from emple;
 
 DELETE FROM emple WHERE emp_no = 8000;
+
+11. Borrar empleados.
+
+CREATE OR REPLACE TRIGGER tr_borrar_empleados
+BEFORE DELETE ON EMPLE
+BEGIN
+    IF TO_CHAR(SYSDATE, 'DD') = '11' THEN
+        RAISE_APPLICATION_ERROR(-20008, 'No se pueden borrar empleados el día 11');
+    END IF;
+END;
+
+12. Insertar apellidos.
+
+CREATE OR REPLACE TRIGGER tr_minusculas_check
+BEFORE INSERT ON EMPLE
+FOR EACH ROW
+BEGIN
+    IF :NEW.apellido = LOWER(:NEW.apellido) THEN
+        RAISE_APPLICATION_ERROR(-20005, 'APELLIDO EN MINÚSCULA');
+    END IF;
+END;
+
+13. Insertar fecha actual.
+
+CREATE OR REPLACE TRIGGER tr_empleados_fecha
+BEFORE INSERT ON EMPLE
+FOR EACH ROW
+BEGIN
+    IF :NEW.fecha_alta < TRUNC(SYSDATE) THEN
+        RAISE_APPLICATION_ERROR(-20007, 'NO SE PERMITEN FECHAS ANTERIORES A LA ACTUAL');
+    END IF;
+END;
+
+14. Fallo al modificar.
+
+CREATE OR REPLACE TRIGGER tr_fallo_modificar
+BEFORE UPDATE ON EMPLE
+FOR EACH ROW
+BEGIN
+    IF UPDATING('apellido') OR UPDATING('emp_no') OR (:NEW.sal > :OLD.sal * 1.1) THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Operación no permitida: Cambio de apellido/número o subida > 10%');
+    END IF;
+END;
