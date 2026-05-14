@@ -1,0 +1,115 @@
+1. Mayor de 3 numeros.
+
+CREATE OR REPLACE FUNCTION MAYOR (n1 NUMBER, n2 NUMBER, n3 NUMBER) RETURN NUMBER IS
+BEGIN
+    IF n1 >= n2 AND n1 >= n3 THEN RETURN n1;
+    ELSIF n2 >= n1 AND n2 >= n3 THEN RETURN n2;
+    ELSE RETURN n3;
+    END IF;
+END;
+/
+
+-- Bloque principal de prueba
+
+DECLARE
+    v_n1 NUMBER := &num1;
+    v_n2 NUMBER := &num2;
+    v_n3 NUMBER := &num3;
+    v_res NUMBER;
+BEGIN
+    v_res := MAYOR(v_n1, v_n2, v_n3);
+    DBMS_OUTPUT.PUT_LINE('EL MAYOR ENTRE '||v_n1||', '||v_n2||' y '||v_n3||' ES: '||v_res);
+END;
+
+2. Numero de empleados.
+
+CREATE OR REPLACE FUNCTION NUM_EMPLEADOS(p_dept_no NUMBER) RETURN NUMBER IS
+    v_count NUMBER;
+    v_existe NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_existe FROM DEPART WHERE DEPT_NO = p_dept_no;
+    IF v_existe = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Aviso: El departamento '||p_dept_no||' no existe.');
+        RETURN 0;
+    END IF;
+
+    SELECT COUNT(*) INTO v_count FROM EMPLE WHERE DEPT_NO = p_dept_no;
+    RETURN v_count;
+END;
+/
+
+-- Bloque principal de prueba
+
+DECLARE
+    v_dept NUMBER := &codigo_departamento;
+    v_total NUMBER;
+BEGIN
+    v_total := NUM_EMPLEADOS(v_dept);
+    DBMS_OUTPUT.PUT_LINE('Número de Empleados del departamento '||v_dept||' es: '||v_total);
+END;
+
+3. Salario total.
+
+CREATE OR REPLACE FUNCTION SALARIO_TOTAL(p_dept_no NUMBER) RETURN NUMBER IS
+    v_suma NUMBER;
+BEGIN
+    SELECT SUM(salario) INTO v_suma FROM EMPLE WHERE DEPT_NO = p_dept_no;
+    RETURN NVL(v_suma, 0);
+END;
+/
+
+-- Bloque principal de prueba
+
+DECLARE
+    v_dept NUMBER := 20;
+    v_total NUMBER;
+BEGIN
+    v_total := SALARIO_TOTAL(v_dept);
+    DBMS_OUTPUT.PUT_LINE('EL TOTAL DE LOS SALARIOS DEL DEPARTAMENTO '||v_dept||' ES '||v_total);
+END;
+
+4. Varias
+
+-- 1. Salario promedio por departamento
+
+CREATE OR REPLACE FUNCTION PROM_SALARIO(p_dept NUMBER) RETURN NUMBER IS
+    v_prom NUMBER;
+BEGIN
+    SELECT AVG(salario) INTO v_prom FROM EMPLE WHERE DEPT_NO = p_dept;
+    RETURN NVL(v_prom, 0);
+END;
+/
+
+-- 2. Apellido del empleado con salario máximo
+
+CREATE OR REPLACE FUNCTION EMP_MAX_SALARIO RETURN VARCHAR2 IS
+    v_ape VARCHAR2(50);
+BEGIN
+    SELECT apellido INTO v_ape FROM EMPLE WHERE salario = (SELECT MAX(salario) FROM EMPLE) AND ROWNUM = 1;
+    RETURN v_ape;
+END;
+/
+
+-- 3. Nombre del departamento con mayor comisión total
+
+CREATE OR REPLACE FUNCTION DEPT_MAX_COMISION RETURN VARCHAR2 IS
+    v_nom VARCHAR2(50);
+BEGIN
+    SELECT d.dnombre INTO v_nom
+    FROM DEPART d JOIN EMPLE e ON d.dept_no = e.dept_no
+    GROUP BY d.dnombre
+    ORDER BY SUM(NVL(e.comision, 0)) DESC
+    FETCH FIRST 1 ROW ONLY;
+    RETURN v_nom;
+END;
+/
+
+-- Bloque principal que llama a las tres
+
+DECLARE
+    v_dept_test NUMBER := 20;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Salario promedio Dept '||v_dept_test||': '|| PROM_SALARIO(v_dept_test));
+    DBMS_OUTPUT.PUT_LINE('Empleado con salario máximo: '|| EMP_MAX_SALARIO);
+    DBMS_OUTPUT.PUT_LINE('Departamento con más comisiones: '|| DEPT_MAX_COMISION);
+END;
