@@ -1,0 +1,73 @@
+1 Mostrar las personas que tengan 18 años ordenando sus amigos descendentemente.  
+
+db.amigos.aggregate([
+  {
+    $match: { Edad: 18 }   
+  },
+  {
+    $project: {
+      Nombre: 1,
+      Apellidos: 1,
+      Edad: 1,
+      Aficiones: 1,
+      Amigos: {
+        $sortArray: { input: "$Amigos", sortBy: { Edad: -1 } }   
+      }
+    }
+  }
+]);
+
+2. Mostrar cuantos amigos de las personas hay mayores de 18 años
+
+db.amigos.aggregate([
+  { $match: { Edad: { $gt: 18 } } },   
+  { $unwind: "$Amigos" },   
+  { $group: { _id: null, totalAmigos: { $sum: 1 } } }   
+]);
+
+
+3. Mostrar las personas que tienen la afición "fútbol" y al menos un amigo mayor de 25 años
+
+db.amigos.aggregate([
+  { $match: { Aficiones: "fútbol" } },   
+  { $unwind: "$Amigos" },   
+  { $match: { "Amigos.Edad": { $gt: 25 } } },   
+  { $project: { Nombre: 1, Apellidos: 1 } }   
+]);
+
+4. Mostrar el nombre de las personas que tienen aficiones relacionadas con "fútbol" y "tenis"
+
+db.amigos.aggregate([
+  { $unwind: "$Aficiones" },   
+  { $match: { Aficiones: { $in: ["fútbol", "tenis"] } } },   
+  { $group: { 
+      _id: "$Nombre",   
+      Aficiones: { $push: "$Aficiones" }   
+  } },
+  { $project: { 
+      _id: 0,   
+      Nombre: "$_id",   
+      Aficiones: 1  
+  } }
+]);
+
+5. Mostrar los nombres y edades de las personas con más de una afición, ordenados por edad descendente
+
+db.amigos.aggregate([
+  { 
+    $match: { 
+      $expr: { 
+        $gt: [{ $size: "$Aficiones" }, 1]        } 
+    }
+  },   
+  { 
+    $project: { 
+      Nombre: 1,   
+      Edad: 1,   
+      Aficiones: 1   
+    } 
+  },
+  { 
+    $sort: { Edad: -1 } 
+  }
+]);

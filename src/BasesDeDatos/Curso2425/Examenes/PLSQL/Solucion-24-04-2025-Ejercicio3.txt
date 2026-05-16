@@ -1,0 +1,74 @@
+SET SERVEROUTPUT ON;
+execute contarpordepartMayor(10);
+execute contarpordepartMayor(20);
+execute contarpordepartMayor(30);
+execute contarpordepartMayor(40);
+execute contarpordepartMayor(50);
+
+create or replace procedure contarPorDepartMayor(deparnumero number)
+as
+	cursor curContar is
+		select dnombre, count(*), sum(salario), avg(salario)
+		from emple, depart
+		where deparnumero=emple.dept_no and emple.dept_no = depart.dept_no
+		group by dnombre;
+
+	cursor curmayor is
+		select dnombre, sum(salario) 
+		from emple, depart
+		where depart.dept_no=emple.dept_no 
+		group by dnombre;
+    
+		vNombreDepar varchar(20);
+		vContarEmple number;
+		vsumasalario number;
+		vmediasalario number;	
+		v_departamento_reves varchar(20);
+    
+    /* vNombreDepar varchar(20);*/
+		nombredepartmayor varchar(20);
+		departmayor varchar(20);
+    /* vsumasalario number; */
+		total number;
+		num number;
+		mayor number;
+    
+begin
+  /* primer cursor*/
+	open curContar;
+	fetch curContar into vNombreDepar,vContarEmple,vsumasalario,vmediasalario;
+	while curContar%FOUND and deparnumero<=30 loop    
+	    DBMS_OUTPUT.PUT_LINE('Departamento: '||deparnumero||' Nombre: '||vNombreDepar||' Empleados: '||vContarEmple
+	    ||' Total de Salarios: '|| vsumasalario ||' Media de los Salarios: ' || vmediasalario);
+	    /* inicio mostrar el nombre del departamento al reves */
+      	    FOR i IN REVERSE 1..LENGTH(vNombreDepar) LOOP
+        	IF SUBSTR(vNombreDepar, i, 1) != ' ' THEN
+            		v_departamento_reves := v_departamento_reves || SUBSTR(vNombreDepar, i, 1);
+        	END IF;
+    	    END LOOP;
+    	    DBMS_OUTPUT.PUT_LINE(' El departamento introducido: '||deparnumero|| ' : ' || vNombreDepar || ' al reves es : ' || v_departamento_reves);
+	    fetch curContar into vNombreDepar, vContarEmple,vsumasalario,vmediasalario;
+	end loop;
+	if deparnumero>30
+         then 	
+		DBMS_OUTPUT.PUT_LINE(' El departamento introducido: '||deparnumero||' No esta en la tabla de departamentos');
+	end if;
+	close curContar;
+  
+  /* segundo  cursor*/
+    select count(*) into total from depart;
+    open curmayor;
+    fetch curmayor into vNombreDepar,vsumasalario;
+    while curmayor%FOUND loop    
+    	mayor:=vsumasalario;
+    	for i in 1..total loop
+       		fetch curmayor into vNombreDepar,vsumasalario;
+       		num:=vsumasalario;
+       		if num > mayor then 
+          		mayor:= num; 
+      		end if;
+    	end loop;
+    end loop;
+    DBMS_OUTPUT.PUT_LINE('El departamento con el mayor total de salario tiene ' || mayor);
+    close curmayor;
+end;

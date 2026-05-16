@@ -1,0 +1,84 @@
+CREATE OR REPLACE FUNCTION dif_salario_promedio(emp_id IN NUMBER)
+RETURN NUMBER
+IS
+  diferencia_salario NUMBER;
+  salario_empleado NUMBER;
+  salario_promedio_departamento NUMBER;
+BEGIN
+  -- Obtener el salario del empleado
+  SELECT SALARIO INTO salario_empleado
+  FROM EMPLE
+  WHERE EMP_NO = emp_id;
+  
+  -- Obtener el salario promedio del departamento del empleado
+  SELECT AVG(SALARIO) INTO salario_promedio_departamento
+  FROM EMPLE
+  WHERE DEPT_NO = (SELECT DEPT_NO FROM EMPLE WHERE EMP_NO = emp_id);
+  
+  -- Calcular la diferencia de salario
+  diferencia_salario := salario_empleado - salario_promedio_departamento;
+  
+  RETURN diferencia_salario;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE insertar_empleados 
+      (p_emp_no emple.emp_no%TYPE,
+       p_apellido emple.apellido%TYPE,
+       p_oficio emple.oficio%TYPE,
+       p_dir emple.dir%TYPE,
+       p_fecha_alta emple.fecha_alt%TYPE,
+       p_salario emple.salario%TYPE,
+       p_comision emple.comision%TYPE,
+       p_dept_no emple.dept_no%TYPE
+)
+IS
+    contador NUMBER;
+    d number;
+    /* suma number */
+BEGIN
+    -- Verificar si ya existe un empleado 
+    SELECT COUNT(*) INTO contador FROM emple WHERE emp_no = p_emp_no;
+
+    IF contador > 0 THEN
+        DBMS_OUTPUT.PUT_LINE('El empleado existe y podemos calcular la diferencia.');
+        d:=dif_salario_promedio(p_emp_no);
+	DBMS_OUTPUT.PUT_LINE('La diferencia es '|| d);
+    ELSE
+        INSERT INTO emple VALUES (p_emp_no, p_apellido, p_oficio, p_dir, p_fecha_alta, 
+        p_salario, p_comision, p_dept_no);
+        DBMS_OUTPUT.PUT_LINE('Empleado insertado correctamente.');
+    END IF;
+END;
+/
+
+
+DECLARE
+       p_emp_no emple.emp_no%TYPE;
+       p_apellido emple.apellido%TYPE;
+       p_oficio emple.oficio%TYPE;
+       p_dir emple.dir%TYPE;
+       p_fecha_alta emple.fecha_alt%TYPE;
+       p_salario emple.salario%TYPE;
+       p_comision emple.comision%TYPE;
+       p_dept_no emple.dept_no%TYPE;
+BEGIN
+       p_emp_no:=&introduceempledonumero;
+       p_apellido:=&introduceapellido;
+       p_oficio:=&introduceoficio;
+       p_dir:=&introduceempleadojefe; 
+       p_fecha_alta:=&introducedept;
+       p_salario:=&introducedept;
+       p_comision:=&introducedept;
+       p_dept_no:=&introducedept;
+      insertar_empleados(p_emp_no, p_apellido, p_oficio, p_dir, p_fecha_alta, 
+        p_salario, p_comision, p_dept_no);
+END;
+
+SET SERVEROUTPUT ON;
+EXECUTE insertar_empleados (7799, 'GALLEGO', 'ANALISTA', 7531, '12/02/02', 390000, NULL, 20);
+EXECUTE insertar_empleados (7369, 'SANCHEZ', 'EMPLEADO', 7902, '17/12/80', 104000, NULL, 20);
+
+
+

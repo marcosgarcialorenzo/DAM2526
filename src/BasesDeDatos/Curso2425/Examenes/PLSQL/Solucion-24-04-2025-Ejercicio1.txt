@@ -1,0 +1,74 @@
+SET SERVEROUTPUT ON;
+DECLARE
+  cod_max number;
+  productos_max number;
+  v_descripcion productos.descripcion%type;
+
+BEGIN
+  select cod_producto INTO cod_max
+  from ventas
+  having sum(unidades) in (select max(sum(unidades)) 
+  from ventas 
+  group by cod_producto)
+  group by cod_producto;
+  
+  select LINEA_PRECIO_UNI,descripcion into productos_max, v_descripcion
+  from productos
+  where cod_producto =  cod_max;
+  
+  DBMS_OUTPUT.PUT_LINE ('EL PRODUCTO MAS VENDIDO ES:  ' );
+  DBMS_OUTPUT.PUT_LINE ('----------------------------- ');
+  DBMS_OUTPUT.PUT_LINE (' CODIGO      : ' || cod_max);
+  DBMS_OUTPUT.PUT_LINE (' DESCRIPCION : ' || v_descripcion) ;
+  DBMS_OUTPUT.PUT_LINE(' ');
+  DBMS_OUTPUT.PUT_LINE('LA ANTEPENULTIMA PALABRA DE LA DESCRICPION ES: ');
+  DBMS_OUTPUT.PUT_LINE('---------------------------------------------- ');
+  antepenultima_palabra(v_descripcion);
+END;
+
+
+CREATE OR REPLACE PROCEDURE antepenultima_palabra(frase IN VARCHAR2) IS
+  fraseauxiliar VARCHAR2(4000);
+  palabra VARCHAR2(100);
+  contador_palabras NUMBER := 0;
+  total_palabras NUMBER := 0;
+  resultado VARCHAR2(100);
+  posicion NUMBER;
+BEGIN
+  fraseauxiliar := TRIM(frase);
+
+  total_palabras := LENGTH(fraseauxiliar) - LENGTH(REPLACE(fraseauxiliar, ' ', '')) + 1;
+
+  IF total_palabras < 3 THEN
+    DBMS_OUTPUT.PUT_LINE('La frase tiene menos de 3 palabras');
+    RETURN;
+  END IF;
+
+ 
+  WHILE LENGTH(fraseauxiliar) > 0 LOOP
+    posicion := INSTR(fraseauxiliar, ' ');
+
+    IF posicion = 0 THEN
+      palabra := fraseauxiliar;
+      fraseauxiliar := '';
+    ELSE
+      palabra := RTRIM(SUBSTR(fraseauxiliar, 1, posicion - 1));
+      fraseauxiliar := SUBSTR(fraseauxiliar, posicion + 1);
+    END IF;
+
+    contador_palabras := contador_palabras + 1;
+
+ 
+    IF contador_palabras = total_palabras - 2 THEN
+      resultado := palabra;
+    END IF;
+  END LOOP;
+
+ 
+  IF total_palabras >= 3 THEN
+    DBMS_OUTPUT.PUT_LINE(resultado);
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('La frase tiene menos de 3 palabras');
+  END IF;
+
+END;

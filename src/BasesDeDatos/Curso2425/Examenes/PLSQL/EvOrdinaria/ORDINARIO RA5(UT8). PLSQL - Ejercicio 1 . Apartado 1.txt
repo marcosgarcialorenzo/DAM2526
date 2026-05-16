@@ -1,0 +1,27 @@
+Muestre el apellido, oficio, departamento y salario del empleado que más gana del departamento con la media salarial más alta.
+
+DECLARE
+    d number;
+    ape varchar2(30);
+    sala number;
+    ofi varchar2(30);
+BEGIN
+    select apellido, oficio, dept_no,salario into ape, ofi, d, sala
+    from emple e
+    where salario in (select max(salario) from emple e2
+                      where e.dept_no = e2.dept_no
+                      group by dept_no
+                      having avg(salario) in
+                      (select max(avg(salario)) 
+    		from emple group by dept_no));
+			
+    DBMS_OUTPUT.PUT_LINE(' Empleado que más gana del departamento con la media salarial más alta ' );
+    DBMS_OUTPUT.PUT_LINE(' ---------------------------------------------------------------------- ' );
+    DBMS_OUTPUT.PUT_LINE('  - Apellido ' || ape);
+    DBMS_OUTPUT.PUT_LINE('  - Oficio   ' || ofi);
+    DBMS_OUTPUT.PUT_LINE('  - Depto    ' || d);
+    DBMS_OUTPUT.PUT_LINE('  - Salario  ' || sala);
+       
+
+END;
+

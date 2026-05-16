@@ -1,0 +1,32 @@
+Dado un empleado, nos muestre el número, nombre y oficio de los empleados que tienen como jefe a ese empleado mostrando además el código del jefe, el nombre y el oficio del jefe tal como aparece en la captura.
+
+SET SERVEROUTPUT ON; 
+DECLARE
+   emp number;
+   nom varchar2(10);
+   ofi varchar2(10);
+   jefe number;
+   nomjefe varchar2(10);
+   ofijefe varchar2(10);
+   oofi varchar2(10);
+   lofijefe varchar2(10);
+   lape number;
+   lofi number;
+   i number;
+BEGIN 
+  select e.emp_no, e.apellido, e.oficio, e.dir, e2.apellido, e2.oficio into emp, nom, ofi, jefe, nomjefe, ofijefe
+  from emple e, emple e2
+  where e.dir = e2.emp_no and e2.apellido = 'GIL'
+  order by 2;
+  DBMS_OUTPUT.PUT_LINE(' DATOS DEL EMPLEADO QUE TIENEN COMO JEFE A GIL ');
+  DBMS_OUTPUT.PUT_LINE(' --------------------------------------------- ');
+  DBMS_OUTPUT.PUT_LINE(' empleado ' || emp);
+  DBMS_OUTPUT.PUT_LINE(' nombre   ' || nom);
+  DBMS_OUTPUT.PUT_LINE(' oficio   ' || ofi);
+  DBMS_OUTPUT.PUT_LINE(' nomjefe  ' || jefe);
+  DBMS_OUTPUT.PUT_LINE(' nomemple ' || nomjefe);
+  DBMS_OUTPUT.PUT_LINE(' oficiojefe ' || ofijefe);
+END;
+
+
+NOTA CAMBIAR GIL POR UN DATO POR TECLADO

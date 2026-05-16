@@ -1,0 +1,71 @@
+create table centros( 
+  codigo number(6),
+  nombre varchar2(40),
+  mes varchar2(30),
+  saldo number(6)
+ );
+ 
+create table beneficios (
+  codigo number(6),
+  saldo number(6,2)
+ );
+ 
+insert into centros values(001,'ParqueSur','Enero',22000);
+insert into centros values(002,'Islazul','Enero',24000);
+insert into centros values(003,'Nassica','Enero',25000);
+insert into centros values(004,'Nexum','Enero',20000);
+insert into centros values(005,'Tres Aguas','Enero',12000);
+insert into centros values(006,'Carrefour','Enero',12000);
+insert into centros values(007,'Mercadona','Enero',12000);
+
+
+drop table centros
+
+create or replace trigger tr_modificar_tienda_saldo
+ 
+ before insert or update of saldo on centros
+ 
+ for each row
+ 
+ DECLARE NUM number;
+ 
+ begin 
+ 
+  if (:new.saldo<0) then
+        RAISE_APPLICATION_ERROR(-20001,'Has introducido un saldo NEGATIVO');
+  end if;
+  if (:new.saldo=0) then
+        RAISE_APPLICATION_ERROR(-20001,'Has introducido un saldo CERO');
+  end if;
+  
+  if (:old.saldo<=30000) and (:new.saldo>30000) then
+   delete from beneficios where codigo=:old.codigo;
+  end if;
+  
+  if (:old.saldo>30000) and (:new.saldo<=30000) then
+   insert into beneficios values(:new.codigo,:new.saldo);
+  end if;
+  
+  select COUNT(*) INTO NUM 
+  from centros
+  where codigo=:NEW.codigo;
+    if (NUM != 0) then 
+      		RAISE_APPLICATION_ERROR(-20001,  'EL CENTRO YA EXISTE');
+  end if;
+
+ end;
+
+
+select * from centros; delete from centros where codigo=9
+select * from beneficios;
+-- PRUEBA DEL DISPARADOR
+-- insert saldo menor que o
+insert into centros values(008,'Mercadona','Enero',-1);
+-- insert saldo =0
+insert into centros values(009,'Mercadona','Enero',0);
+-- insert de un saldo que ya existe
+insert into centros values(007,'Mercadona','Enero',12000);
+-- insert de un saldo mayor que 30000 (se inserta en beneficios)
+insert into centros values(008,'Las Aguilas','Enero',31000);
+-- insert de un saldo menor que o igual que 30000 (se borra de beneficios)
+insert into centros values(011,'Las Aguilas','Enero',33333);
