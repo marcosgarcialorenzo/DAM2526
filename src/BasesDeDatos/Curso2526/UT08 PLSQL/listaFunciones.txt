@@ -1,0 +1,155 @@
+Listado por categorías (nombre — breve descripción — ejemplo(s) de uso / archivo)
+A. Funciones y operaciones con cadenas (string)
+TRIM — elimina espacios en los extremos.
+Ejemplo: Solucion-24-04-2025-Ejercicio1.txt (línea 38: fraseauxiliar := TRIM(frase);)
+LENGTH — longitud de cadena.
+Ejemplo: Solucion-24-04-2025-Ejercicio1.txt (cálculo de palabras: LENGTH(fraseauxiliar))
+SUBSTR (SUBSTR) — subcadena.
+Ejemplo: Solucion-24-04-2025-Ejercicio1.txt (extrae caracteres), Solucion-24-04-2025-Ejercicio3.txt (reverso de nombre con SUBSTR).
+INSTR — posición dentro de cadena (aparece en ejercicios de texto/consulta en varias soluciones).
+(Presente en ejercicios de manipulación de cadenas; revisar PDFs si faltara).
+RTRIM / LTRIM — recortar en un extremo (ej. RTRIM usado en Solucion-24-04-2025-Ejercicio1.txt).
+REPLACE — reemplazo dentro de cadena (usado para contar espacios en el cálculo de palabras: LENGTH(fraseauxiliar) - LENGTH(REPLACE(fraseauxiliar, ' ', '')) + 1).
+UPPER / LOWER — conversión mayúsculas/minúsculas.
+Ejemplo: 8.3.2.txt (búsqueda con UPPER(v_busqueda)), 8.4.2.txt (comprobación IF :NEW.apellido = LOWER(:NEW.apellido)).
+B. Funciones y agregados numéricos / de conjunto
+COUNT, SUM, AVG, MIN, MAX — funciones de agregación SQL (aparecen en consultas y cursores).
+Ejemplo: Solucion-24-04-2025-Ejercicio3.txt (cursor con count(*), sum(salario), avg(salario)), y en múltiples consultas SQL en el proyecto.
+GROUP BY / HAVING / ORDER BY — agrupación y filtros por agregados (aparecen en varios ejercicios SQL).
+operadores aritméticos básicos (+, -, *, /) en cálculos de salarios, etc.
+C. Fecha y conversión relacionada
+SYSDATE — fecha/hora actual (triggers y comprobaciones).
+Ejemplo: 8.4.2.txt (registros con TO_CHAR(SYSDATE, 'DD/MM/YY HH24:MI') y IF TO_CHAR(SYSDATE, 'DD') = '11' THEN)
+TO_CHAR — formateo de fecha/fecha→texto (en triggers).
+TRUNC (usado para comparar fechas sin tiempo): 8.4.2.txt (IF :NEW.fecha_alta < TRUNC(SYSDATE) THEN)
+TO_DATE — aparece en otros SQL del repositorio (6.2 Multinacional.sql) para parsear fechas.
+D. Cursores y estructuras de control PL/SQL
+CURSOR — declaración de cursores explícitos.
+Ejemplo: Solucion-24-04-2025-Ejercicio3.txt (cursor curContar is ...) y 8.3.2.txt.
+OPEN / FETCH / CLOSE — manejo manual de cursores (abre, recupera y cierra).
+Ejemplo: Solucion-24-04-2025-Ejercicio3.txt (open curContar; fetch; close).
+FOR r IN cursor LOOP — cursor FOR loop (versión implícita).
+Ejemplo: 8.3.2.txt (FOR r_emp IN c_busqueda LOOP).
+WHILE / FOR / EXIT WHEN — bucles y control de iteración (aparecen en soluciones).
+IF / ELSIF / ELSE — condicionales PL/SQL (ampliamente usadas).
+REVERSE in FOR — bucle FOR i IN REVERSE 1..LENGTH(...) para invertir cadenas (ej.: Solucion-24-04-2025-Ejercicio3.txt).
+E. Procedimientos, funciones y bloques PL/SQL
+CREATE OR REPLACE PROCEDURE / FUNCTION — definición de subprogramas (varias soluciones usan CREATE OR REPLACE PROCEDURE y FUNCTION). Ejemplo: Solucion-24-04-2025-Ejercicio1.txt (procedimiento antepenultima_palabra).
+Parámetros IN / OUT / IN OUT — firma de procedimientos/funciones en ejercicios.
+DECLARE / BEGIN / EXCEPTION / END — bloques anónimos y manejo de excepciones.
+F. Triggers (disparadores)
+CREATE OR REPLACE TRIGGER — definición de triggers (múltiples ejemplos en 8.4 Disparadores).
+BEFORE / AFTER / FOR EACH ROW — timing y tipo de trigger.
+INSERTING / UPDATING / DELETING — condiciones en triggers.
+:NEW / :OLD — referencias a valores nuevos/antiguos (muy usadas en 8.4.2.txt y 8.4.1.txt).
+UPDATING('columna') — comprobación si una columna concreta se modifica.
+RAISE_APPLICATION_ERROR — lanzar error con código propio desde trigger/PLSQL (varios triggers usan RAISE_APPLICATION_ERROR(-20001, 'mensaje')).
+Uso de tablas de auditoría (INSERT INTO log_table VALUES (TO_CHAR(SYSDATE,...), :NEW...)) — típico en 8.4.2.txt.
+G. Utilidades y salida por consola
+DBMS_OUTPUT.PUT_LINE — imprimir resultados en consola/SQL*Plus (aparece en soluciones y triggers). Ejemplo: Solucion-24-04-2025-Ejercicio1.txt, Solucion-24-04-2025-Ejercicio3.txt, varios triggers.
+H. Excepciones y control de errores
+EXCEPTION … WHEN OTHERS THEN — manejo de excepciones en PL/SQL.
+RAISE / RAISE_APPLICATION_ERROR — re-lanzar o devolver errores controlados (se usa en triggers para impedir operaciones).
+Uso de códigos error -20001 etc. en triggers.
+I. DDL / DML usados en los ejercicios
+CREATE TABLE / INSERT INTO — definición de tablas y datos de ejemplo (TablasUsadas.sql tiene CREATE TABLE e INSERTs).
+SELECT … INTO — consulta que devuelve a variables PL/SQL (ej.: select cod_producto INTO cod_max ... en Solucion-24-04-2025-Ejercicio1.txt).
+UPDATE / DELETE / INSERT — operaciones de modificación que disparan triggers o son prácticas en procedimientos.
+FOR UPDATE (cláusula en cursores para bloqueo de filas) — 8.3.2.txt (SELECT ... FOR UPDATE).
+J. Otras construcciones y funciones varias
+RTRIM, LPAD, RPAD (aparecen en varios ejercicios / ejemplos del repositorio).
+USER — usuario Oracle (aparece en registros de auditoría).
+EXISTS / IN / subconsultas — subconsultas en WHERE/HAVING (aparecen en SQL de ejercicios).
+%TYPE — tipo de variable derivado de columna (ej.: v_descripcion productos.descripcion%type).
+Comentarios y comandos de SQL*Plus: SET SERVEROUTPUT ON; (aparece en soluciones).
+
+
+
+
+
+A. Funciones/operaciones con cadenas
+TRIM
+LENGTH
+SUBSTR
+INSTR
+RTRIM
+LTRIM
+REPLACE
+UPPER
+LOWER
+CONCAT
+B. Agregados y cláusulas de conjunto
+COUNT
+SUM
+AVG
+MIN
+MAX
+GROUP BY
+HAVING
+ORDER BY
+C. Fechas y conversiones
+SYSDATE
+TO_CHAR
+TRUNC
+TO_DATE
+D. Cursores y control de flujo
+CURSOR
+OPEN
+FETCH
+CLOSE
+FOR (cursor FOR / FOR i IN ...)
+WHILE
+EXIT WHEN
+IF
+ELSIF
+ELSE
+REVERSE (FOR IN REVERSE)
+E. Procedimientos/funciones y bloques
+CREATE OR REPLACE PROCEDURE
+CREATE OR REPLACE FUNCTION
+IN / OUT / IN OUT
+DECLARE
+BEGIN
+EXCEPTION
+END
+F. Triggers y elementos relacionados
+CREATE OR REPLACE TRIGGER
+BEFORE
+AFTER
+FOR EACH ROW
+INSERTING
+UPDATING
+DELETING
+:NEW
+:OLD
+UPDATING('columna')
+RAISE_APPLICATION_ERROR
+G. Utilidades / salida
+DBMS_OUTPUT.PUT_LINE
+SET SERVEROUTPUT ON
+H. Excepciones y errores
+EXCEPTION … WHEN OTHERS THEN
+RAISE
+RAISE_APPLICATION_ERROR
+I. DDL / DML y variantes
+CREATE TABLE
+INSERT INTO
+SELECT … INTO
+UPDATE
+DELETE
+INSERT
+FOR UPDATE
+J. Otras funciones/constructos
+RTRIM
+LPAD
+RPAD
+USER
+EXISTS
+IN
+SUBCONSULTAS
+%TYPE
+
+
+
+
+Dado esta lista resuelve el siguiente ejercicio utilizando las funciones y conceptos listados anteriormente
