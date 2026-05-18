@@ -149,7 +149,14 @@ IN
 SUBCONSULTAS
 %TYPE
 
-
+CREATE OR REPLACE FUNCTION reverse_string(p_str IN VARCHAR2) RETURN VARCHAR2 IS
+  v_res VARCHAR2(4000) := '';
+BEGIN
+  FOR i IN REVERSE 1..LENGTH(NVL(p_str,'')) LOOP
+    v_res := v_res || SUBSTR(p_str, i, 1);
+  END LOOP;
+  RETURN v_res;
+END;
 
 
 Dado esta lista resuelve el siguiente ejercicio utilizando las funciones y conceptos listados anteriormente
